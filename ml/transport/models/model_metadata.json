@@ -1,0 +1,68 @@
+{
+    "best_model": "Random Forest Regressor",
+    "target_variable": "total_rides",
+    "test_r2_score": 0.6413,
+    "test_rmse": 135231.47,
+    "test_mape": 14.32,
+    "features": [
+        "year",
+        "month",
+        "day",
+        "day_of_week",
+        "day_of_year",
+        "is_weekend",
+        "quarter",
+        "day_type_A",
+        "day_type_U",
+        "day_type_W",
+        "lag_1",
+        "lag_2",
+        "lag_7",
+        "lag_14",
+        "lag_30",
+        "rolling_mean_7",
+        "rolling_std_7",
+        "rolling_mean_14",
+        "rolling_mean_30",
+        "rolling_min_7",
+        "rolling_max_7",
+        "time_index"
+    ],
+    "comparison_results": [
+        {
+            "Model": "Random Forest Regressor",
+            "MAE": 105570.74,
+            "RMSE": 135231.47,
+            "R2_Score": 0.6413,
+            "MAPE (%)": 14.32
+        },
+        {
+            "Model": "Linear Regression",
+            "MAE": 118912.26,
+            "RMSE": 148107.39,
+            "R2_Score": 0.5698,
+            "MAPE (%)": 19.54
+        },
+        {
+            "Model": "Ridge Regression",
+            "MAE": 119019.66,
+            "RMSE": 148208.84,
+            "R2_Score": 0.5692,
+            "MAPE (%)": 19.56
+        },
+        {
+            "Model": "Gradient Boosting Regressor",
+            "MAE": 140707.46,
+            "RMSE": 176832.05,
+            "R2_Score": 0.3867,
+            "MAPE (%)": 17.87
+        },
+        {
+            "Model": "Decision Tree Regressor",
+            "MAE": 224210.8,
+            "RMSE": 297600.64,
+            "R2_Score": -0.7371,
+            "MAPE (%)": 28.44
+        }
+    ]
+}
