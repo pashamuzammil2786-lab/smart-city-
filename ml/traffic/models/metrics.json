@@ -1,0 +1,347 @@
+{
+  "module": "Traffic Flow & Congestion Analytics",
+  "dataset": "Google Sheets / Kaggle Traffic Dataset (48,120 rows)",
+  "target": "Vehicles (Hourly Junction Flow)",
+  "samples_total": 48120,
+  "train_samples": 38496,
+  "test_samples": 9624,
+  "best_model": "Gradient Boosting",
+  "comparison": {
+    "Linear Regression": {
+      "MAE": 3.2498,
+      "RMSE": 5.0324,
+      "R2": 0.9658,
+      "MAPE": 19.51
+    },
+    "Ridge Regression": {
+      "MAE": 3.2501,
+      "RMSE": 5.0335,
+      "R2": 0.9658,
+      "MAPE": 19.5
+    },
+    "Random Forest": {
+      "MAE": 2.9839,
+      "RMSE": 4.8951,
+      "R2": 0.9677,
+      "MAPE": 18.06
+    },
+    "Gradient Boosting": {
+      "MAE": 2.9341,
+      "RMSE": 4.8367,
+      "R2": 0.9684,
+      "MAPE": 17.33
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "lag_1",
+      "importance": 0.9509
+    },
+    {
+      "feature": "lag_24",
+      "importance": 0.0103
+    },
+    {
+      "feature": "rolling_mean_24",
+      "importance": 0.0064
+    },
+    {
+      "feature": "lag_2",
+      "importance": 0.006
+    },
+    {
+      "feature": "hour",
+      "importance": 0.0054
+    },
+    {
+      "feature": "hour_cos",
+      "importance": 0.0052
+    },
+    {
+      "feature": "is_rush_hour",
+      "importance": 0.0048
+    },
+    {
+      "feature": "rolling_mean_6",
+      "importance": 0.0032
+    },
+    {
+      "feature": "hour_sin",
+      "importance": 0.0024
+    },
+    {
+      "feature": "dayofweek",
+      "importance": 0.0022
+    },
+    {
+      "feature": "is_weekend",
+      "importance": 0.0008
+    },
+    {
+      "feature": "month",
+      "importance": 0.0007
+    },
+    {
+      "feature": "junction_3",
+      "importance": 0.0007
+    },
+    {
+      "feature": "day",
+      "importance": 0.0005
+    },
+    {
+      "feature": "junction_2",
+      "importance": 0.0003
+    },
+    {
+      "feature": "junction_1",
+      "importance": 0.0002
+    },
+    {
+      "feature": "junction_4",
+      "importance": 0.0
+    }
+  ],
+  "actual_vs_predicted_sample": [
+    {
+      "timestamp": "2017-06-30 12:00:00",
+      "actual": 9.0,
+      "predicted": 15.0
+    },
+    {
+      "timestamp": "2017-06-30 12:00:00",
+      "actual": 99.0,
+      "predicted": 86.9
+    },
+    {
+      "timestamp": "2017-06-30 12:00:00",
+      "actual": 29.0,
+      "predicted": 25.5
+    },
+    {
+      "timestamp": "2017-06-30 12:00:00",
+      "actual": 28.0,
+      "predicted": 29.0
+    },
+    {
+      "timestamp": "2017-06-30 13:00:00",
+      "actual": 11.0,
+      "predicted": 10.9
+    },
+    {
+      "timestamp": "2017-06-30 13:00:00",
+      "actual": 33.0,
+      "predicted": 25.5
+    },
+    {
+      "timestamp": "2017-06-30 13:00:00",
+      "actual": 89.0,
+      "predicted": 83.2
+    },
+    {
+      "timestamp": "2017-06-30 13:00:00",
+      "actual": 33.0,
+      "predicted": 25.7
+    },
+    {
+      "timestamp": "2017-06-30 14:00:00",
+      "actual": 38.0,
+      "predicted": 33.6
+    },
+    {
+      "timestamp": "2017-06-30 14:00:00",
+      "actual": 33.0,
+      "predicted": 31.8
+    },
+    {
+      "timestamp": "2017-06-30 14:00:00",
+      "actual": 104.0,
+      "predicted": 88.7
+    },
+    {
+      "timestamp": "2017-06-30 14:00:00",
+      "actual": 10.0,
+      "predicted": 12.3
+    },
+    {
+      "timestamp": "2017-06-30 15:00:00",
+      "actual": 33.0,
+      "predicted": 36.5
+    },
+    {
+      "timestamp": "2017-06-30 15:00:00",
+      "actual": 101.0,
+      "predicted": 93.2
+    },
+    {
+      "timestamp": "2017-06-30 15:00:00",
+      "actual": 31.0,
+      "predicted": 31.3
+    },
+    {
+      "timestamp": "2017-06-30 15:00:00",
+      "actual": 14.0,
+      "predicted": 11.3
+    },
+    {
+      "timestamp": "2017-06-30 16:00:00",
+      "actual": 29.0,
+      "predicted": 31.8
+    },
+    {
+      "timestamp": "2017-06-30 16:00:00",
+      "actual": 95.0,
+      "predicted": 87.9
+    },
+    {
+      "timestamp": "2017-06-30 16:00:00",
+      "actual": 32.0,
+      "predicted": 28.1
+    },
+    {
+      "timestamp": "2017-06-30 16:00:00",
+      "actual": 16.0,
+      "predicted": 11.7
+    },
+    {
+      "timestamp": "2017-06-30 17:00:00",
+      "actual": 90.0,
+      "predicted": 96.4
+    },
+    {
+      "timestamp": "2017-06-30 17:00:00",
+      "actual": 36.0,
+      "predicted": 30.7
+    },
+    {
+      "timestamp": "2017-06-30 17:00:00",
+      "actual": 16.0,
+      "predicted": 13.4
+    },
+    {
+      "timestamp": "2017-06-30 17:00:00",
+      "actual": 32.0,
+      "predicted": 29.1
+    },
+    {
+      "timestamp": "2017-06-30 18:00:00",
+      "actual": 34.0,
+      "predicted": 33.2
+    },
+    {
+      "timestamp": "2017-06-30 18:00:00",
+      "actual": 17.0,
+      "predicted": 13.8
+    },
+    {
+      "timestamp": "2017-06-30 18:00:00",
+      "actual": 95.0,
+      "predicted": 92.6
+    },
+    {
+      "timestamp": "2017-06-30 18:00:00",
+      "actual": 38.0,
+      "predicted": 33.3
+    },
+    {
+      "timestamp": "2017-06-30 19:00:00",
+      "actual": 34.0,
+      "predicted": 35.3
+    },
+    {
+      "timestamp": "2017-06-30 19:00:00",
+      "actual": 105.0,
+      "predicted": 99.8
+    },
+    {
+      "timestamp": "2017-06-30 19:00:00",
+      "actual": 33.0,
+      "predicted": 37.7
+    },
+    {
+      "timestamp": "2017-06-30 19:00:00",
+      "actual": 11.0,
+      "predicted": 15.0
+    },
+    {
+      "timestamp": "2017-06-30 20:00:00",
+      "actual": 35.0,
+      "predicted": 33.1
+    },
+    {
+      "timestamp": "2017-06-30 20:00:00",
+      "actual": 30.0,
+      "predicted": 12.4
+    },
+    {
+      "timestamp": "2017-06-30 20:00:00",
+      "actual": 96.0,
+      "predicted": 93.4
+    },
+    {
+      "timestamp": "2017-06-30 20:00:00",
+      "actual": 31.0,
+      "predicted": 31.0
+    },
+    {
+      "timestamp": "2017-06-30 21:00:00",
+      "actual": 90.0,
+      "predicted": 85.5
+    },
+    {
+      "timestamp": "2017-06-30 21:00:00",
+      "actual": 16.0,
+      "predicted": 21.2
+    },
+    {
+      "timestamp": "2017-06-30 21:00:00",
+      "actual": 28.0,
+      "predicted": 29.0
+    },
+    {
+      "timestamp": "2017-06-30 21:00:00",
+      "actual": 31.0,
+      "predicted": 32.3
+    },
+    {
+      "timestamp": "2017-06-30 22:00:00",
+      "actual": 29.0,
+      "predicted": 29.9
+    },
+    {
+      "timestamp": "2017-06-30 22:00:00",
+      "actual": 22.0,
+      "predicted": 14.4
+    },
+    {
+      "timestamp": "2017-06-30 22:00:00",
+      "actual": 84.0,
+      "predicted": 81.4
+    },
+    {
+      "timestamp": "2017-06-30 22:00:00",
+      "actual": 26.0,
+      "predicted": 26.8
+    },
+    {
+      "timestamp": "2017-06-30 23:00:00",
+      "actual": 78.0,
+      "predicted": 76.4
+    },
+    {
+      "timestamp": "2017-06-30 23:00:00",
+      "actual": 39.0,
+      "predicted": 25.3
+    },
+    {
+      "timestamp": "2017-06-30 23:00:00",
+      "actual": 27.0,
+      "predicted": 28.4
+    },
+    {
+      "timestamp": "2017-06-30 23:00:00",
+      "actual": 12.0,
+      "predicted": 17.6
+    }
+  ]
+}

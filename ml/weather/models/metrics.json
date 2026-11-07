@@ -1,0 +1,363 @@
+{
+  "module": "Weather & Urban Microclimate Intelligence",
+  "dataset": "Kaggle Hyderabad Historical Weather (96,432 rows, 2009-2019)",
+  "target": "tempC (Ambient Temperature \u00b0C)",
+  "samples_total": 96432,
+  "train_samples": 77145,
+  "test_samples": 19287,
+  "best_model": "Linear Regression",
+  "comparison": {
+    "Linear Regression": {
+      "MAE": 0.4051,
+      "RMSE": 0.5309,
+      "R2": 0.9894,
+      "MAPE": 1.51
+    },
+    "Ridge Regression": {
+      "MAE": 0.4056,
+      "RMSE": 0.5323,
+      "R2": 0.9894,
+      "MAPE": 1.51
+    },
+    "Random Forest": {
+      "MAE": 0.542,
+      "RMSE": 0.813,
+      "R2": 0.9752,
+      "MAPE": 2.0
+    },
+    "Gradient Boosting": {
+      "MAE": 0.5102,
+      "RMSE": 0.7832,
+      "R2": 0.977,
+      "MAPE": 1.88
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "temp_lag_1",
+      "importance": 0.9403
+    },
+    {
+      "feature": "temp_lag_24",
+      "importance": 0.0303
+    },
+    {
+      "feature": "hour_sin",
+      "importance": 0.0124
+    },
+    {
+      "feature": "hour",
+      "importance": 0.0035
+    },
+    {
+      "feature": "humidity",
+      "importance": 0.0024
+    },
+    {
+      "feature": "temp_rolling_6",
+      "importance": 0.0019
+    },
+    {
+      "feature": "hour_cos",
+      "importance": 0.0012
+    },
+    {
+      "feature": "dayofyear",
+      "importance": 0.0011
+    },
+    {
+      "feature": "cloudcover",
+      "importance": 0.0011
+    },
+    {
+      "feature": "temp_rolling_24",
+      "importance": 0.0011
+    },
+    {
+      "feature": "temp_lag_2",
+      "importance": 0.0009
+    },
+    {
+      "feature": "DewPointC",
+      "importance": 0.0006
+    },
+    {
+      "feature": "WindGustKmph",
+      "importance": 0.0006
+    },
+    {
+      "feature": "humidity_lag_1",
+      "importance": 0.0006
+    },
+    {
+      "feature": "pressure",
+      "importance": 0.0005
+    },
+    {
+      "feature": "windspeedKmph",
+      "importance": 0.0005
+    },
+    {
+      "feature": "month_cos",
+      "importance": 0.0004
+    },
+    {
+      "feature": "sunHour",
+      "importance": 0.0003
+    },
+    {
+      "feature": "month",
+      "importance": 0.0001
+    },
+    {
+      "feature": "month_sin",
+      "importance": 0.0001
+    },
+    {
+      "feature": "precipMM",
+      "importance": 0.0001
+    }
+  ],
+  "actual_vs_predicted_sample": [
+    {
+      "timestamp": "2019-12-31 00:00:00",
+      "actual": 20.0,
+      "predicted": 19.0
+    },
+    {
+      "timestamp": "2019-12-31 01:00:00",
+      "actual": 19.0,
+      "predicted": 19.3
+    },
+    {
+      "timestamp": "2019-12-31 02:00:00",
+      "actual": 19.0,
+      "predicted": 18.4
+    },
+    {
+      "timestamp": "2019-12-31 03:00:00",
+      "actual": 18.0,
+      "predicted": 18.4
+    },
+    {
+      "timestamp": "2019-12-31 04:00:00",
+      "actual": 18.0,
+      "predicted": 18.0
+    },
+    {
+      "timestamp": "2019-12-31 05:00:00",
+      "actual": 18.0,
+      "predicted": 18.1
+    },
+    {
+      "timestamp": "2019-12-31 06:00:00",
+      "actual": 18.0,
+      "predicted": 18.3
+    },
+    {
+      "timestamp": "2019-12-31 07:00:00",
+      "actual": 19.0,
+      "predicted": 18.7
+    },
+    {
+      "timestamp": "2019-12-31 08:00:00",
+      "actual": 19.0,
+      "predicted": 19.9
+    },
+    {
+      "timestamp": "2019-12-31 09:00:00",
+      "actual": 20.0,
+      "predicted": 20.0
+    },
+    {
+      "timestamp": "2019-12-31 10:00:00",
+      "actual": 21.0,
+      "predicted": 21.4
+    },
+    {
+      "timestamp": "2019-12-31 11:00:00",
+      "actual": 22.0,
+      "predicted": 22.4
+    },
+    {
+      "timestamp": "2019-12-31 12:00:00",
+      "actual": 23.0,
+      "predicted": 23.2
+    },
+    {
+      "timestamp": "2019-12-31 13:00:00",
+      "actual": 24.0,
+      "predicted": 23.7
+    },
+    {
+      "timestamp": "2019-12-31 14:00:00",
+      "actual": 24.0,
+      "predicted": 24.5
+    },
+    {
+      "timestamp": "2019-12-31 15:00:00",
+      "actual": 25.0,
+      "predicted": 24.5
+    },
+    {
+      "timestamp": "2019-12-31 16:00:00",
+      "actual": 24.0,
+      "predicted": 24.3
+    },
+    {
+      "timestamp": "2019-12-31 17:00:00",
+      "actual": 23.0,
+      "predicted": 23.3
+    },
+    {
+      "timestamp": "2019-12-31 18:00:00",
+      "actual": 22.0,
+      "predicted": 22.0
+    },
+    {
+      "timestamp": "2019-12-31 19:00:00",
+      "actual": 22.0,
+      "predicted": 21.0
+    },
+    {
+      "timestamp": "2019-12-31 20:00:00",
+      "actual": 21.0,
+      "predicted": 20.7
+    },
+    {
+      "timestamp": "2019-12-31 21:00:00",
+      "actual": 20.0,
+      "predicted": 19.8
+    },
+    {
+      "timestamp": "2019-12-31 22:00:00",
+      "actual": 20.0,
+      "predicted": 19.3
+    },
+    {
+      "timestamp": "2019-12-31 23:00:00",
+      "actual": 19.0,
+      "predicted": 19.3
+    },
+    {
+      "timestamp": "2020-01-01 00:00:00",
+      "actual": 19.0,
+      "predicted": 18.1
+    },
+    {
+      "timestamp": "2020-01-01 01:00:00",
+      "actual": 19.0,
+      "predicted": 18.2
+    },
+    {
+      "timestamp": "2020-01-01 02:00:00",
+      "actual": 19.0,
+      "predicted": 18.5
+    },
+    {
+      "timestamp": "2020-01-01 03:00:00",
+      "actual": 19.0,
+      "predicted": 18.6
+    },
+    {
+      "timestamp": "2020-01-01 04:00:00",
+      "actual": 19.0,
+      "predicted": 19.1
+    },
+    {
+      "timestamp": "2020-01-01 05:00:00",
+      "actual": 19.0,
+      "predicted": 19.4
+    },
+    {
+      "timestamp": "2020-01-01 06:00:00",
+      "actual": 19.0,
+      "predicted": 19.3
+    },
+    {
+      "timestamp": "2020-01-01 07:00:00",
+      "actual": 20.0,
+      "predicted": 19.7
+    },
+    {
+      "timestamp": "2020-01-01 08:00:00",
+      "actual": 21.0,
+      "predicted": 20.6
+    },
+    {
+      "timestamp": "2020-01-01 09:00:00",
+      "actual": 22.0,
+      "predicted": 21.9
+    },
+    {
+      "timestamp": "2020-01-01 10:00:00",
+      "actual": 23.0,
+      "predicted": 22.9
+    },
+    {
+      "timestamp": "2020-01-01 11:00:00",
+      "actual": 24.0,
+      "predicted": 24.0
+    },
+    {
+      "timestamp": "2020-01-01 12:00:00",
+      "actual": 25.0,
+      "predicted": 25.0
+    },
+    {
+      "timestamp": "2020-01-01 13:00:00",
+      "actual": 25.0,
+      "predicted": 25.2
+    },
+    {
+      "timestamp": "2020-01-01 14:00:00",
+      "actual": 25.0,
+      "predicted": 25.0
+    },
+    {
+      "timestamp": "2020-01-01 15:00:00",
+      "actual": 25.0,
+      "predicted": 25.0
+    },
+    {
+      "timestamp": "2020-01-01 16:00:00",
+      "actual": 24.0,
+      "predicted": 24.0
+    },
+    {
+      "timestamp": "2020-01-01 17:00:00",
+      "actual": 24.0,
+      "predicted": 22.9
+    },
+    {
+      "timestamp": "2020-01-01 18:00:00",
+      "actual": 23.0,
+      "predicted": 22.7
+    },
+    {
+      "timestamp": "2020-01-01 19:00:00",
+      "actual": 22.0,
+      "predicted": 22.1
+    },
+    {
+      "timestamp": "2020-01-01 20:00:00",
+      "actual": 22.0,
+      "predicted": 21.1
+    },
+    {
+      "timestamp": "2020-01-01 21:00:00",
+      "actual": 21.0,
+      "predicted": 21.0
+    },
+    {
+      "timestamp": "2020-01-01 22:00:00",
+      "actual": 21.0,
+      "predicted": 20.2
+    },
+    {
+      "timestamp": "2020-01-01 23:00:00",
+      "actual": 20.0,
+      "predicted": 20.1
+    }
+  ]
+}

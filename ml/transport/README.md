@@ -114,3 +114,56 @@ python predict.py
 2026-07-06         Monday          Weekday                         1,095,973
 2026-07-07        Tuesday          Weekday                         1,074,029
 ```
+
+---
+
+## 7. GTFS Transit Network Database (MySQL 8.4)
+
+The transit schedule subsystem uses a relational **MySQL** database (`smart_city_db`) rather than SQLite, providing production concurrency and integration with backend APIs.
+
+### Relational Schema (`database/schema.sql`):
+- `transit_stops`: 5,028 bus stops across Hyderabad with geographical coordinates (`stop_lat`, `stop_lon`, `zone_id`, `stop_desc`).
+- `transit_routes`: 1,031 bus routes (`route_id`, `route_short_name`, `route_long_name`, `route_type`).
+- `transit_trips`: 44,892 scheduled trips mapping routes to block shapes and directions.
+- `transit_stop_times`: 1,132,807 timetable rows mapping exact scheduled arrival/departure sequences with multi-column composite indexes (`stop_id, trip_id`, `trip_id, stop_sequence`).
+- `transit_demand_forecasts`: Storage for daily machine learning ridership predictions.
+- `user_trip_searches`: Audit log of origin-to-destination passenger queries for smart city transit corridor analytics.
+
+### Database Ingestion Script:
+To populate or rebuild the MySQL transit database from raw GTFS feeds:
+```bash
+python ml/transport/build_gtfs_db.py
+```
+*Note: Configured via environment variables in `.env` (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`).*
+
+---
+
+## 8. GTFS Origin-to-Destination Route Finder & Decision Support
+
+The route finder engine (`ml/transport/route_finder.py`) resolves origin and destination stops across physical multi-platform stop clusters, discovers direct bus routes, calculates travel times and scheduled stops, and fuses predictive intelligence:
+- **Expected Traffic Delay**: Dynamic delay estimation using peak-hour traffic multipliers.
+- **Predicted Crowd Level**: Capacity forecast categorizing upcoming buses (Low Crowd, Moderate Crowd, High Rush).
+- **Intelligent Scoring & Ranking**: Multi-objective ranking balancing travel duration, traffic delays, and crowding.
+
+### CLI Usage Examples:
+
+#### 1. Plan a Trip between Origin & Destination:
+```bash
+python ml/transport/route_finder.py --origin "Charminar" --dest "Afzalgunj"
+```
+
+#### 2. Cross-Corridor Routing (Secunderabad to Mehdipatnam):
+```bash
+python ml/transport/route_finder.py --origin "Secunderabad" --dest "Mehdipatnam"
+```
+
+#### 3. Search Bus Stops by Name:
+```bash
+python ml/transport/route_finder.py --search "Ameerpet"
+```
+
+#### 4. Find Nearest Bus Stops by GPS Coordinates:
+```bash
+python ml/transport/route_finder.py --lat 17.3586 --lon 78.4740 --radius 1.0
+```
+

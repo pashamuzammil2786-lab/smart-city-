@@ -1,0 +1,2135 @@
+{
+  "test_start_date": "2021-05-31",
+  "test_end_date": "2026-06-30",
+  "total_test_samples": 1857,
+  "sample_points": [
+    {
+      "date_str": "2021-05-31",
+      "total_rides": 342781,
+      "predicted_total_rides": 540498,
+      "error": -197717,
+      "abs_pct_error": 57.68026815955377,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2021-06-07",
+      "total_rides": 546749,
+      "predicted_total_rides": 501675,
+      "error": 45074,
+      "abs_pct_error": 8.244002275267079,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-06-14",
+      "total_rides": 589644,
+      "predicted_total_rides": 569245,
+      "error": 20399,
+      "abs_pct_error": 3.45954508143897,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-06-21",
+      "total_rides": 587480,
+      "predicted_total_rides": 591453,
+      "error": -3973,
+      "abs_pct_error": 0.6762783413903452,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-06-28",
+      "total_rides": 556342,
+      "predicted_total_rides": 590188,
+      "error": -33846,
+      "abs_pct_error": 6.0836679596363386,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-07-05",
+      "total_rides": 416226,
+      "predicted_total_rides": 552437,
+      "error": -136211,
+      "abs_pct_error": 32.72525022463758,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2021-07-12",
+      "total_rides": 600978,
+      "predicted_total_rides": 515691,
+      "error": 85287,
+      "abs_pct_error": 14.191368070045826,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-07-19",
+      "total_rides": 625953,
+      "predicted_total_rides": 576024,
+      "error": 49929,
+      "abs_pct_error": 7.976477467158078,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-07-26",
+      "total_rides": 633502,
+      "predicted_total_rides": 592953,
+      "error": 40549,
+      "abs_pct_error": 6.400769058345514,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-08-02",
+      "total_rides": 634395,
+      "predicted_total_rides": 603580,
+      "error": 30815,
+      "abs_pct_error": 4.857383806618905,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-08-09",
+      "total_rides": 575067,
+      "predicted_total_rides": 604144,
+      "error": -29077,
+      "abs_pct_error": 5.056280398631811,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-08-16",
+      "total_rides": 618572,
+      "predicted_total_rides": 603730,
+      "error": 14842,
+      "abs_pct_error": 2.399397321572913,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-08-23",
+      "total_rides": 653156,
+      "predicted_total_rides": 598162,
+      "error": 54994,
+      "abs_pct_error": 8.41973433605448,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-08-30",
+      "total_rides": 735440,
+      "predicted_total_rides": 596409,
+      "error": 139031,
+      "abs_pct_error": 18.90446535407375,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-09-06",
+      "total_rides": 421531,
+      "predicted_total_rides": 567911,
+      "error": -146380,
+      "abs_pct_error": 34.72579715370874,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2021-09-13",
+      "total_rides": 747081,
+      "predicted_total_rides": 513264,
+      "error": 233817,
+      "abs_pct_error": 31.297409517843445,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-09-20",
+      "total_rides": 742199,
+      "predicted_total_rides": 578272,
+      "error": 163927,
+      "abs_pct_error": 22.0866640887417,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-09-27",
+      "total_rides": 756666,
+      "predicted_total_rides": 614371,
+      "error": 142295,
+      "abs_pct_error": 18.805523176672402,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-10-04",
+      "total_rides": 750825,
+      "predicted_total_rides": 612520,
+      "error": 138305,
+      "abs_pct_error": 18.42040422202244,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-10-11",
+      "total_rides": 604747,
+      "predicted_total_rides": 601602,
+      "error": 3145,
+      "abs_pct_error": 0.520052187112958,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-10-18",
+      "total_rides": 750904,
+      "predicted_total_rides": 599347,
+      "error": 151557,
+      "abs_pct_error": 20.18327242896562,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-10-25",
+      "total_rides": 654345,
+      "predicted_total_rides": 560276,
+      "error": 94069,
+      "abs_pct_error": 14.376055444757736,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-11-01",
+      "total_rides": 753933,
+      "predicted_total_rides": 596497,
+      "error": 157436,
+      "abs_pct_error": 20.88196165972308,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-11-08",
+      "total_rides": 763790,
+      "predicted_total_rides": 602876,
+      "error": 160914,
+      "abs_pct_error": 21.067832781261867,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-11-15",
+      "total_rides": 720657,
+      "predicted_total_rides": 582775,
+      "error": 137882,
+      "abs_pct_error": 19.132819080366943,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-11-22",
+      "total_rides": 716231,
+      "predicted_total_rides": 558141,
+      "error": 158090,
+      "abs_pct_error": 22.07248778676153,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-11-29",
+      "total_rides": 697412,
+      "predicted_total_rides": 538088,
+      "error": 159324,
+      "abs_pct_error": 22.84503277832902,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-12-06",
+      "total_rides": 698222,
+      "predicted_total_rides": 567771,
+      "error": 130451,
+      "abs_pct_error": 18.683312757260584,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-12-13",
+      "total_rides": 697670,
+      "predicted_total_rides": 604540,
+      "error": 93130,
+      "abs_pct_error": 13.34871787521321,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-12-20",
+      "total_rides": 581951,
+      "predicted_total_rides": 601502,
+      "error": -19551,
+      "abs_pct_error": 3.3595612001697734,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2021-12-27",
+      "total_rides": 447549,
+      "predicted_total_rides": 506670,
+      "error": -59121,
+      "abs_pct_error": 13.2099501953976,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-01-03",
+      "total_rides": 493620,
+      "predicted_total_rides": 475216,
+      "error": 18404,
+      "abs_pct_error": 3.728374052915198,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-01-10",
+      "total_rides": 449749,
+      "predicted_total_rides": 471443,
+      "error": -21694,
+      "abs_pct_error": 4.823579374273206,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-01-17",
+      "total_rides": 408103,
+      "predicted_total_rides": 487602,
+      "error": -79499,
+      "abs_pct_error": 19.48013124137779,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-01-24",
+      "total_rides": 587662,
+      "predicted_total_rides": 432352,
+      "error": 155310,
+      "abs_pct_error": 26.428457174362137,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-01-31",
+      "total_rides": 658502,
+      "predicted_total_rides": 525670,
+      "error": 132832,
+      "abs_pct_error": 20.171844580578345,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-02-07",
+      "total_rides": 663635,
+      "predicted_total_rides": 566497,
+      "error": 97138,
+      "abs_pct_error": 14.637262953280041,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-02-14",
+      "total_rides": 661195,
+      "predicted_total_rides": 567967,
+      "error": 93228,
+      "abs_pct_error": 14.099925135550025,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-02-21",
+      "total_rides": 549742,
+      "predicted_total_rides": 580391,
+      "error": -30649,
+      "abs_pct_error": 5.5751607117520585,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-02-28",
+      "total_rides": 709702,
+      "predicted_total_rides": 580310,
+      "error": 129392,
+      "abs_pct_error": 18.23187760496659,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-03-07",
+      "total_rides": 660975,
+      "predicted_total_rides": 589187,
+      "error": 71788,
+      "abs_pct_error": 10.860925148454934,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-03-14",
+      "total_rides": 742726,
+      "predicted_total_rides": 609677,
+      "error": 133049,
+      "abs_pct_error": 17.913604747915112,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-03-21",
+      "total_rides": 745529,
+      "predicted_total_rides": 598183,
+      "error": 147346,
+      "abs_pct_error": 19.763952844222022,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-03-28",
+      "total_rides": 726429,
+      "predicted_total_rides": 590936,
+      "error": 135493,
+      "abs_pct_error": 18.651926065727,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-04-04",
+      "total_rides": 748471,
+      "predicted_total_rides": 607244,
+      "error": 141227,
+      "abs_pct_error": 18.86873372515435,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-04-11",
+      "total_rides": 664583,
+      "predicted_total_rides": 604830,
+      "error": 59753,
+      "abs_pct_error": 8.991051531561897,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-04-18",
+      "total_rides": 695701,
+      "predicted_total_rides": 574757,
+      "error": 120944,
+      "abs_pct_error": 17.384479826822155,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-04-25",
+      "total_rides": 748466,
+      "predicted_total_rides": 593152,
+      "error": 155314,
+      "abs_pct_error": 20.75097599623764,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-05-02",
+      "total_rides": 744968,
+      "predicted_total_rides": 596718,
+      "error": 148250,
+      "abs_pct_error": 19.900183632048623,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-05-09",
+      "total_rides": 752782,
+      "predicted_total_rides": 608864,
+      "error": 143918,
+      "abs_pct_error": 19.118151071624986,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-05-16",
+      "total_rides": 765480,
+      "predicted_total_rides": 612568,
+      "error": 152912,
+      "abs_pct_error": 19.9759627945864,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-05-23",
+      "total_rides": 754416,
+      "predicted_total_rides": 597732,
+      "error": 156684,
+      "abs_pct_error": 20.768912642361773,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-05-30",
+      "total_rides": 446286,
+      "predicted_total_rides": 543641,
+      "error": -97355,
+      "abs_pct_error": 21.814486674464355,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2022-06-06",
+      "total_rides": 729832,
+      "predicted_total_rides": 537601,
+      "error": 192231,
+      "abs_pct_error": 26.33907529404027,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-06-13",
+      "total_rides": 740303,
+      "predicted_total_rides": 573700,
+      "error": 166603,
+      "abs_pct_error": 22.50470415492035,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-06-20",
+      "total_rides": 623655,
+      "predicted_total_rides": 603677,
+      "error": 19978,
+      "abs_pct_error": 3.2033736601165708,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-06-27",
+      "total_rides": 714953,
+      "predicted_total_rides": 606576,
+      "error": 108377,
+      "abs_pct_error": 15.158618818299944,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-07-04",
+      "total_rides": 359758,
+      "predicted_total_rides": 558021,
+      "error": -198263,
+      "abs_pct_error": 55.11010179064816,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2022-07-11",
+      "total_rides": 700657,
+      "predicted_total_rides": 502371,
+      "error": 198286,
+      "abs_pct_error": 28.300009847899897,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-07-18",
+      "total_rides": 732028,
+      "predicted_total_rides": 573625,
+      "error": 158403,
+      "abs_pct_error": 21.63892637986525,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-07-25",
+      "total_rides": 738399,
+      "predicted_total_rides": 597135,
+      "error": 141264,
+      "abs_pct_error": 19.13112016673912,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-08-01",
+      "total_rides": 738724,
+      "predicted_total_rides": 615123,
+      "error": 123601,
+      "abs_pct_error": 16.731688695642756,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-08-08",
+      "total_rides": 667621,
+      "predicted_total_rides": 612984,
+      "error": 54637,
+      "abs_pct_error": 8.18383484042593,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-08-15",
+      "total_rides": 735385,
+      "predicted_total_rides": 613560,
+      "error": 121825,
+      "abs_pct_error": 16.56615242356045,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-08-22",
+      "total_rides": 806958,
+      "predicted_total_rides": 597577,
+      "error": 209381,
+      "abs_pct_error": 25.94695139028301,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-08-29",
+      "total_rides": 761214,
+      "predicted_total_rides": 625414,
+      "error": 135800,
+      "abs_pct_error": 17.839924121206387,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-09-05",
+      "total_rides": 417557,
+      "predicted_total_rides": 566187,
+      "error": -148630,
+      "abs_pct_error": 35.59514030419799,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2022-09-12",
+      "total_rides": 823721,
+      "predicted_total_rides": 547724,
+      "error": 275997,
+      "abs_pct_error": 33.50612646757823,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-09-19",
+      "total_rides": 845504,
+      "predicted_total_rides": 608363,
+      "error": 237141,
+      "abs_pct_error": 28.047294867913102,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-09-26",
+      "total_rides": 835610,
+      "predicted_total_rides": 766306,
+      "error": 69304,
+      "abs_pct_error": 8.293821280262323,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-10-03",
+      "total_rides": 869709,
+      "predicted_total_rides": 880560,
+      "error": -10851,
+      "abs_pct_error": 1.2476586996340155,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-10-10",
+      "total_rides": 745523,
+      "predicted_total_rides": 1009262,
+      "error": -263739,
+      "abs_pct_error": 35.376373364738576,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-10-17",
+      "total_rides": 803577,
+      "predicted_total_rides": 745734,
+      "error": 57843,
+      "abs_pct_error": 7.198190092548691,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-10-24",
+      "total_rides": 841879,
+      "predicted_total_rides": 641352,
+      "error": 200527,
+      "abs_pct_error": 23.818981112487663,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-10-31",
+      "total_rides": 773804,
+      "predicted_total_rides": 702444,
+      "error": 71360,
+      "abs_pct_error": 9.221973523010995,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-11-07",
+      "total_rides": 847300,
+      "predicted_total_rides": 688179,
+      "error": 159121,
+      "abs_pct_error": 18.77977103741296,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-11-14",
+      "total_rides": 810142,
+      "predicted_total_rides": 681316,
+      "error": 128826,
+      "abs_pct_error": 15.901656746595041,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-11-21",
+      "total_rides": 723167,
+      "predicted_total_rides": 702504,
+      "error": 20663,
+      "abs_pct_error": 2.8572929904157682,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-11-28",
+      "total_rides": 779592,
+      "predicted_total_rides": 470905,
+      "error": 308687,
+      "abs_pct_error": 39.595968147441226,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-12-05",
+      "total_rides": 774326,
+      "predicted_total_rides": 604371,
+      "error": 169955,
+      "abs_pct_error": 21.94876576532365,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-12-12",
+      "total_rides": 771009,
+      "predicted_total_rides": 601880,
+      "error": 169129,
+      "abs_pct_error": 21.936060409152162,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-12-19",
+      "total_rides": 694054,
+      "predicted_total_rides": 586157,
+      "error": 107897,
+      "abs_pct_error": 15.545908531612815,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2022-12-26",
+      "total_rides": 328373,
+      "predicted_total_rides": 474354,
+      "error": -145981,
+      "abs_pct_error": 44.45584746614368,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2023-01-02",
+      "total_rides": 419921,
+      "predicted_total_rides": 379815,
+      "error": 40106,
+      "abs_pct_error": 9.550844087340238,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2023-01-09",
+      "total_rides": 746268,
+      "predicted_total_rides": 495989,
+      "error": 250279,
+      "abs_pct_error": 33.53741551292565,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-01-16",
+      "total_rides": 492201,
+      "predicted_total_rides": 583272,
+      "error": -91071,
+      "abs_pct_error": 18.502806780156888,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-01-23",
+      "total_rides": 776140,
+      "predicted_total_rides": 585838,
+      "error": 190302,
+      "abs_pct_error": 24.519030071894246,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-01-30",
+      "total_rides": 704941,
+      "predicted_total_rides": 594151,
+      "error": 110790,
+      "abs_pct_error": 15.716208874217843,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-02-06",
+      "total_rides": 793736,
+      "predicted_total_rides": 542386,
+      "error": 251350,
+      "abs_pct_error": 31.66670026305976,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-02-13",
+      "total_rides": 776139,
+      "predicted_total_rides": 614737,
+      "error": 161402,
+      "abs_pct_error": 20.795501836655546,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-02-20",
+      "total_rides": 622633,
+      "predicted_total_rides": 589454,
+      "error": 33179,
+      "abs_pct_error": 5.3288213120730825,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-02-27",
+      "total_rides": 723042,
+      "predicted_total_rides": 557192,
+      "error": 165850,
+      "abs_pct_error": 22.93780997507752,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-03-06",
+      "total_rides": 773719,
+      "predicted_total_rides": 614295,
+      "error": 159424,
+      "abs_pct_error": 20.604896609751087,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-03-13",
+      "total_rides": 766654,
+      "predicted_total_rides": 634200,
+      "error": 132454,
+      "abs_pct_error": 17.27689413999014,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-03-20",
+      "total_rides": 778652,
+      "predicted_total_rides": 629375,
+      "error": 149277,
+      "abs_pct_error": 19.17120870427354,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-03-27",
+      "total_rides": 813551,
+      "predicted_total_rides": 613172,
+      "error": 200379,
+      "abs_pct_error": 24.630170696121077,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-04-03",
+      "total_rides": 743546,
+      "predicted_total_rides": 666690,
+      "error": 76856,
+      "abs_pct_error": 10.336414962894024,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-04-10",
+      "total_rides": 817184,
+      "predicted_total_rides": 546739,
+      "error": 270445,
+      "abs_pct_error": 33.094749774836515,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-04-17",
+      "total_rides": 768607,
+      "predicted_total_rides": 636193,
+      "error": 132414,
+      "abs_pct_error": 17.2277900149231,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-04-24",
+      "total_rides": 830940,
+      "predicted_total_rides": 655918,
+      "error": 175022,
+      "abs_pct_error": 21.063133318891857,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-05-01",
+      "total_rides": 797978,
+      "predicted_total_rides": 704614,
+      "error": 93364,
+      "abs_pct_error": 11.700071931807644,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-05-08",
+      "total_rides": 795034,
+      "predicted_total_rides": 748393,
+      "error": 46641,
+      "abs_pct_error": 5.8665415567132975,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-05-15",
+      "total_rides": 807041,
+      "predicted_total_rides": 686211,
+      "error": 120830,
+      "abs_pct_error": 14.97197787968641,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-05-22",
+      "total_rides": 832900,
+      "predicted_total_rides": 689440,
+      "error": 143460,
+      "abs_pct_error": 17.224156561411935,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-05-29",
+      "total_rides": 479385,
+      "predicted_total_rides": 594869,
+      "error": -115484,
+      "abs_pct_error": 24.090032020192538,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2023-06-05",
+      "total_rides": 861073,
+      "predicted_total_rides": 676372,
+      "error": 184701,
+      "abs_pct_error": 21.45009772690585,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-06-12",
+      "total_rides": 784994,
+      "predicted_total_rides": 614807,
+      "error": 170187,
+      "abs_pct_error": 21.68003831876422,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-06-19",
+      "total_rides": 646147,
+      "predicted_total_rides": 680805,
+      "error": -34658,
+      "abs_pct_error": 5.363794925922429,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-06-26",
+      "total_rides": 769007,
+      "predicted_total_rides": 651074,
+      "error": 117933,
+      "abs_pct_error": 15.335751170015358,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-07-03",
+      "total_rides": 738116,
+      "predicted_total_rides": 621444,
+      "error": 116672,
+      "abs_pct_error": 15.806729565542543,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-07-10",
+      "total_rides": 816423,
+      "predicted_total_rides": 575710,
+      "error": 240713,
+      "abs_pct_error": 29.48385824505189,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-07-17",
+      "total_rides": 829935,
+      "predicted_total_rides": 641211,
+      "error": 188724,
+      "abs_pct_error": 22.739612138299986,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-07-24",
+      "total_rides": 813002,
+      "predicted_total_rides": 813938,
+      "error": -936,
+      "abs_pct_error": 0.11512886807166527,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-07-31",
+      "total_rides": 803219,
+      "predicted_total_rides": 740816,
+      "error": 62403,
+      "abs_pct_error": 7.76911402743212,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-08-07",
+      "total_rides": 814092,
+      "predicted_total_rides": 896680,
+      "error": -82588,
+      "abs_pct_error": 10.144799359286175,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-08-14",
+      "total_rides": 699424,
+      "predicted_total_rides": 744528,
+      "error": -45104,
+      "abs_pct_error": 6.44873495905202,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-08-21",
+      "total_rides": 895168,
+      "predicted_total_rides": 707110,
+      "error": 188058,
+      "abs_pct_error": 21.008123614785156,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-08-28",
+      "total_rides": 938370,
+      "predicted_total_rides": 617935,
+      "error": 320435,
+      "abs_pct_error": 34.14804394854908,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-09-04",
+      "total_rides": 513517,
+      "predicted_total_rides": 619646,
+      "error": -106129,
+      "abs_pct_error": 20.667085997152967,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2023-09-11",
+      "total_rides": 861187,
+      "predicted_total_rides": 922670,
+      "error": -61483,
+      "abs_pct_error": 7.139332107892943,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-09-18",
+      "total_rides": 942841,
+      "predicted_total_rides": 815926,
+      "error": 126915,
+      "abs_pct_error": 13.4609122853164,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-09-25",
+      "total_rides": 923202,
+      "predicted_total_rides": 1036486,
+      "error": -113284,
+      "abs_pct_error": 12.270770643911083,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-10-02",
+      "total_rides": 954964,
+      "predicted_total_rides": 1092388,
+      "error": -137424,
+      "abs_pct_error": 14.390490112716293,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-10-09",
+      "total_rides": 819234,
+      "predicted_total_rides": 1085938,
+      "error": -266704,
+      "abs_pct_error": 32.555289453318586,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-10-16",
+      "total_rides": 926491,
+      "predicted_total_rides": 1095113,
+      "error": -168622,
+      "abs_pct_error": 18.200068861974913,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-10-23",
+      "total_rides": 934718,
+      "predicted_total_rides": 890750,
+      "error": 43968,
+      "abs_pct_error": 4.7038786029583255,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-10-30",
+      "total_rides": 919293,
+      "predicted_total_rides": 1039975,
+      "error": -120682,
+      "abs_pct_error": 13.127697045446881,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-11-06",
+      "total_rides": 944143,
+      "predicted_total_rides": 994868,
+      "error": -50725,
+      "abs_pct_error": 5.372597159540451,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-11-13",
+      "total_rides": 928831,
+      "predicted_total_rides": 1048370,
+      "error": -119539,
+      "abs_pct_error": 12.86983315587012,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-11-20",
+      "total_rides": 806125,
+      "predicted_total_rides": 1044398,
+      "error": -238273,
+      "abs_pct_error": 29.557822918281907,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-11-27",
+      "total_rides": 831721,
+      "predicted_total_rides": 550115,
+      "error": 281606,
+      "abs_pct_error": 33.858228901278196,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-12-04",
+      "total_rides": 875583,
+      "predicted_total_rides": 732461,
+      "error": 143122,
+      "abs_pct_error": 16.345908954376682,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-12-11",
+      "total_rides": 843720,
+      "predicted_total_rides": 978392,
+      "error": -134672,
+      "abs_pct_error": 15.961693452804248,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-12-18",
+      "total_rides": 805485,
+      "predicted_total_rides": 968843,
+      "error": -163358,
+      "abs_pct_error": 20.28070044755644,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2023-12-25",
+      "total_rides": 225639,
+      "predicted_total_rides": 576082,
+      "error": -350443,
+      "abs_pct_error": 155.31136018152893,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2024-01-01",
+      "total_rides": 358731,
+      "predicted_total_rides": 376819,
+      "error": -18088,
+      "abs_pct_error": 5.0422182638244255,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2024-01-08",
+      "total_rides": 844015,
+      "predicted_total_rides": 460108,
+      "error": 383907,
+      "abs_pct_error": 45.485802977435235,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-01-15",
+      "total_rides": 333860,
+      "predicted_total_rides": 536085,
+      "error": -202225,
+      "abs_pct_error": 60.57179656143293,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-01-22",
+      "total_rides": 854857,
+      "predicted_total_rides": 533485,
+      "error": 321372,
+      "abs_pct_error": 37.59365601498262,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-01-29",
+      "total_rides": 886325,
+      "predicted_total_rides": 594100,
+      "error": 292225,
+      "abs_pct_error": 32.97041153075903,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-02-05",
+      "total_rides": 897881,
+      "predicted_total_rides": 1035914,
+      "error": -138033,
+      "abs_pct_error": 15.373195334348317,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-02-12",
+      "total_rides": 859251,
+      "predicted_total_rides": 1025546,
+      "error": -166295,
+      "abs_pct_error": 19.35348344081066,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-02-19",
+      "total_rides": 689228,
+      "predicted_total_rides": 1031661,
+      "error": -342433,
+      "abs_pct_error": 49.68355899644239,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-02-26",
+      "total_rides": 908046,
+      "predicted_total_rides": 865429,
+      "error": 42617,
+      "abs_pct_error": 4.693264438145204,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-03-04",
+      "total_rides": 890158,
+      "predicted_total_rides": 819784,
+      "error": 70374,
+      "abs_pct_error": 7.905787511879914,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-03-11",
+      "total_rides": 919652,
+      "predicted_total_rides": 983515,
+      "error": -63863,
+      "abs_pct_error": 6.944257175540313,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-03-18",
+      "total_rides": 881664,
+      "predicted_total_rides": 968831,
+      "error": -87167,
+      "abs_pct_error": 9.886646159988386,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-03-25",
+      "total_rides": 793990,
+      "predicted_total_rides": 979392,
+      "error": -185402,
+      "abs_pct_error": 23.350671922820187,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-04-01",
+      "total_rides": 812843,
+      "predicted_total_rides": 674790,
+      "error": 138053,
+      "abs_pct_error": 16.983968613865162,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-04-08",
+      "total_rides": 913049,
+      "predicted_total_rides": 780911,
+      "error": 132138,
+      "abs_pct_error": 14.472169620688485,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-04-15",
+      "total_rides": 957608,
+      "predicted_total_rides": 923527,
+      "error": 34081,
+      "abs_pct_error": 3.5589719384132126,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-04-22",
+      "total_rides": 929396,
+      "predicted_total_rides": 966975,
+      "error": -37579,
+      "abs_pct_error": 4.04337871047433,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-04-29",
+      "total_rides": 906090,
+      "predicted_total_rides": 977118,
+      "error": -71028,
+      "abs_pct_error": 7.838956395060093,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-05-06",
+      "total_rides": 977099,
+      "predicted_total_rides": 1080030,
+      "error": -102931,
+      "abs_pct_error": 10.534347082537183,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-05-13",
+      "total_rides": 899845,
+      "predicted_total_rides": 1042515,
+      "error": -142670,
+      "abs_pct_error": 15.854952797426222,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-05-20",
+      "total_rides": 927768,
+      "predicted_total_rides": 1073930,
+      "error": -146162,
+      "abs_pct_error": 15.754154055755318,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-05-27",
+      "total_rides": 511834,
+      "predicted_total_rides": 644299,
+      "error": -132465,
+      "abs_pct_error": 25.880461243293723,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2024-06-03",
+      "total_rides": 972273,
+      "predicted_total_rides": 942180,
+      "error": 30093,
+      "abs_pct_error": 3.0951183463903655,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-06-10",
+      "total_rides": 881779,
+      "predicted_total_rides": 846756,
+      "error": 35023,
+      "abs_pct_error": 3.9718568938475514,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-06-17",
+      "total_rides": 863389,
+      "predicted_total_rides": 1051525,
+      "error": -188136,
+      "abs_pct_error": 21.79040965312275,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-06-24",
+      "total_rides": 901578,
+      "predicted_total_rides": 1043766,
+      "error": -142188,
+      "abs_pct_error": 15.771014820681073,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-07-01",
+      "total_rides": 918178,
+      "predicted_total_rides": 1092408,
+      "error": -174230,
+      "abs_pct_error": 18.975623462988658,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-07-08",
+      "total_rides": 888073,
+      "predicted_total_rides": 1049503,
+      "error": -161430,
+      "abs_pct_error": 18.177559727635003,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-07-15",
+      "total_rides": 875268,
+      "predicted_total_rides": 1048903,
+      "error": -173635,
+      "abs_pct_error": 19.83792392729998,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-07-22",
+      "total_rides": 921605,
+      "predicted_total_rides": 1053714,
+      "error": -132109,
+      "abs_pct_error": 14.334666153069916,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-07-29",
+      "total_rides": 847066,
+      "predicted_total_rides": 1045165,
+      "error": -198099,
+      "abs_pct_error": 23.386489364465106,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-08-05",
+      "total_rides": 874037,
+      "predicted_total_rides": 1068615,
+      "error": -194578,
+      "abs_pct_error": 22.2619866207037,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-08-12",
+      "total_rides": 878639,
+      "predicted_total_rides": 1062165,
+      "error": -183526,
+      "abs_pct_error": 20.887531739428823,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-08-19",
+      "total_rides": 834256,
+      "predicted_total_rides": 1033204,
+      "error": -198948,
+      "abs_pct_error": 23.84735620720738,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-08-26",
+      "total_rides": 972614,
+      "predicted_total_rides": 1028260,
+      "error": -55646,
+      "abs_pct_error": 5.721283057821499,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-09-02",
+      "total_rides": 565471,
+      "predicted_total_rides": 638784,
+      "error": -73313,
+      "abs_pct_error": 12.964944267698964,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2024-09-09",
+      "total_rides": 1023721,
+      "predicted_total_rides": 1016260,
+      "error": 7461,
+      "abs_pct_error": 0.7288118540110049,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-09-16",
+      "total_rides": 1020544,
+      "predicted_total_rides": 886801,
+      "error": 133743,
+      "abs_pct_error": 13.105069453154398,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-09-23",
+      "total_rides": 1020758,
+      "predicted_total_rides": 1020427,
+      "error": 331,
+      "abs_pct_error": 0.03242688276751199,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-09-30",
+      "total_rides": 1026214,
+      "predicted_total_rides": 1163765,
+      "error": -137551,
+      "abs_pct_error": 13.403734503719496,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-10-07",
+      "total_rides": 1029363,
+      "predicted_total_rides": 1171403,
+      "error": -142040,
+      "abs_pct_error": 13.798825098628958,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-10-14",
+      "total_rides": 871313,
+      "predicted_total_rides": 1099965,
+      "error": -228652,
+      "abs_pct_error": 26.24223442092566,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-10-21",
+      "total_rides": 1023334,
+      "predicted_total_rides": 1076953,
+      "error": -53619,
+      "abs_pct_error": 5.2396382803659405,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-10-28",
+      "total_rides": 1000400,
+      "predicted_total_rides": 1153576,
+      "error": -153176,
+      "abs_pct_error": 15.311475409836065,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-11-04",
+      "total_rides": 936732,
+      "predicted_total_rides": 1098503,
+      "error": -161771,
+      "abs_pct_error": 17.26972068852137,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-11-11",
+      "total_rides": 914845,
+      "predicted_total_rides": 1084380,
+      "error": -169535,
+      "abs_pct_error": 18.531554525630025,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-11-18",
+      "total_rides": 948150,
+      "predicted_total_rides": 1164637,
+      "error": -216487,
+      "abs_pct_error": 22.832568686389283,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-11-25",
+      "total_rides": 857014,
+      "predicted_total_rides": 1059987,
+      "error": -202973,
+      "abs_pct_error": 23.68374378948302,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-12-02",
+      "total_rides": 903267,
+      "predicted_total_rides": 750284,
+      "error": 152983,
+      "abs_pct_error": 16.93663114007265,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-12-09",
+      "total_rides": 949811,
+      "predicted_total_rides": 921824,
+      "error": 27987,
+      "abs_pct_error": 2.946586215573414,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-12-16",
+      "total_rides": 893964,
+      "predicted_total_rides": 998231,
+      "error": -104267,
+      "abs_pct_error": 11.66344506042749,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-12-23",
+      "total_rides": 693736,
+      "predicted_total_rides": 979431,
+      "error": -285695,
+      "abs_pct_error": 41.182092323304545,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2024-12-30",
+      "total_rides": 733119,
+      "predicted_total_rides": 442134,
+      "error": 290985,
+      "abs_pct_error": 39.69137343323526,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-01-06",
+      "total_rides": 840256,
+      "predicted_total_rides": 613445,
+      "error": 226811,
+      "abs_pct_error": 26.99308306040064,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-01-13",
+      "total_rides": 911060,
+      "predicted_total_rides": 644604,
+      "error": 266456,
+      "abs_pct_error": 29.246811406493535,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-01-20",
+      "total_rides": 448307,
+      "predicted_total_rides": 1016659,
+      "error": -568352,
+      "abs_pct_error": 126.77740923072804,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-01-27",
+      "total_rides": 956859,
+      "predicted_total_rides": 661578,
+      "error": 295281,
+      "abs_pct_error": 30.85940561775559,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-02-03",
+      "total_rides": 959943,
+      "predicted_total_rides": 840836,
+      "error": 119107,
+      "abs_pct_error": 12.407715874796734,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-02-10",
+      "total_rides": 958511,
+      "predicted_total_rides": 1045734,
+      "error": -87223,
+      "abs_pct_error": 9.099843402944776,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-02-17",
+      "total_rides": 645274,
+      "predicted_total_rides": 1045641,
+      "error": -400367,
+      "abs_pct_error": 62.04604555584139,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-02-24",
+      "total_rides": 986957,
+      "predicted_total_rides": 839122,
+      "error": 147835,
+      "abs_pct_error": 14.978869393499414,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-03-03",
+      "total_rides": 979667,
+      "predicted_total_rides": 891029,
+      "error": 88638,
+      "abs_pct_error": 9.047768272280274,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-03-10",
+      "total_rides": 1023511,
+      "predicted_total_rides": 1126872,
+      "error": -103361,
+      "abs_pct_error": 10.098670165733441,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-03-17",
+      "total_rides": 1039724,
+      "predicted_total_rides": 1092730,
+      "error": -53006,
+      "abs_pct_error": 5.098083722218589,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-03-24",
+      "total_rides": 865398,
+      "predicted_total_rides": 1034189,
+      "error": -168791,
+      "abs_pct_error": 19.504436109165958,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-03-31",
+      "total_rides": 933402,
+      "predicted_total_rides": 953316,
+      "error": -19914,
+      "abs_pct_error": 2.1334858935378325,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-04-07",
+      "total_rides": 1018654,
+      "predicted_total_rides": 1074565,
+      "error": -55911,
+      "abs_pct_error": 5.4887135376683345,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-04-14",
+      "total_rides": 1051006,
+      "predicted_total_rides": 1086145,
+      "error": -35139,
+      "abs_pct_error": 3.3433681634548233,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-04-21",
+      "total_rides": 986009,
+      "predicted_total_rides": 1047059,
+      "error": -61050,
+      "abs_pct_error": 6.191627054114111,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-04-28",
+      "total_rides": 1069250,
+      "predicted_total_rides": 1082684,
+      "error": -13434,
+      "abs_pct_error": 1.2563946691606267,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-05-05",
+      "total_rides": 1065047,
+      "predicted_total_rides": 1184659,
+      "error": -119612,
+      "abs_pct_error": 11.230678082751277,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-05-12",
+      "total_rides": 1031143,
+      "predicted_total_rides": 1161546,
+      "error": -130403,
+      "abs_pct_error": 12.646451559095102,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-05-19",
+      "total_rides": 1033195,
+      "predicted_total_rides": 1116092,
+      "error": -82897,
+      "abs_pct_error": 8.023364418139847,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-05-26",
+      "total_rides": 598712,
+      "predicted_total_rides": 661619,
+      "error": -62907,
+      "abs_pct_error": 10.507055145044696,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2025-06-02",
+      "total_rides": 1059855,
+      "predicted_total_rides": 1030033,
+      "error": 29822,
+      "abs_pct_error": 2.8137811304376545,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-06-09",
+      "total_rides": 1028159,
+      "predicted_total_rides": 868288,
+      "error": 159871,
+      "abs_pct_error": 15.549248705696298,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-06-16",
+      "total_rides": 967481,
+      "predicted_total_rides": 1092410,
+      "error": -124929,
+      "abs_pct_error": 12.912811724467973,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-06-23",
+      "total_rides": 951222,
+      "predicted_total_rides": 1034710,
+      "error": -83488,
+      "abs_pct_error": 8.77692063472039,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-06-30",
+      "total_rides": 975662,
+      "predicted_total_rides": 1006807,
+      "error": -31145,
+      "abs_pct_error": 3.1921915581420617,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-07-07",
+      "total_rides": 1004241,
+      "predicted_total_rides": 1194646,
+      "error": -190405,
+      "abs_pct_error": 18.960090257219132,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-07-14",
+      "total_rides": 994442,
+      "predicted_total_rides": 1066806,
+      "error": -72364,
+      "abs_pct_error": 7.276844702858487,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-07-21",
+      "total_rides": 1035087,
+      "predicted_total_rides": 1079187,
+      "error": -44100,
+      "abs_pct_error": 4.260511435270659,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-07-28",
+      "total_rides": 953037,
+      "predicted_total_rides": 1060821,
+      "error": -107784,
+      "abs_pct_error": 11.309529430651695,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-08-04",
+      "total_rides": 1029378,
+      "predicted_total_rides": 1113124,
+      "error": -83746,
+      "abs_pct_error": 8.135592561721738,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-08-11",
+      "total_rides": 968027,
+      "predicted_total_rides": 1078044,
+      "error": -110017,
+      "abs_pct_error": 11.365075560908942,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-08-18",
+      "total_rides": 1028162,
+      "predicted_total_rides": 1040732,
+      "error": -12570,
+      "abs_pct_error": 1.2225699841075628,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-08-25",
+      "total_rides": 1088142,
+      "predicted_total_rides": 1145991,
+      "error": -57849,
+      "abs_pct_error": 5.31630981985807,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-09-01",
+      "total_rides": 672473,
+      "predicted_total_rides": 695568,
+      "error": -23095,
+      "abs_pct_error": 3.4343386277218566,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2025-09-08",
+      "total_rides": 1104574,
+      "predicted_total_rides": 988893,
+      "error": 115681,
+      "abs_pct_error": 10.472906296907224,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-09-15",
+      "total_rides": 1110119,
+      "predicted_total_rides": 886776,
+      "error": 223343,
+      "abs_pct_error": 20.118834106974116,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-09-22",
+      "total_rides": 1109000,
+      "predicted_total_rides": 1193875,
+      "error": -84875,
+      "abs_pct_error": 7.6532912533814255,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-09-29",
+      "total_rides": 1091217,
+      "predicted_total_rides": 1156978,
+      "error": -65761,
+      "abs_pct_error": 6.026390717886543,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-10-06",
+      "total_rides": 1078171,
+      "predicted_total_rides": 1206977,
+      "error": -128806,
+      "abs_pct_error": 11.946713461964753,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-10-13",
+      "total_rides": 930054,
+      "predicted_total_rides": 1103416,
+      "error": -173362,
+      "abs_pct_error": 18.639992946646107,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-10-20",
+      "total_rides": 1083967,
+      "predicted_total_rides": 1158107,
+      "error": -74140,
+      "abs_pct_error": 6.839691614228108,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-10-27",
+      "total_rides": 995206,
+      "predicted_total_rides": 1175680,
+      "error": -180474,
+      "abs_pct_error": 18.134336006816678,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-11-03",
+      "total_rides": 1085292,
+      "predicted_total_rides": 1194135,
+      "error": -108843,
+      "abs_pct_error": 10.028913877555533,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-11-10",
+      "total_rides": 928751,
+      "predicted_total_rides": 1131482,
+      "error": -202731,
+      "abs_pct_error": 21.828347964093712,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-11-17",
+      "total_rides": 1056661,
+      "predicted_total_rides": 1161489,
+      "error": -104828,
+      "abs_pct_error": 9.920684117233435,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-11-24",
+      "total_rides": 932677,
+      "predicted_total_rides": 1146881,
+      "error": -214204,
+      "abs_pct_error": 22.966578997873864,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-12-01",
+      "total_rides": 985680,
+      "predicted_total_rides": 911680,
+      "error": 74000,
+      "abs_pct_error": 7.5075075075075075,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-12-08",
+      "total_rides": 983231,
+      "predicted_total_rides": 1001790,
+      "error": -18559,
+      "abs_pct_error": 1.8875523656190663,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-12-15",
+      "total_rides": 877269,
+      "predicted_total_rides": 1056988,
+      "error": -179719,
+      "abs_pct_error": 20.486190666716823,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-12-22",
+      "total_rides": 796865,
+      "predicted_total_rides": 1050178,
+      "error": -253313,
+      "abs_pct_error": 31.7886969561971,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2025-12-29",
+      "total_rides": 674496,
+      "predicted_total_rides": 515581,
+      "error": 158915,
+      "abs_pct_error": 23.560554843913085,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-01-05",
+      "total_rides": 870404,
+      "predicted_total_rides": 548570,
+      "error": 321834,
+      "abs_pct_error": 36.975243679946324,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-01-12",
+      "total_rides": 1002446,
+      "predicted_total_rides": 820693,
+      "error": 181753,
+      "abs_pct_error": 18.130951692160973,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-01-19",
+      "total_rides": 511945,
+      "predicted_total_rides": 1039578,
+      "error": -527633,
+      "abs_pct_error": 103.06439168270029,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-01-26",
+      "total_rides": 808114,
+      "predicted_total_rides": 650123,
+      "error": 157991,
+      "abs_pct_error": 19.55058320979466,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-02-02",
+      "total_rides": 978466,
+      "predicted_total_rides": 759688,
+      "error": 218778,
+      "abs_pct_error": 22.359284839738937,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-02-09",
+      "total_rides": 977204,
+      "predicted_total_rides": 943270,
+      "error": 33934,
+      "abs_pct_error": 3.4725604889050805,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-02-16",
+      "total_rides": 807706,
+      "predicted_total_rides": 1092478,
+      "error": -284772,
+      "abs_pct_error": 35.2568880260887,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-02-23",
+      "total_rides": 956589,
+      "predicted_total_rides": 1012148,
+      "error": -55559,
+      "abs_pct_error": 5.808032498805652,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-03-02",
+      "total_rides": 987544,
+      "predicted_total_rides": 1045028,
+      "error": -57484,
+      "abs_pct_error": 5.820905195110294,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-03-09",
+      "total_rides": 1053545,
+      "predicted_total_rides": 1151108,
+      "error": -97563,
+      "abs_pct_error": 9.260449245167505,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-03-16",
+      "total_rides": 940630,
+      "predicted_total_rides": 1091790,
+      "error": -151160,
+      "abs_pct_error": 16.070080690600978,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-03-23",
+      "total_rides": 873836,
+      "predicted_total_rides": 1067262,
+      "error": -193426,
+      "abs_pct_error": 22.135274811291822,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-03-30",
+      "total_rides": 1099488,
+      "predicted_total_rides": 1044329,
+      "error": 55159,
+      "abs_pct_error": 5.016789632992811,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-04-06",
+      "total_rides": 1045775,
+      "predicted_total_rides": 1162497,
+      "error": -116722,
+      "abs_pct_error": 11.161291864884895,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-04-13",
+      "total_rides": 1046402,
+      "predicted_total_rides": 1189174,
+      "error": -142772,
+      "abs_pct_error": 13.64408707169902,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-04-20",
+      "total_rides": 1075473,
+      "predicted_total_rides": 1144581,
+      "error": -69108,
+      "abs_pct_error": 6.4258238003185575,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-04-27",
+      "total_rides": 961318,
+      "predicted_total_rides": 1156417,
+      "error": -195099,
+      "abs_pct_error": 20.29494922595853,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-05-04",
+      "total_rides": 1099244,
+      "predicted_total_rides": 1125862,
+      "error": -26618,
+      "abs_pct_error": 2.4214824006317066,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-05-11",
+      "total_rides": 1030067,
+      "predicted_total_rides": 1176656,
+      "error": -146589,
+      "abs_pct_error": 14.231016040704148,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-05-18",
+      "total_rides": 1046901,
+      "predicted_total_rides": 1093780,
+      "error": -46879,
+      "abs_pct_error": 4.477882817955088,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-05-25",
+      "total_rides": 675726,
+      "predicted_total_rides": 678965,
+      "error": -3239,
+      "abs_pct_error": 0.479336299032448,
+      "day_type": "U"
+    },
+    {
+      "date_str": "2026-06-01",
+      "total_rides": 1064095,
+      "predicted_total_rides": 1042886,
+      "error": 21209,
+      "abs_pct_error": 1.9931491079273937,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-06-08",
+      "total_rides": 992536,
+      "predicted_total_rides": 959173,
+      "error": 33363,
+      "abs_pct_error": 3.3613894105604234,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-06-15",
+      "total_rides": 1043511,
+      "predicted_total_rides": 1060609,
+      "error": -17098,
+      "abs_pct_error": 1.638506925178556,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-06-22",
+      "total_rides": 1031069,
+      "predicted_total_rides": 1032002,
+      "error": -933,
+      "abs_pct_error": 0.09048860939471559,
+      "day_type": "W"
+    },
+    {
+      "date_str": "2026-06-29",
+      "total_rides": 1035536,
+      "predicted_total_rides": 1071967,
+      "error": -36431,
+      "abs_pct_error": 3.5180814573322414,
+      "day_type": "W"
+    }
+  ]
+}
