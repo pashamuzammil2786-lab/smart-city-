@@ -70,10 +70,21 @@ export const api = {
     return data;
   },
 
-  async getForecast() {
-    const res = await fetch(`${API_BASE_URL}/transport/forecast`);
+  async getForecast(num_days = 7) {
+    const res = await fetch(`${API_BASE_URL}/transport/forecast?num_days=${num_days}`);
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to fetch forecast');
+    return data;
+  },
+
+  async predictTransportDemand(payload = {}) {
+    const res = await fetch(`${API_BASE_URL}/transport/predict-demand`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to predict transport demand');
     return data;
   },
 
@@ -185,6 +196,17 @@ export const api = {
     return data;
   },
 
+  async predictTrafficJunction(payload) {
+    const res = await fetch(`${API_BASE_URL}/traffic/predict-junction`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to predict traffic junction flow');
+    return data;
+  },
+
   // Weather APIs
   async getWeatherOverview() {
     const res = await fetch(`${API_BASE_URL}/weather/overview`);
@@ -222,6 +244,24 @@ export const api = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to simulate microclimate cooling');
+    return data;
+  },
+
+  async predictWeatherTemperature(payload) {
+    const res = await fetch(`${API_BASE_URL}/weather/predict-temperature`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to predict weather temperature');
+    return data;
+  },
+
+  async getMLHealth() {
+    const res = await fetch(`${API_BASE_URL}/ml/health`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to fetch ML health');
     return data;
   },
 

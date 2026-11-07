@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const mlInferenceService = require('../services/mlInferenceService');
 
 // =============================================================================
 // Smart City Urban Analytics - Module 2: Weather & Urban Microclimate Intelligence
@@ -199,15 +200,42 @@ router.get('/', (req, res) => {
 });
 
 // -----------------------------------------------------------------------------
-// 2. GET /api/weather/overview (City Weather Snapshot)
+// 2. GET /api/weather/overview (City Weather Snapshot with Live ML Integration)
 // -----------------------------------------------------------------------------
-router.get('/overview', (req, res) => {
+router.get('/overview', async (req, res) => {
   try {
     const avgTemp = (
       HYDERABAD_MICROCLIMATES.reduce((acc, z) => acc + z.currentTempC, 0) / HYDERABAD_MICROCLIMATES.length
     ).toFixed(1);
 
     const maxUHI = Math.max(...HYDERABAD_MICROCLIMATES.map(z => z.uhiDifferentialC)).toFixed(1);
+
+    // Live ML Temperature Prediction from trained Linear Regression Pipeline
+    let mlTemperature = null;
+    try {
+      const currentMonth = new Date().getMonth() + 1;
+      const currentHour = new Date().getHours();
+      const mlRes = await mlInferenceService.predictWeatherTemperature({
+        hour: currentHour,
+        month: currentMonth,
+        humidity: 58.0,
+        dewpoint: 21.5,
+        pressure: 1012.0,
+        windspeed: 12.8
+      });
+      mlTemperature = {
+        predicted_temperature_c: mlRes.prediction.predicted_temperature_c,
+        feels_like_c: mlRes.prediction.feels_like_c,
+        thermal_comfort_level: mlRes.prediction.thermal_comfort_level,
+        model: 'Linear Regression Pipeline',
+        r2_score: 0.9894,
+        mape: 1.51,
+        target: 'tempC (Hourly Ambient Temperature °C)',
+        is_live_ml: true
+      };
+    } catch (mlErr) {
+      console.warn('[Weather ML Inference Warning]: Using empirical temperature:', mlErr.message);
+    }
 
     res.json({
       city: 'Hyderabad, India',
@@ -228,6 +256,7 @@ router.get('/overview', (req, res) => {
       maxUHIDifferentialC: parseFloat(maxUHI),
       airDispersionIndex: 'Moderate (PBL Height ~1,450m)',
       heatAdvisory: 'Stay hydrated during 12:00 PM – 3:30 PM peak solar radiation.',
+      ml_temperature: mlTemperature,
       timestamp: new Date().toISOString()
     });
   } catch (error) {
@@ -410,6 +439,36 @@ router.post('/simulate', (req, res) => {
   } catch (error) {
     console.error('[Weather Simulate Error]:', error);
     res.status(500).json({ error: 'Failed to simulate microclimate cooling.' });
+  }
+});
+
+// -----------------------------------------------------------------------------
+// 7. POST /api/weather/predict-temperature (Dedicated Live ML Temperature Prediction)
+// -----------------------------------------------------------------------------
+router.post('/predict-temperature', async (req, res) => {
+  try {
+    const {
+      hour = 14,
+      month = 5,
+      humidity = 45.0,
+      dewpoint = 18.0,
+      pressure = 1010.0,
+      windspeed = 12.0
+    } = req.body || {};
+
+    const result = await mlInferenceService.predictWeatherTemperature({
+      hour,
+      month,
+      humidity,
+      dewpoint,
+      pressure,
+      windspeed
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error('[Weather Predict Temperature Error]:', error);
+    res.status(500).json({ error: 'Weather temperature prediction failed: ' + error.message });
   }
 });
 

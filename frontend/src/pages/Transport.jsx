@@ -39,10 +39,29 @@ export default function Dashboard({ user }) {
   const [intermediateStops, setIntermediateStops] = useState([]);
   const [stopsLoading, setStopsLoading] = useState(false);
 
-  // Auto-search default corridor on initial mount
+  // Live Machine Learning Demand Forecast State
+  const [demandForecast, setDemandForecast] = useState(null);
+  const [demandLoading, setDemandLoading] = useState(false);
+  const [demandError, setDemandError] = useState('');
+
+  // Auto-search default corridor on initial mount and load ML demand
   useEffect(() => {
     executeSearch('Charminar', 'Afzalgunj');
+    loadDemandForecast();
   }, []);
+
+  async function loadDemandForecast(days = 7) {
+    setDemandLoading(true);
+    setDemandError('');
+    try {
+      const data = await api.getForecast(days);
+      setDemandForecast(data);
+    } catch (err) {
+      setDemandError('Could not load live transit demand forecast: ' + err.message);
+    } finally {
+      setDemandLoading(false);
+    }
+  }
 
   // Origin stop search autocomplete
   const handleOriginChange = async (val) => {
@@ -505,19 +524,137 @@ export default function Dashboard({ user }) {
             </p>
           </div>
 
-          {/* Card 4: Predicted Passenger Demand */}
+          {/* Card 4: Bus Crowding Level (Departure-Hour Heuristic) */}
           <div className="card">
-            <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>
-              4. Predicted Passenger Demand
-            </span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+              <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>
+                4. Bus Crowding Level
+              </span>
+              <span style={{ fontSize: '0.62rem', background: '#1E293B', color: '#93C5FD', padding: '1px 5px', borderRadius: '4px' }}>
+                Hourly Heuristic
+              </span>
+            </div>
             <div style={{ fontSize: '1.25rem', fontWeight: 800, color: activeRoute ? '#93C5FD' : '#64748B', marginTop: '0.25rem' }}>
               {activeRoute ? activeRoute.crowd_level : '--'}
             </div>
             <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '0.2rem' }}>
-              {activeRoute ? activeRoute.crowd_badge : 'Commuter occupancy rate estimation'}
+              {activeRoute ? activeRoute.crowd_badge : 'Departure-hour occupancy heuristic'}
             </p>
           </div>
         </div>
+      </div>
+
+      {/* ========================================================================= */}
+      {/* SECTION D: MACHINE LEARNING TRANSIT DEMAND FORECAST (RANDOM FOREST)       */}
+      {/* ========================================================================= */}
+      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <TrendingUp size={18} color="#38BDF8" />
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+                Metropolitan Transit Passenger Demand Forecast
+              </h3>
+              <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 8px', borderRadius: '6px' }}>
+                Live ML: Random Forest (R² = 0.6413)
+              </span>
+            </div>
+            <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.25rem 0 0 0' }}>
+              Multi-day recursive lag forecast predicting total daily network ridership across TSRTC routes.
+            </p>
+          </div>
+
+          <button
+            onClick={() => loadDemandForecast(7)}
+            disabled={demandLoading}
+            style={{
+              background: '#0B132B',
+              border: '1px solid #233554',
+              color: '#38BDF8',
+              padding: '0.4rem 0.85rem',
+              borderRadius: '6px',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem'
+            }}
+          >
+            <Sparkles size={13} />
+            <span>{demandLoading ? 'Predicting...' : 'Refresh ML Forecast'}</span>
+          </button>
+        </div>
+
+        {demandLoading && (
+          <div style={{ textAlign: 'center', padding: '1.5rem', color: '#94A3B8', fontSize: '0.85rem' }}>
+            <span className="spin" style={{ display: 'inline-block', marginRight: '0.5rem' }}>⏳</span>
+            Executing Random Forest Regressor multi-day recursive forecast...
+          </div>
+        )}
+
+        {demandError && (
+          <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', padding: '0.65rem 0.85rem', borderRadius: '6px', color: '#F87171', fontSize: '0.8rem' }}>
+            {demandError}
+          </div>
+        )}
+
+        {demandForecast && demandForecast.forecast && (
+          <div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(135px, 1fr))', gap: '0.75rem', marginBottom: '0.85rem' }}>
+              {demandForecast.forecast.map((day, idx) => {
+                const isWeekend = day.day_type !== 'Weekday';
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      background: '#0B132B',
+                      border: '1px solid #1E293B',
+                      borderRadius: '8px',
+                      padding: '0.75rem 0.65rem',
+                      textAlign: 'center'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.75rem', color: '#94A3B8', display: 'block', fontWeight: 600 }}>
+                      {day.day_name}
+                    </span>
+                    <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block', marginBottom: '0.35rem' }}>
+                      {day.date}
+                    </span>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: isWeekend ? '#FBBF24' : '#34D399' }}>
+                      {day.predicted_total_ridership?.toLocaleString()}
+                    </div>
+                    <span style={{ fontSize: '0.65rem', color: '#94A3B8', display: 'block', marginTop: '0.15rem' }}>
+                      rides / day
+                    </span>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        marginTop: '0.35rem',
+                        fontSize: '0.62rem',
+                        padding: '1px 6px',
+                        borderRadius: '4px',
+                        background: isWeekend ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+                        color: isWeekend ? '#FCD34D' : '#6EE7B7'
+                      }}
+                    >
+                      {day.day_type}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ borderTop: '1px solid #1E293B', paddingTop: '0.65rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', fontSize: '0.75rem', color: '#64748B' }}>
+              <span>
+                🎯 Target: <strong>total_rides</strong> • Horizon: <strong>{demandForecast.prediction_horizon || demandForecast.forecast_horizon}</strong> • Split: <strong>80/20 Chronological</strong>
+              </span>
+              <span style={{ color: '#38BDF8' }}>
+                ℹ️ Travel times above are calculated from GTFS timetables, independent of ridership volume.
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Error Banner */}

@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const pool = require('../db');
 const routingService = require('../services/routingService');
+const mlInferenceService = require('../services/mlInferenceService');
 
 // Helper: Haversine distance in kilometers
 function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -328,15 +329,42 @@ router.get('/route-stops', async (req, res) => {
 });
 
 // -----------------------------------------------------------------------------
-// 5. GET /api/transport/forecast (7-Day Passenger Demand Prediction - Dynamic Horizon)
+// 5. GET /api/transport/forecast (7-Day Passenger Demand Prediction - Live ML)
 // -----------------------------------------------------------------------------
 router.get('/forecast', async (req, res) => {
+  const numDays = Math.max(1, Math.min(14, parseInt(req.query.num_days || '7', 10)));
+  const baseDate = req.query.base_date || null;
+
+  // 1. Attempt genuine Machine Learning inference (Random Forest Regressor)
+  try {
+    const mlResult = await mlInferenceService.predictTransportDemand(numDays, baseDate);
+    return res.json({
+      success: true,
+      module: 'transport',
+      prediction_type: 'transit_demand',
+      prediction_source: 'Machine Learning',
+      model: 'Random Forest Regressor',
+      model_used: 'Random Forest Regressor (Ensemble)',
+      prediction_horizon: `${mlResult.prediction.forecast_days.length} Days Ahead`,
+      base_date: mlResult.prediction.base_date,
+      forecast_horizon: `${mlResult.prediction.forecast_days.length} Days`,
+      forecast: mlResult.prediction.forecast_days,
+      target_variable: mlResult.prediction.target_variable,
+      average_predicted_daily_ridership: mlResult.prediction.average_predicted_daily_ridership,
+      is_fallback: false,
+      metrics: mlResult.metrics
+    });
+  } catch (mlErr) {
+    console.warn('[Transport ML Forecast Warning]: Falling back to analytical model:', mlErr.message);
+  }
+
+  // 2. Analytical Fallback (Calibrated diurnal calendar if ML process is unavailable)
   try {
     const today = new Date();
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const forecastDays = [];
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= numDays; i++) {
       const fDate = new Date(today.getTime() + i * 24 * 3600 * 1000);
       const dateStr = fDate.toISOString().split('T')[0];
       const dayIdx = fDate.getDay();
@@ -363,7 +391,6 @@ router.get('/forecast', async (req, res) => {
         note = 'Heavy start-of-week office rush';
       }
 
-      // Add reproducible variance based on day of month
       const seedVariance = ((fDate.getDate() * 17 + fDate.getMonth() * 31) % 20000) - 10000;
       const predictedRidership = Math.round(baseline + seedVariance);
 
@@ -378,14 +405,34 @@ router.get('/forecast', async (req, res) => {
     }
 
     res.json({
-      model_used: 'Random Forest Regressor (Ensemble)',
+      success: true,
+      module: 'transport',
+      prediction_type: 'transit_demand',
+      prediction_source: 'Analytical Fallback',
+      model_used: 'Calibrated Diurnal Calendar Model (Analytical Fallback)',
       base_date: today.toISOString().split('T')[0],
-      forecast_horizon: '7 Days',
-      forecast: forecastDays
+      forecast_horizon: `${numDays} Days`,
+      forecast: forecastDays,
+      is_fallback: true,
+      fallback_note: 'Machine Learning daemon unavailable; serving calibrated analytical baseline'
     });
   } catch (error) {
     console.error('[Transport Forecast Error]:', error);
     res.status(500).json({ error: 'Failed to generate demand forecast.' });
+  }
+});
+
+// -----------------------------------------------------------------------------
+// 5b. POST /api/transport/predict-demand (Interactive Demand Predictor)
+// -----------------------------------------------------------------------------
+router.post('/predict-demand', async (req, res) => {
+  try {
+    const { num_days = 7, base_date = null } = req.body || {};
+    const result = await mlInferenceService.predictTransportDemand(num_days, base_date);
+    res.json(result);
+  } catch (error) {
+    console.error('[Transport Predict Demand Error]:', error);
+    res.status(500).json({ error: 'Transport demand prediction failed: ' + error.message });
   }
 });
 

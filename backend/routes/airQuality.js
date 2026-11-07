@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
+const mlInferenceService = require('../services/mlInferenceService');
 
 // =============================================================================
 // Indian CPCB National Air Quality Index (NAQI) Standard Definitions & Formulas
@@ -458,9 +459,9 @@ router.get('/ml-metrics', (req, res) => {
 });
 
 // -----------------------------------------------------------------------------
-// 6. POST /api/air-quality/predict (Interactive Real-Time Scenario Predictor)
+// 6. POST /api/air-quality/predict (Hybrid Live SVR Machine Learning Predictor)
 // -----------------------------------------------------------------------------
-router.post('/predict', (req, res) => {
+router.post('/predict', async (req, res) => {
   try {
     const {
       pm25 = 55,
@@ -470,7 +471,8 @@ router.post('/predict', (req, res) => {
       temperature = 28,
       humidity = 60,
       wind_speed = 10,
-      traffic_congestion = 0.6
+      traffic_congestion = 0.6,
+      hour = 18
     } = req.body;
 
     const pm25Num = Math.max(0, parseFloat(pm25) || 0);
@@ -481,9 +483,9 @@ router.post('/predict', (req, res) => {
     const humNum = parseFloat(humidity) || 60;
     const windNum = Math.max(0.1, parseFloat(wind_speed) || 10);
     const trafficNum = Math.min(1.0, Math.max(0.0, parseFloat(traffic_congestion) || 0.5));
+    const hrNum = Math.max(0, Math.min(23, parseInt(hour, 10) || 18));
 
-    // Multi-source SVR/RF empirical approximation
-    // Traffic & stagnation increase PM2.5, wind disperses it:
+    // Analytical sub-indices calculation for breakdown
     const predictedNextPm25 = Math.max(
       5,
       pm25Num * 0.72 +
@@ -492,23 +494,75 @@ router.post('/predict', (req, res) => {
         windNum * 0.85 +
         (humNum > 75 ? 6.5 : 0)
     );
-
     const subPm25 = calculateSubIndex(predictedNextPm25, 'pm25');
     const subPm10 = calculateSubIndex(pm10Num * 0.85 + trafficNum * 20, 'pm10');
     const subNo2 = calculateSubIndex(no2Num * 0.85 + trafficNum * 15, 'no2');
     const subCo = calculateSubIndex(coNum * 0.9 + trafficNum * 0.4, 'co');
 
-    const predictedAQI = Math.round(Math.max(subPm25, subPm10, subNo2, subCo));
-    const cat = getAQICategory(predictedAQI);
+    // 1. Attempt genuine ML inference (Support Vector Regressor RBF Kernel)
+    try {
+      const mlRes = await mlInferenceService.predictAirQuality({
+        pm25: pm25Num,
+        pm10: pm10Num,
+        no2: no2Num,
+        co: coNum,
+        temp: tempNum,
+        humidity: humNum,
+        wind: windNum,
+        traffic: trafficNum,
+        hour: hrNum
+      });
+
+      const catInfo = getAQICategory(mlRes.prediction.predicted_aqi);
+
+      return res.json({
+        success: true,
+        module: 'air_quality',
+        prediction_type: 'next_hour_aqi',
+        prediction_source: 'Machine Learning',
+        model: 'Support Vector Regressor (SVR)',
+        modelUsed: 'Support Vector Regressor (SVR with RBF Kernel)',
+        prediction_horizon: '1 Hour Ahead',
+        horizon: 'Next 1 Hour',
+        predictedAQI: mlRes.prediction.predicted_aqi,
+        category: mlRes.prediction.category,
+        color: mlRes.prediction.color,
+        healthAdvisory: mlRes.prediction.health_advisory,
+        action: catInfo.action,
+        breakdown: {
+          predictedPm25: Math.round(predictedNextPm25 * 10) / 10,
+          subIndexPm25: subPm25,
+          subIndexPm10: subPm10,
+          subIndexNo2: subNo2,
+          subIndexCo: subCo
+        },
+        driverAnalysis: {
+          trafficContribution: `${Math.round(trafficNum * 100)}% traffic density adds approx +${Math.round(trafficNum * 28.5)} µg/m³ PM2.5`,
+          windDispersionEffect: `${windNum} km/h wind provides -${Math.round(windNum * 0.85)} µg/m³ pollutant clearing effect`
+        },
+        is_live_ml: true,
+        metrics: mlRes.metrics
+      });
+    } catch (mlErr) {
+      console.warn('[AQI ML Inference Warning]: Using CPCB analytical approximation fallback:', mlErr.message);
+    }
+
+    // 2. Analytical Fallback
+    const fallbackAQI = Math.round(Math.max(subPm25, subPm10, subNo2, subCo));
+    const fallbackCat = getAQICategory(fallbackAQI);
 
     res.json({
-      predictedAQI,
-      category: cat.category,
-      color: cat.color,
-      healthAdvisory: cat.healthAdvisory,
-      action: cat.action,
-      modelUsed: 'SVR Multi-Source Fusion Model',
+      success: true,
+      module: 'air_quality',
+      prediction_type: 'next_hour_aqi',
+      prediction_source: 'Analytical Fallback',
+      modelUsed: 'CPCB Multi-Source Piecewise Linear Approximation (Fallback)',
       horizon: 'Next 1 Hour',
+      predictedAQI: fallbackAQI,
+      category: fallbackCat.category,
+      color: fallbackCat.color,
+      healthAdvisory: fallbackCat.healthAdvisory,
+      action: fallbackCat.action,
       breakdown: {
         predictedPm25: Math.round(predictedNextPm25 * 10) / 10,
         subIndexPm25: subPm25,
@@ -519,11 +573,13 @@ router.post('/predict', (req, res) => {
       driverAnalysis: {
         trafficContribution: `${Math.round(trafficNum * 100)}% traffic density adds approx +${Math.round(trafficNum * 28.5)} µg/m³ PM2.5`,
         windDispersionEffect: `${windNum} km/h wind provides -${Math.round(windNum * 0.85)} µg/m³ pollutant clearing effect`
-      }
+      },
+      is_fallback: true,
+      fallback_note: 'Machine Learning daemon unavailable; serving CPCB piecewise analytical estimation'
     });
   } catch (error) {
     console.error('[AQI Predict API Error]:', error);
-    res.status(500).json({ error: 'Failed to process AQI prediction.' });
+    res.status(500).json({ error: 'Failed to process AQI prediction: ' + error.message });
   }
 });
 

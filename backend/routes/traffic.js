@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const mlInferenceService = require('../services/mlInferenceService');
 
 // =============================================================================
 // Smart City Urban Analytics - Module 3: Traffic Flow & Congestion Analytics
@@ -418,44 +419,61 @@ router.get('/ml-metrics', (req, res) => {
 });
 
 // -----------------------------------------------------------------------------
-// 6. POST /api/traffic/predict (Interactive What-If Scenario Simulator)
+// 6. POST /api/traffic/predict (Hybrid ML Flow + Corridor Scenario Simulator)
 // -----------------------------------------------------------------------------
-router.post('/predict', (req, res) => {
+router.post('/predict', async (req, res) => {
   try {
     const {
       corridorId = 'CORR-01',
+      junctionId = 1,
       hourOfDay = 9,
       weatherCondition = 'Clear', // 'Clear' | 'Rain' | 'Heavy Rain'
       incidentSeverity = 'None' // 'None' | 'Minor' | 'Major'
     } = req.body;
 
     const corridor = HYDERABAD_CORRIDORS.find(c => c.id === corridorId) || HYDERABAD_CORRIDORS[0];
+    const hr = Math.max(0, Math.min(23, parseInt(hourOfDay, 10) || 9));
 
-    // Diurnal factor (peak hours: 9-10 AM and 6-7 PM)
+    // Map corridor to representative junction detector (1 to 4)
+    let junctionNum = parseInt(junctionId, 10);
+    if (![1, 2, 3, 4].includes(junctionNum)) {
+      const corrIdx = HYDERABAD_CORRIDORS.findIndex(c => c.id === corridorId);
+      junctionNum = (corrIdx >= 0 ? (corrIdx % 4) + 1 : 1);
+    }
+
+    // 1. Invoke Genuine ML Model (Gradient Boosting Regressor for junction vehicle counts)
+    let mlPrediction = null;
+    try {
+      const mlRes = await mlInferenceService.predictTrafficFlow({
+        junction: junctionNum,
+        hour: hr,
+        weather: weatherCondition,
+        incident: incidentSeverity !== 'None' ? 1 : 0
+      });
+      mlPrediction = mlRes.prediction;
+    } catch (mlErr) {
+      console.warn('[Traffic ML Inference Warning]: Using heuristic flow estimation:', mlErr.message);
+    }
+
+    // 2. Analytical Corridor Simulator (Calculates physical travel times and delays along the arterial)
     let diurnalFactor = 1.0;
-    const hr = parseInt(hourOfDay, 10);
     if ((hr >= 8 && hr <= 10) || (hr >= 17 && hr <= 20)) {
       diurnalFactor = 1.75;
-    } else if ((hr >= 11 && hr <= 16)) {
+    } else if (hr >= 11 && hr <= 16) {
       diurnalFactor = 1.25;
     } else {
       diurnalFactor = 0.85;
     }
 
-    // Weather impact multiplier
     let weatherMultiplier = 1.0;
     if (weatherCondition === 'Rain') weatherMultiplier = 1.35;
     if (weatherCondition === 'Heavy Rain') weatherMultiplier = 1.70;
 
-    // Incident multiplier
     let incidentMultiplier = 1.0;
     if (incidentSeverity === 'Minor') incidentMultiplier = 1.25;
     if (incidentSeverity === 'Major') incidentMultiplier = 1.60;
 
-    // Base free flow travel time in minutes
     const baseTime = corridor.freeFlowTimeMin;
-
-    // Multi-factor ML regression estimation
     const totalPredictedTime = Math.round(baseTime * diurnalFactor * weatherMultiplier * incidentMultiplier * 10) / 10;
     const delayMins = Math.max(0, Math.round((totalPredictedTime - baseTime) * 10) / 10);
     const predictedSpeed = Math.min(
@@ -475,6 +493,9 @@ router.post('/predict', (req, res) => {
     else if (predictedCongestion > 15) los = 'B';
 
     res.json({
+      success: true,
+      module: 'traffic',
+      prediction_source: mlPrediction ? 'Hybrid (Gradient Boosting ML + Analytical Corridor)' : 'Analytical Flow Simulator',
       corridorName: corridor.name,
       corridorLengthKm: corridor.lengthKm,
       freeFlowTimeMin: corridor.freeFlowTimeMin,
@@ -483,7 +504,23 @@ router.post('/predict', (req, res) => {
       predictedAverageSpeedKmH: predictedSpeed,
       predictedCongestionIndex: predictedCongestion,
       levelOfService: los,
-      modelUsed: 'Analytical Flow Simulator (Diurnal + Weather + Incident Heuristics)',
+      predictedVehiclesPerHour: mlPrediction ? mlPrediction.predicted_vehicles_per_hour : Math.round(corridor.vehicleCountPerHour * diurnalFactor * weatherMultiplier),
+      modelUsed: mlPrediction
+        ? 'Gradient Boosting Regressor (Junction Flow) & Calibrated Diurnal Simulator (Corridor Delay)'
+        : 'Analytical Flow Simulator (Diurnal + Weather + Incident Heuristics)',
+      ml_junction_prediction: mlPrediction ? {
+        junction: junctionNum,
+        hour: hr,
+        predicted_vehicles_per_hour: mlPrediction.predicted_vehicles_per_hour,
+        level_of_service: mlPrediction.level_of_service,
+        congestion_percentage: mlPrediction.congestion_percentage,
+        estimated_delay_mins: mlPrediction.estimated_delay_mins,
+        travel_time_index: mlPrediction.travel_time_index,
+        model: 'Gradient Boosting Regressor',
+        r2_score: 0.9684,
+        mape: 17.33,
+        is_live_ml: true
+      } : null,
       impactAnalysis: {
         timeOfDayEffect: `${hr}:00 hrs (${diurnalFactor > 1.3 ? 'Peak Congestion Window' : 'Normal Off-Peak'})`,
         weatherDelayContribution: weatherCondition !== 'Clear' ? `+${Math.round((weatherMultiplier - 1) * 100)}% wet surface delay` : 'Optimal Dry Asphalt',
@@ -492,7 +529,21 @@ router.post('/predict', (req, res) => {
     });
   } catch (error) {
     console.error('[Traffic Predict Error]:', error);
-    res.status(500).json({ error: 'Failed to predict traffic scenario.' });
+    res.status(500).json({ error: 'Failed to predict traffic scenario: ' + error.message });
+  }
+});
+
+// -----------------------------------------------------------------------------
+// 7. POST /api/traffic/predict-junction (Dedicated Live ML Junction Flow API)
+// -----------------------------------------------------------------------------
+router.post('/predict-junction', async (req, res) => {
+  try {
+    const { junction = 1, hour = 18, dayofweek = 2, weather = 'Clear', incident = 0 } = req.body || {};
+    const result = await mlInferenceService.predictTrafficFlow({ junction, hour, dayofweek, weather, incident });
+    res.json(result);
+  } catch (error) {
+    console.error('[Traffic Predict Junction Error]:', error);
+    res.status(500).json({ error: 'Traffic junction prediction failed: ' + error.message });
   }
 });
 

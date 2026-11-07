@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "daemon:ml": "python ../ml/unified_inference_service.py --serve --port 5001"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

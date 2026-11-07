@@ -28,9 +28,11 @@ Each issue has been classified using the strict verification status taxonomy:
 │ ISSUE-02 │ Transport Test Failures                    │ Fixed and verified          │ 12 Passed, 0 Failed in test_transport_routing.js       │
 │          │ (validateLegPlausibility crash)            │                             │ 7 Passed, 0 Failed in test_transport_audit.js         │
 ├──────────┼────────────────────────────────────────────┼─────────────────────────────┼────────────────────────────────────────────────────────┤
-│ ISSUE-03 │ ML Model Integration & Decoupling          │ Fixed and verified          │ 4 models verified: Transport (R²=0.64), Traffic        │
-│          │ (Respect target variables & separation)    │                             │ (R²=0.97), Weather (R²=0.99), Air Quality (R²=0.77).   │
-│          │                                            │                             │ Deterministic timetable durations separated from ML.   │
+│ ISSUE-03 │ Live ML Integration & Target Decoupling    │ Fixed and verified          │ Live Dual-Engine ML service active (Flask + CLI).      │
+│          │ (Live API + UI integration for all 4 mod.) │                             │ 4 models live: Transport RF (R²=0.64, 7-day demand),   │
+│          │                                            │                             │ Traffic GB (R²=0.97, veh/hr flow), Weather LR (R²=0.99,│
+│          │                                            │                             │ tempC), Air Quality SVR (R²=0.77, 1-hr AQI).           │
+│          │                                            │                             │ 27/27 live integration tests passed (sub-10ms).        │
 ├──────────┼────────────────────────────────────────────┼─────────────────────────────┼────────────────────────────────────────────────────────┤
 │ ISSUE-04 │ Dataset Authenticity & Record Reconciliation Fixed and verified          │ Accurate data counts reconciled: Weather (96,432 rows),│
 │          │ (Provenance audit & discrepancy resolution)│                             │ AQI (26,255 post-lag rows from 26,280 raw CSV),        │
@@ -76,6 +78,7 @@ While the software engineering, relational database structures, and analytical e
 # 1. Run Automated Test Suites
 node backend/tests/test_transport_routing.js
 node backend/tests/test_transport_audit.js
+node backend/tests/test_live_ml_integration.js
 
 # 2. Run Standalone Machine Learning Pipelines
 python ml/transport/predict.py
@@ -83,12 +86,15 @@ python ml/traffic/predict.py
 python ml/weather/predict.py
 python ml/air_quality/predict.py --pm25 55 --pm10 110 --hour 18
 
-# 3. Launch Development Servers
-# Terminal A (Backend API):
+# 3. Launch Complete Hybrid Platform Services
+# Terminal A (Unified ML Persistent Inference Daemon - Port 5001):
+python ml/unified_inference_service.py --serve --port 5001
+
+# Terminal B (Backend Node.js/Express API - Port 5000):
 cd backend
 npm start
 
-# Terminal B (Frontend UI):
+# Terminal C (Frontend React/Vite UI - Port 5173):
 cd frontend
 npm run dev
 ```

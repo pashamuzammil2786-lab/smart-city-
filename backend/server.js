@@ -8,6 +8,8 @@ const transportRoutes = require('./routes/transport');
 const weatherRoutes = require('./routes/weather');
 const trafficRoutes = require('./routes/traffic');
 const airQualityRoutes = require('./routes/airQuality');
+const mlInferenceService = require('./services/mlInferenceService');
+const { spawn } = require('child_process');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,6 +40,26 @@ app.get('/api/model-performance', (req, res) => {
   }
 });
 
+// ML Inference Engine Health API
+app.get('/api/ml/health', async (req, res) => {
+  try {
+    const health = await mlInferenceService.checkHealth();
+    res.json({
+      success: true,
+      service: 'Smart City Unified ML Decision Support',
+      daemon_status: health.status || 'offline',
+      models_status: health.models_loaded || {
+        transport: 'available (via CLI)',
+        traffic: 'available (via CLI)',
+        weather: 'available (via CLI)',
+        air_quality: 'available (via CLI)'
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Health Check
 app.get('/api/health', (req, res) => {
   res.json({
@@ -53,11 +75,50 @@ app.get('/', (req, res) => {
   res.send('Smart City Urban Analytics Backend API Server is Running.');
 });
 
+let mlDaemonProcess = null;
+
+function ensureMLDaemon() {
+  mlInferenceService.checkHealth().then(status => {
+    if (status.status === 'healthy') {
+      console.log('🤖 ML Inference Daemon is active on http://127.0.0.1:5001');
+    } else {
+      console.log('⚡ Launching persistent Python ML Inference Daemon on http://127.0.0.1:5001...');
+      const pyCmd = process.platform === 'win32' ? 'python' : 'python3';
+      const scriptPath = path.join(__dirname, '..', 'ml', 'unified_inference_service.py');
+      try {
+        mlDaemonProcess = spawn(pyCmd, [scriptPath, '--serve', '--port', '5001'], {
+          cwd: path.join(__dirname, '..'),
+          windowsHide: true,
+          stdio: 'ignore'
+        });
+        mlDaemonProcess.unref();
+        setTimeout(() => {
+          mlInferenceService.checkHealth().then(h => {
+            if (h.status === 'healthy') {
+              console.log('✅ Python ML Inference Daemon ready (all 4 models loaded into memory)');
+            }
+          }).catch(() => {});
+        }, 3000);
+      } catch (err) {
+        console.warn('Could not auto-spawn Python ML daemon:', err.message);
+      }
+    }
+  }).catch(() => {});
+}
+
+process.on('exit', () => {
+  if (mlDaemonProcess) {
+    try { mlDaemonProcess.kill(); } catch (e) {}
+  }
+});
+
 // Start Server
 app.listen(PORT, () => {
   console.log('='.repeat(70));
   console.log(`🚀 Smart City Backend API listening on http://localhost:${PORT}`);
   console.log(`📡 Transport API: http://localhost:${PORT}/api/transport`);
+  console.log(`📡 ML Engine:    http://localhost:${PORT}/api/ml/health`);
   console.log(`🔐 Auth API:      http://localhost:${PORT}/api/auth`);
   console.log('='.repeat(70));
+  ensureMLDaemon();
 });

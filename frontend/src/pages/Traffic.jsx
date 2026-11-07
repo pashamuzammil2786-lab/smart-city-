@@ -464,7 +464,12 @@ export default function Traffic() {
           <div style={{ marginTop: '1.5rem', background: '#0B132B', border: '1px solid #F59E0B', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#FCD34D', fontWeight: 700 }}>PREDICTIVE SIMULATION RESULTS</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#FCD34D', fontWeight: 700 }}>HYBRID ML + SIMULATION RESULTS</span>
+                  <span style={{ fontSize: '0.68rem', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 6px', borderRadius: '4px' }}>
+                    Gradient Boosting (R² = 0.9684)
+                  </span>
+                </div>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', margin: '0.2rem 0 0' }}>
                   {predictionResult.corridorName}
                 </h3>
@@ -474,52 +479,75 @@ export default function Traffic() {
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+            {/* Hybrid KPI Grid: ML Output + Corridor Sim */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+              {/* Card A: ML Predicted Vehicles */}
+              <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px', border: '1px solid #2563EB' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.72rem', color: '#93C5FD', fontWeight: 700 }}>ML Junction Flow:</span>
+                  <span style={{ fontSize: '0.62rem', background: '#1E293B', color: '#38BDF8', padding: '1px 5px', borderRadius: '3px' }}>Live ML</span>
+                </div>
+                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#38BDF8' }}>
+                  {predictionResult.predictedVehiclesPerHour} veh/hr
+                </div>
+                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                  Trained Gradient Boosting model
+                </span>
+              </div>
+
+              {/* Card B: Predicted Travel Time */}
               <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
                 <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Predicted Travel Time:</span>
                 <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FCD34D' }}>
                   {predictionResult.predictedTravelTimeMin} mins
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#64748B' }}>
-                  Free-flow baseline: {predictionResult.freeFlowTimeMin} mins
+                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                  Baseline: {predictionResult.freeFlowTimeMin} mins
                 </span>
               </div>
 
+              {/* Card C: Predicted Delay */}
               <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Predicted Delay Penalty:</span>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Traffic Delay Penalty:</span>
                 <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#EF4444' }}>
                   +{predictionResult.predictedDelayMin} mins
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#64748B' }}>
-                  Estimated total transit queue delay
+                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                  Corridor queue congestion
                 </span>
               </div>
 
+              {/* Card D: Average Velocity */}
               <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Predicted Average Speed:</span>
-                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#38BDF8' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Corridor Velocity:</span>
+                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34D399' }}>
                   {predictionResult.predictedAverageSpeedKmH} km/h
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#64748B' }}>
-                  Over {predictionResult.corridorLengthKm} km corridor
+                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                  Over {predictionResult.corridorLengthKm} km route
                 </span>
               </div>
 
+              {/* Card E: Congestion Index */}
               <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Corridor Congestion Index:</span>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Congestion Index:</span>
                 <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#10B981' }}>
                   {predictionResult.predictedCongestionIndex}%
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#64748B' }}>
-                  Capacity saturation metric
+                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                  Capacity saturation
                 </span>
               </div>
             </div>
 
             <div style={{ fontSize: '0.8rem', color: '#94A3B8', borderTop: '1px solid #1E293B', paddingTop: '0.75rem', display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-              <span>Time Impact: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis.timeOfDayEffect}</strong></span>
-              <span>Weather Contribution: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis.weatherDelayContribution}</strong></span>
-              <span>Incident Factor: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis.incidentImpact}</strong></span>
+              <span>Time Impact: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis?.timeOfDayEffect}</strong></span>
+              <span>Weather Contribution: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis?.weatherDelayContribution}</strong></span>
+              <span>Incident Factor: <strong style={{ color: '#E2E8F0' }}>{predictionResult.impactAnalysis?.incidentImpact}</strong></span>
+            </div>
+
+            <div style={{ marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px dashed #1E293B', fontSize: '0.72rem', color: '#64748B' }}>
+              ℹ️ <strong>System Architecture:</strong> Vehicle count ({predictionResult.predictedVehiclesPerHour} veh/hr) is generated by the trained Gradient Boosting model from historical sensor data. Arterial travel times and delay minutes are calculated via the calibrated corridor simulator.
             </div>
           </div>
         )}

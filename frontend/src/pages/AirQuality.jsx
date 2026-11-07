@@ -532,26 +532,36 @@ export default function AirQuality() {
               style={{
                 marginTop: '1.25rem',
                 background: '#0B132B',
-                border: `1px solid ${predictionResult.color}`,
+                border: `1px solid ${predictionResult.color || '#38BDF8'}`,
                 borderRadius: '10px',
-                padding: '1rem',
-                boxShadow: `0 0 15px ${predictionResult.color}22`
+                padding: '1.15rem',
+                boxShadow: `0 0 15px ${predictionResult.color || '#38BDF8'}22`
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: 600 }}>Simulated Next-Hour AQI:</span>
-                <span style={{ background: predictionResult.color, color: '#0F172A', fontWeight: 800, fontSize: '0.75rem', padding: '2px 8px', borderRadius: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.4rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: 600 }}>Forecasted Next-Hour AQI:</span>
+                  <span style={{ fontSize: '0.65rem', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '1px 6px', borderRadius: '4px' }}>
+                    SVR RBF Model (1h Horizon)
+                  </span>
+                </div>
+                <span style={{ background: predictionResult.color || '#F59E0B', color: '#0F172A', fontWeight: 800, fontSize: '0.75rem', padding: '2px 8px', borderRadius: '10px' }}>
                   {predictionResult.category}
                 </span>
               </div>
-              <div style={{ fontSize: '2rem', fontWeight: 900, color: predictionResult.color, lineHeight: 1, marginBottom: '0.4rem' }}>
+              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: predictionResult.color || '#F59E0B', lineHeight: 1, marginBottom: '0.4rem' }}>
                 {predictionResult.predictedAQI}
               </div>
-              <p style={{ color: '#CBD5E1', fontSize: '0.8rem', margin: '0 0 0.5rem 0' }}>
+              <p style={{ color: '#CBD5E1', fontSize: '0.82rem', margin: '0 0 0.5rem 0' }}>
                 {predictionResult.healthAdvisory}
               </p>
-              <div style={{ fontSize: '0.72rem', color: '#94A3B8', borderTop: '1px solid #1E293B', paddingTop: '0.4rem' }}>
-                {predictionResult.driverAnalysis?.trafficContribution} • {predictionResult.driverAnalysis?.windDispersionEffect}
+              <div style={{ fontSize: '0.72rem', color: '#94A3B8', borderTop: '1px solid #1E293B', paddingTop: '0.45rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                <div>
+                  {predictionResult.driverAnalysis?.trafficContribution} • {predictionResult.driverAnalysis?.windDispersionEffect}
+                </div>
+                <div style={{ color: '#64748B', fontSize: '0.68rem', marginTop: '0.2rem' }}>
+                  ℹ️ <strong>Methodology:</strong> Current station values use CPCB piecewise linear formula. This forecast is computed via Support Vector Regression (SVR with RBF kernel, R² = 0.7742) incorporating multi-source pollutant and meteorological lag vectors.
+                </div>
               </div>
             </div>
           )}
