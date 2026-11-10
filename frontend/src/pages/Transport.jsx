@@ -19,7 +19,7 @@ import {
   Info
 } from 'lucide-react';
 
-export default function Dashboard({ user }) {
+export default function Transport({ user }) {
   const [origin, setOrigin] = useState('Charminar');
   const [destination, setDestination] = useState('Afzalgunj');
   const [originSuggestions, setOriginSuggestions] = useState([]);
