@@ -455,7 +455,7 @@ export default function Landing() {
               <Wind size={20} color="#FFF" />
             </div>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#FFF', marginBottom: '0.35rem' }}>Air Quality (AQI)</h3>
-            <div style={{ fontSize: '0.8rem', color: '#6EE7B7', fontWeight: 600, marginBottom: '0.75rem' }}>Real-Time Sensor Telemetry</div>
+            <div style={{ fontSize: '0.8rem', color: '#6EE7B7', fontWeight: 600, marginBottom: '0.75rem' }}>CPCB Station Telemetry & ML Forecast</div>
             <p style={{ fontSize: '0.85rem', color: '#9EBAAF', lineHeight: 1.5, margin: 0 }}>
               7 CPCB monitoring stations, piecewise linear NAQI calculation for PM2.5, PM10, NO2, CO, 48-hr hourly forecasts, and scenario simulator.
             </p>

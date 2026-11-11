@@ -112,7 +112,7 @@ export default function Traffic() {
             Hyderabad Traffic Congestion & Arterial Flow Analytics
           </h1>
           <p style={{ color: '#94A3B8', fontSize: '0.92rem', margin: 0 }}>
-            Lead: <strong>Navkar Gelda Jain</strong> • Real-Time Sensor Telemetry, Bottleneck Vulnerability & Dynamic Delay ML
+            Lead: <strong>Navkar Gelda Jain</strong> • Junction Detector Telemetry, Bottleneck Vulnerability & Gradient Boosting Flow ML
           </p>
         </div>
 
@@ -229,10 +229,10 @@ export default function Traffic() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
-              Hyderabad Arterial Corridors Live Telemetry Matrix
+              Hyderabad Arterial Corridors Analytical Telemetry Matrix
             </h2>
             <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.2rem 0 0 0' }}>
-              Real-time speed, Travel Time Index (TTI), and Level of Service (LOS) across major commuter veins.
+              Simulated corridor speed, Travel Time Index (TTI), and Level of Service (LOS) across major commuter veins.
             </p>
           </div>
           <span style={{ fontSize: '0.75rem', color: '#64748B' }}>

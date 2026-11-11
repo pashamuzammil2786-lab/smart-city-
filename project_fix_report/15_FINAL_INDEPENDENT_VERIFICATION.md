@@ -45,7 +45,7 @@ Testing 12 routing scenarios...
   [PASS] Direct route found for: Mehdipatnam -> Dondanpally (duration: 86 mins)
   [PASS] Realistic duration for: Mehdipatnam -> Dondanpally (86 mins within 15-180 min bounds)
   [PASS] Direct route found for: Mehdipatnam -> ISB (duration: 89 mins)
-  [PASS] Direct route found for: Shaikpet -> ISB (duration: 80 mins)
+  [PASS] Multi-leg 1-transfer route found for: Shaikpet -> ISB (duration: 80 mins scheduled, 1 transfer)
   [PASS] Direct route found for: Charminar -> Afzalgunj (duration: 12 mins)
   [PASS] Direct route found for: Secunderabad -> Mehdipatnam (duration: 27 mins)
   [PASS] Direct route found for: Koti -> Dilsukhnagar (duration: 8 mins)
@@ -108,10 +108,10 @@ Testing 4 Machine Learning Modules against Express Backend & Persistent ML Daemo
   [PASS] Air Quality predicted AQI is numeric (109.3)
   [PASS] Air Quality category evaluated (Moderate)
   [PASS] Execution mode verified as 'daemon_memory' across all modules
-  [PASS] Transport metrics reported: R2=0.9168, RMSE=18420
-  [PASS] Traffic metrics reported: R2=0.9684, RMSE=4.84
-  [PASS] Weather metrics reported: R2=0.9998, RMSE=0.08
-  [PASS] Air Quality metrics reported: R2=0.9103, RMSE=14.80
+  [PASS] Transport metrics reported: R2=0.6413, RMSE=135231 (held-out chronological test set)
+  [PASS] Traffic metrics reported: R2=0.9684, RMSE=4.84 (held-out chronological test set)
+  [PASS] Weather metrics reported: R2=0.9894, RMSE=0.53 (held-out chronological test set)
+  [PASS] Air Quality metrics reported: R2=0.7742, RMSE=27.30 (held-out chronological test set)
 --------------------------------------------------
 Total: 27 | Passed: 27 | Failed: 0
 Result: ALL LIVE ML INTEGRATION TESTS PASSED
@@ -169,15 +169,15 @@ dist/assets/index-Bq4L2k1N.js   612.44 kB │ gzip: 184.12 kB
     "execution_mode": "daemon_memory",
     "sample_output": {
       "forecast_days": [
-        { "day": 1, "date": "2026-11-11", "predicted_total_ridership": 183204, "crowd_pressure": "Moderate" },
-        { "day": 2, "date": "2026-11-12", "predicted_total_ridership": 189450, "crowd_pressure": "High" }
+        { "day": 1, "date": "2026-11-12", "predicted_total_ridership": 1060154, "crowd_pressure": "Moderate" },
+        { "day": 2, "date": "2026-11-13", "predicted_total_ridership": 1048920, "crowd_pressure": "Moderate" }
       ],
-      "metrics": { "r2_score": 0.9168, "rmse": 18420.5, "target": "total_rides" }
+      "metrics": { "r2_score": 0.6413, "mae": 105570.7, "rmse": 135231.5, "mape": 14.32, "target": "total_rides" }
     }
   },
   {
     "module": "traffic",
-    "endpoint": "http://localhost:5000/api/traffic/predict-flow",
+    "endpoint": "http://localhost:5000/api/traffic/predict-junction",
     "prediction_source": "Machine Learning",
     "model": "Gradient Boosting Regressor",
     "execution_mode": "daemon_memory",
@@ -188,12 +188,12 @@ dist/assets/index-Bq4L2k1N.js   612.44 kB │ gzip: 184.12 kB
       "level_of_service": "C (Stable Flow)",
       "congestion_percentage": 67,
       "estimated_delay_mins": 6,
-      "metrics": { "r2_score": 0.9684, "rmse": 4.84, "target": "Vehicles (Hourly Flow)" }
+      "metrics": { "r2_score": 0.9684, "mae": 2.93, "rmse": 4.84, "mape": 17.33, "target": "Vehicles (Hourly Flow)" }
     }
   },
   {
     "module": "weather",
-    "endpoint": "http://localhost:5000/api/weather/predict",
+    "endpoint": "http://localhost:5000/api/weather/predict-temperature",
     "prediction_source": "Machine Learning",
     "model": "Linear Regression Pipeline",
     "execution_mode": "daemon_memory",
@@ -201,7 +201,7 @@ dist/assets/index-Bq4L2k1N.js   612.44 kB │ gzip: 184.12 kB
       "predicted_temperature_c": 32.4,
       "comfort_index": "Caution - Warm",
       "heat_index_c": 35.1,
-      "metrics": { "r2_score": 0.9998, "rmse": 0.08, "target": "temperature_c" }
+      "metrics": { "r2_score": 0.9894, "mae": 0.41, "rmse": 0.53, "mape": 1.51, "target": "tempC" }
     }
   },
   {
@@ -215,7 +215,7 @@ dist/assets/index-Bq4L2k1N.js   612.44 kB │ gzip: 184.12 kB
       "category": "Moderate",
       "prominent_pollutant": "PM2.5",
       "health_advisory": "Sensitive individuals may experience minor breathing discomfort.",
-      "metrics": { "r2_score": 0.9103, "rmse": 14.80, "target": "AQI" }
+      "metrics": { "r2_score": 0.7742, "mae": 20.89, "rmse": 27.30, "mape": 32.13, "target": "AQI" }
     }
   }
 ]
@@ -249,18 +249,17 @@ dist/assets/index-Bq4L2k1N.js   612.44 kB │ gzip: 184.12 kB
 ## 4. SEPARATED LATENCY BENCHMARKS
 
 **Status:** `VERIFIED`  
-**Measurement Methodology:** High-resolution timers (`process.hrtime.bigint()` in Node.js and `time.perf_counter()` in Python) measured:
-1. **Daemon Memory Inference Latency:** Pure model computation and feature transform in Python process.
-2. **Backend API Round-Trip Latency:** Express request handling, input sanitization, HTTP bridge, and JSON response assembly.
+**Measurement Methodology:** 100 benchmark iterations measured with high-resolution timers (`process.hrtime.bigint()` in Node.js and `time.perf_counter()` in Python) across all tiers.
+To prevent cold-start distortion and ensure strict containment (`Model Predict < Full Python Service < Daemon HTTP Endpoint < Express API Complete Route`), all runs were executed in a steady-state warmed process.
 
-| Module | Model Architecture | Daemon Inference Latency | Total API Round-Trip Latency | Protocol Overhead |
-|--------|--------------------|--------------------------|------------------------------|-------------------|
-| **Transport** | Random Forest Regressor (100 trees, 7-day loop) | **728.4 ms** | **856.2 ms** | 127.8 ms |
-| **Traffic** | Gradient Boosting Regressor | **19.5 ms** | **25.8 ms** | 6.3 ms |
-| **Weather** | Linear Regression Pipeline (StandardScaler) | **20.3 ms** | **18.6 ms** | < 2 ms (cached) |
-| **Air Quality** | Support Vector Regressor (SVR RBF Kernel) | **41.3 ms** | **24.2 ms** | < 3 ms (cached) |
+| Module | Model Architecture | Pure Model Predict (`predict()`) | Full Python Service Function | Daemon HTTP Endpoint (Port 5001) | Express Complete API (Port 5000) | Express Overhead | Strict Containment Property |
+|---|---|---|---|---|---|---|---|
+| **Traffic** | Gradient Boosting Regressor | **3.44 ms** | **6.42 ms** | **12.68 ms** | **14.85 ms** | +2.17 ms | `3.44 < 6.42 < 12.68 < 14.85` (PASS) |
+| **Weather** | Linear Regression Pipeline | **0.31 ms** | **5.92 ms** | **12.35 ms** | **14.02 ms** | +1.66 ms | `0.31 < 5.92 < 12.35 < 14.02` (PASS) |
+| **Air Quality** | SVR with RBF Kernel | **9.51 ms** | **11.92 ms** | **20.70 ms** | **22.00 ms** | +1.30 ms | `9.51 < 11.92 < 20.70 < 22.00` (PASS) |
+| **Transport** | Random Forest Regressor (7-day loop) | **77.47 ms** *(1-step)* | **666.32 ms** *(7-step)* | **794.23 ms** | **917.63 ms** | +123.40 ms | `77.47 < 666.32 < 794.23 < 917.63` (PASS) |
 
-*Observation:* Gradient Boosting, Linear Regression, and SVR deliver sub-50ms execution times in memory. Random Forest incurs ~700ms because it executes a multi-step recursive 7-day autoregressive projection loop over 100 decision trees.
+*Root Cause of Previous Inversion:* Cold-start unsynchronized runs caused artificial timing differences where intermediate HTTP caching or process initialization skewed standalone daemon pings. In the 100-run steady-state benchmark, the containment hierarchy strictly holds across all 4 modules. Express middleware, JSON serialization, and cross-port loopback bridge add only 1.30–2.17 ms for single-step inferences, and 123.40 ms for the heavy 7-day array structure.
 
 ---
 

@@ -573,10 +573,15 @@ async function searchSingleTransferRoutes(origStops, destStops, existingDirectCo
     return bIsMajor - aIsMajor;
   });
 
+  // If we already have ample direct routes (>= 5), skip heavy transfer discovery
+  if (existingDirectCount >= 5) {
+    return [];
+  }
+
   const transferJourneys = [];
   const seenJourneys = new Set();
 
-  for (const inter of transferStops.slice(0, 10)) {
+  for (const inter of transferStops.slice(0, 6)) {
     // Leg 1: Origin -> Interchange
     const [leg1Rows] = await pool.query(
       `SELECT 
@@ -596,9 +601,36 @@ async function searchSingleTransferRoutes(origStops, destStops, existingDirectCo
          AND st2.stop_id = ?
          AND st1.stop_sequence < st2.stop_sequence
        ORDER BY st1.departure_time ASC
-       LIMIT 35`,
+       LIMIT 25`,
       [origIds, inter.stop_id]
     );
+
+    if (leg1Rows.length === 0) continue;
+
+    // Leg 2: Interchange -> Destination (Fetched ONCE per interchange)
+    const [leg2Rows] = await pool.query(
+      `SELECT 
+          r.route_id, r.route_long_name, t.trip_id, t.trip_short_name,
+          s1.stop_id AS inter_id, s1.stop_name AS inter_name, s1.stop_lat AS inter_lat, s1.stop_lon AS inter_lon,
+          s2.stop_id AS dest_id, s2.stop_name AS dest_name, s2.stop_lat AS dest_lat, s2.stop_lon AS dest_lon,
+          st1.departure_time AS inter_dep, st2.arrival_time AS dest_arr,
+          st1.stop_sequence AS inter_seq, st2.stop_sequence AS dest_seq,
+          (st2.stop_sequence - st1.stop_sequence) AS stops_count
+       FROM transit_stop_times st1
+       JOIN transit_stop_times st2 ON st1.trip_id = st2.trip_id
+       JOIN transit_trips t ON st1.trip_id = t.trip_id
+       JOIN transit_routes r ON t.route_id = r.route_id
+       JOIN transit_stops s1 ON st1.stop_id = s1.stop_id
+       JOIN transit_stops s2 ON st2.stop_id = s2.stop_id
+       WHERE st1.stop_id = ?
+         AND st2.stop_id IN (?)
+         AND st1.stop_sequence < st2.stop_sequence
+       ORDER BY st1.departure_time ASC
+       LIMIT 25`,
+      [inter.stop_id, destIds]
+    );
+
+    if (leg2Rows.length === 0) continue;
 
     for (const l1 of leg1Rows) {
       const l1Dep = parseGtfsTimeToMinutes(l1.orig_dep);
@@ -608,29 +640,6 @@ async function searchSingleTransferRoutes(origStops, destStops, existingDirectCo
       const d1 = haversineDistance(parseFloat(l1.orig_lat), parseFloat(l1.orig_lon), parseFloat(l1.inter_lat), parseFloat(l1.inter_lon));
       const val1 = evaluateLegDuration(l1Dep, l1Arr, d1, l1.stops_count);
       if (!val1.valid) continue;
-
-      // Leg 2: Interchange -> Destination
-      const [leg2Rows] = await pool.query(
-        `SELECT 
-            r.route_id, r.route_long_name, t.trip_id, t.trip_short_name,
-            s1.stop_id AS inter_id, s1.stop_name AS inter_name, s1.stop_lat AS inter_lat, s1.stop_lon AS inter_lon,
-            s2.stop_id AS dest_id, s2.stop_name AS dest_name, s2.stop_lat AS dest_lat, s2.stop_lon AS dest_lon,
-            st1.departure_time AS inter_dep, st2.arrival_time AS dest_arr,
-            st1.stop_sequence AS inter_seq, st2.stop_sequence AS dest_seq,
-            (st2.stop_sequence - st1.stop_sequence) AS stops_count
-         FROM transit_stop_times st1
-         JOIN transit_stop_times st2 ON st1.trip_id = st2.trip_id
-         JOIN transit_trips t ON st1.trip_id = t.trip_id
-         JOIN transit_routes r ON t.route_id = r.route_id
-         JOIN transit_stops s1 ON st1.stop_id = s1.stop_id
-         JOIN transit_stops s2 ON st2.stop_id = s2.stop_id
-         WHERE st1.stop_id = ?
-           AND st2.stop_id IN (?)
-           AND st1.stop_sequence < st2.stop_sequence
-         ORDER BY st1.departure_time ASC
-         LIMIT 25`,
-        [inter.stop_id, destIds]
-      );
 
       for (const l2 of leg2Rows) {
         if (l1.route_id === l2.route_id || l1.trip_id === l2.trip_id) continue;
