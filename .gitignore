@@ -35,3 +35,14 @@ yarn-debug.log*
 yarn-error.log*
 test_key_journeys.js
 =
+
+# Academic and submission documents (managed outside in smart-city-submission-materials)
+*.docx
+*.pptx
+*.pdf
+~$*
+smart-city-submission-materials/
+final_submission/
+project_audit/
+project_fix_report/
+scripts/

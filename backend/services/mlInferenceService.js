@@ -24,7 +24,7 @@ const http = require('http');
 const { spawn } = require('child_process');
 const path = require('path');
 
-const DAEMON_HOST = '127.0.0.1';
+const DAEMON_HOST = process.env.ML_DAEMON_HOST || '127.0.0.1';
 const DAEMON_PORT = parseInt(process.env.ML_DAEMON_PORT || '5001', 10);
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const SCRIPT_PATH = path.join(PROJECT_ROOT, 'ml', 'unified_inference_service.py');
