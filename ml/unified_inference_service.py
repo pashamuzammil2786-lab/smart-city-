@@ -763,7 +763,8 @@ def run_cli(module, input_json_str):
 def main():
     parser = argparse.ArgumentParser(description="Smart City Unified ML Inference Service")
     parser.add_argument("--serve", action="store_true", help="Start persistent HTTP inference daemon")
-    parser.add_argument("--port", type=int, default=5001, help="Port for HTTP daemon (default: 5001)")
+    parser.add_argument("--host", type=str, default="0.0.0.0", help="Host interface to bind to (default: 0.0.0.0)")
+    parser.add_argument("--port", type=int, default=None, help="Port for HTTP daemon (default: PORT env var or 5001)")
     parser.add_argument("--module", type=str, choices=["transport", "traffic", "weather", "air_quality", "air-quality"], help="Module for CLI execution")
     parser.add_argument("--input", type=str, default="{}", help="Input parameters in JSON format")
 
@@ -771,8 +772,34 @@ def main():
 
     if args.serve:
         app = create_app()
-        print(f"Starting Smart City Unified ML Inference Daemon on http://127.0.0.1:{args.port}...")
-        app.run(host="127.0.0.1", port=args.port, debug=False)
+
+        # Render and other cloud platforms provide the port via the PORT environment variable.
+        # Fallback precedence:
+        # 1. When on Render (RENDER env var set) or when PORT is provided without explicit CLI override, use PORT.
+        # 2. CLI --port argument (for explicit manual override in local dev).
+        # 3. PORT environment variable.
+        # 4. Default 5001 for local development.
+        env_port = os.environ.get("PORT")
+        is_render = "RENDER" in os.environ
+
+        if is_render and env_port:
+            try:
+                port = int(env_port)
+            except ValueError:
+                port = args.port or 5001
+        elif args.port is not None:
+            port = args.port
+        elif env_port:
+            try:
+                port = int(env_port)
+            except ValueError:
+                port = 5001
+        else:
+            port = 5001
+
+        host = args.host or "0.0.0.0"
+        print(f"Starting Smart City Unified ML Inference Daemon on http://{host}:{port}...")
+        app.run(host=host, port=port, debug=False)
     elif args.module:
         run_cli(args.module, args.input)
     else:
