@@ -45,16 +45,20 @@ app.get('/api/model-performance', (req, res) => {
 app.get('/api/ml/health', async (req, res) => {
   try {
     const health = await mlInferenceService.checkHealth();
+    const config = typeof mlInferenceService.getServiceConfig === 'function' ? mlInferenceService.getServiceConfig() : {};
     res.json({
       success: true,
       service: 'Smart City Unified ML Decision Support',
+      service_url: health.service_url || config.fullUrl || 'http://127.0.0.1:5001',
+      deployment_mode: health.is_external ? 'external_render_service' : 'local_daemon',
       daemon_status: health.status || 'offline',
       models_status: health.models_loaded || {
         transport: 'available (via CLI)',
         traffic: 'available (via CLI)',
         weather: 'available (via CLI)',
         air_quality: 'available (via CLI)'
-      }
+      },
+      timestamp: health.timestamp || new Date().toISOString()
     });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
@@ -79,9 +83,30 @@ app.get('/', (req, res) => {
 let mlDaemonProcess = null;
 
 function ensureMLDaemon() {
+  const config = typeof mlInferenceService.getServiceConfig === 'function' ? mlInferenceService.getServiceConfig() : {};
+  const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER !== undefined;
+  const isExternal = config.isExternal || Boolean(process.env.ML_SERVICE_URL);
+
+  if (isExternal || isProduction) {
+    const targetUrl = config.fullUrl || process.env.ML_SERVICE_URL || 'external Python ML service';
+    console.log(`🌐 Production ML mode: Connecting to external Python ML service at ${targetUrl}`);
+    mlInferenceService.checkHealth().then(status => {
+      if (status.status === 'healthy') {
+        console.log(`✅ External Python ML Service is healthy (all 4 models loaded into memory at ${targetUrl})`);
+      } else {
+        console.warn(`⏳ External Python ML Service at ${targetUrl} reported status: ${status.status || 'offline'}. Requests will retry live.`);
+      }
+    }).catch(err => {
+      console.warn(`⚠️ Could not reach external ML service at ${targetUrl}:`, err.message);
+    });
+    // NEVER attempt to spawn a local Python process in external / production mode
+    return;
+  }
+
+  // Local development mode: check or auto-spawn local Python daemon
   mlInferenceService.checkHealth().then(status => {
     if (status.status === 'healthy') {
-      console.log('🤖 ML Inference Daemon is active on http://127.0.0.1:5001');
+      console.log('🤖 Local ML Inference Daemon is active on http://127.0.0.1:5001');
     } else {
       console.log('⚡ Launching persistent Python ML Inference Daemon on http://127.0.0.1:5001...');
       const pyCmd = process.platform === 'win32' ? 'python' : 'python3';

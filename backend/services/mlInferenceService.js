@@ -21,13 +21,53 @@
  */
 
 const http = require('http');
+const https = require('https');
 const { spawn } = require('child_process');
 const path = require('path');
+const { URL } = require('url');
 
-const DAEMON_HOST = process.env.ML_DAEMON_HOST || '127.0.0.1';
-const DAEMON_PORT = parseInt(process.env.ML_DAEMON_PORT || '5001', 10);
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const SCRIPT_PATH = path.join(PROJECT_ROOT, 'ml', 'unified_inference_service.py');
+
+/**
+ * Resolve target ML service configuration dynamically.
+ * Prioritizes ML_SERVICE_URL (e.g. 'https://smart-city-dhj4.onrender.com'),
+ * falling back to ML_DAEMON_HOST:ML_DAEMON_PORT (default: 127.0.0.1:5001).
+ */
+function getServiceConfig() {
+  const serviceUrl = process.env.ML_SERVICE_URL;
+  if (serviceUrl && serviceUrl.trim()) {
+    try {
+      const parsed = new URL(serviceUrl.trim());
+      const isHttps = parsed.protocol === 'https:';
+      return {
+        protocol: parsed.protocol,
+        isHttps,
+        client: isHttps ? https : http,
+        hostname: parsed.hostname,
+        port: parsed.port ? parseInt(parsed.port, 10) : (isHttps ? 443 : 80),
+        basePath: parsed.pathname.replace(/\/+$/, ''),
+        fullUrl: serviceUrl.trim().replace(/\/+$/, ''),
+        isExternal: true
+      };
+    } catch (err) {
+      console.warn('[ML Service URL Warning]: Could not parse ML_SERVICE_URL, using host/port:', err.message);
+    }
+  }
+
+  const host = process.env.ML_DAEMON_HOST || '127.0.0.1';
+  const port = parseInt(process.env.ML_DAEMON_PORT || '5001', 10);
+  return {
+    protocol: 'http:',
+    isHttps: false,
+    client: http,
+    hostname: host,
+    port: port,
+    basePath: '',
+    fullUrl: `http://${host}:${port}`,
+    isExternal: false
+  };
+}
 
 /**
  * Validate numeric value and ensure it's not NaN or infinite
@@ -48,24 +88,30 @@ function sanitizeErrorMessage(msg) {
 }
 
 /**
- * Make an HTTP POST request to the persistent Python daemon
+ * Make an HTTP / HTTPS POST request to the Python ML inference service
  */
-function queryDaemon(endpoint, payload, timeoutMs = 3000) {
+function queryDaemon(endpoint, payload, timeoutMs = 12000) {
   return new Promise((resolve, reject) => {
+    const config = getServiceConfig();
     const postData = JSON.stringify(payload);
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const fullPath = `${config.basePath}${cleanEndpoint}`;
+
     const options = {
-      hostname: DAEMON_HOST,
-      port: DAEMON_PORT,
-      path: endpoint,
+      hostname: config.hostname,
+      port: config.port,
+      path: fullPath,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postData)
+        'Content-Length': Buffer.byteLength(postData),
+        'Accept': 'application/json',
+        'User-Agent': 'SmartCity-Backend-Node/1.0'
       },
       timeout: timeoutMs
     };
 
-    const req = http.request(options, (res) => {
+    const req = config.client.request(options, (res) => {
       let data = '';
       res.setEncoding('utf8');
       res.on('data', (chunk) => { data += chunk; });
@@ -75,21 +121,21 @@ function queryDaemon(endpoint, payload, timeoutMs = 3000) {
           if (res.statusCode >= 200 && res.statusCode < 300 && parsed.success) {
             resolve(parsed);
           } else {
-            reject(new Error(parsed.error || `Daemon returned status ${res.statusCode}`));
+            reject(new Error(parsed.error || `ML service returned status ${res.statusCode}`));
           }
         } catch (e) {
-          reject(new Error('Invalid JSON response from ML daemon'));
+          reject(new Error(`Invalid JSON response from ML service (status ${res.statusCode})`));
         }
       });
     });
 
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('ML daemon request timed out'));
+      reject(new Error(`ML service request to ${endpoint} timed out after ${timeoutMs}ms`));
     });
 
     req.on('error', (err) => {
-      reject(err);
+      reject(new Error(`ML service connection error (${config.fullUrl}): ${err.message}`));
     });
 
     req.write(postData);
@@ -98,9 +144,9 @@ function queryDaemon(endpoint, payload, timeoutMs = 3000) {
 }
 
 /**
- * Fallback: execute Python inference script via CLI subprocess
+ * Fallback: execute Python inference script via CLI subprocess (Local dev only)
  */
-function runSubprocess(moduleName, payload, timeoutMs = 12000) {
+function runSubprocess(moduleName, payload, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
     const pyCmd = process.platform === 'win32' ? 'python' : 'python3';
     const jsonStr = JSON.stringify(payload);
@@ -158,18 +204,28 @@ function runSubprocess(moduleName, payload, timeoutMs = 12000) {
 }
 
 /**
- * Execute ML prediction using Daemon first, with automatic Subprocess fallback
+ * Execute ML prediction using HTTP/HTTPS Service first.
+ * If in production or using an external ML service, never spawn a local subprocess.
+ * In local development, fall back to controlled subprocess CLI if daemon is unreachable.
  */
 async function executeInference(moduleName, endpoint, payload) {
-  // 1. Try persistent HTTP daemon
+  const config = getServiceConfig();
+
+  // 1. Try HTTP/HTTPS Service
   try {
     const result = await queryDaemon(endpoint, payload);
     return {
       ...result,
-      execution_mode: 'daemon_memory'
+      execution_mode: config.isExternal ? 'remote_https' : 'daemon_memory'
     };
-  } catch (daemonErr) {
-    // 2. Fall back to controlled subprocess
+  } catch (serviceErr) {
+    // 2. If configured for an external service or in production, do NOT attempt local subprocess
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER !== undefined;
+    if (config.isExternal || isProduction) {
+      throw new Error(`ML inference error from ${config.fullUrl}: ${serviceErr.message}`);
+    }
+
+    // 3. Fall back to local CLI subprocess (local dev only)
     try {
       const subResult = await runSubprocess(moduleName, payload);
       return {
@@ -177,8 +233,7 @@ async function executeInference(moduleName, endpoint, payload) {
         execution_mode: 'subprocess_cli'
       };
     } catch (subErr) {
-      // 3. Both failed - rethrow clean error
-      throw new Error(`ML execution failed (Daemon: ${daemonErr.message}; Subprocess: ${subErr.message})`);
+      throw new Error(`ML execution failed (Service: ${serviceErr.message}; Subprocess: ${subErr.message})`);
     }
   }
 }
@@ -189,25 +244,72 @@ async function executeInference(moduleName, endpoint, payload) {
 
 const mlInferenceService = {
   /**
-   * Health check for ML inference daemon
+   * Health check for ML inference daemon / external service
    */
-  async checkHealth() {
+  async checkHealth(timeoutMs = 6000) {
     return new Promise((resolve) => {
-      const req = http.get(`http://${DAEMON_HOST}:${DAEMON_PORT}/health`, { timeout: 1500 }, (res) => {
+      const config = getServiceConfig();
+      const cleanPath = `${config.basePath}/health`.replace(/\/+/g, '/');
+
+      const options = {
+        hostname: config.hostname,
+        port: config.port,
+        path: cleanPath,
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'SmartCity-Backend-Node/1.0'
+        },
+        timeout: timeoutMs
+      };
+
+      const req = config.client.request(options, (res) => {
         let body = '';
+        res.setEncoding('utf8');
         res.on('data', (c) => { body += c; });
         res.on('end', () => {
           try {
-            resolve(JSON.parse(body));
+            const data = JSON.parse(body);
+            resolve({
+              ...data,
+              service_url: config.fullUrl,
+              is_external: config.isExternal
+            });
           } catch (e) {
-            resolve({ status: 'offline', error: 'Invalid response' });
+            resolve({
+              status: 'error',
+              error: 'Invalid JSON response from ML health endpoint',
+              service_url: config.fullUrl,
+              is_external: config.isExternal
+            });
           }
         });
       });
-      req.on('error', () => resolve({ status: 'offline' }));
-      req.on('timeout', () => { req.destroy(); resolve({ status: 'timeout' }); });
+
+      req.on('error', (err) => {
+        resolve({
+          status: 'offline',
+          error: err.message,
+          service_url: config.fullUrl,
+          is_external: config.isExternal
+        });
+      });
+
+      req.on('timeout', () => {
+        req.destroy();
+        resolve({
+          status: 'timeout',
+          error: `ML health check timed out after ${timeoutMs}ms`,
+          service_url: config.fullUrl,
+          is_external: config.isExternal
+        });
+      });
+
+      req.end();
     });
   },
+
+  getServiceConfig,
 
   /**
    * Module 1: Transport Passenger Demand Forecasting (Random Forest)
