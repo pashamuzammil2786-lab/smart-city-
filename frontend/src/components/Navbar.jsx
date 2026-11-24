@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Bus,
   LayoutDashboard,
-  ShieldCheck,
   LogOut,
   Menu,
   X
@@ -56,16 +55,6 @@ export default function Navbar({ user, onLogout }) {
               >
                 <LayoutDashboard size={16} />
                 <span>Dashboard</span>
-              </Link>
-
-              <Link
-                to="/model-performance"
-                className={`nav-link ${location.pathname === '/model-performance' ? 'active' : ''}`}
-                onClick={closeMobile}
-                style={{ fontSize: '0.82rem' }}
-              >
-                <ShieldCheck size={16} color="#38BDF8" />
-                <span>Model Audit</span>
               </Link>
 
               {/* Mobile Profile & Logout */}

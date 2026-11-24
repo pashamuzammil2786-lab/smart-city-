@@ -105,72 +105,71 @@ export default function AirQuality() {
   return (
     <div className="dashboard-page" style={{ maxWidth: '1280px', margin: '0 auto', padding: '1.5rem 1rem' }}>
       {/* 1. Header Banner */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid #1E293B', paddingBottom: '1.25rem', marginBottom: '1.5rem' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '4px 12px', borderRadius: '20px', color: '#38BDF8', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-            <Wind size={15} />
-            <span>Smart City Module 4: Air Quality Analytics & Multi-Source ML Forecasting</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', background: '#1E293B', border: '1px solid #334155', padding: '0.2rem 0.55rem', borderRadius: '4px', color: '#94A3B8', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+            <Wind size={13} color="#38BDF8" />
+            <span>HYDERABAD AIR QUALITY & POLLUTION ANALYTICS PLATFORM</span>
           </div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#F8FAFC', margin: '0 0 0.35rem 0' }}>
-            Hyderabad Air Quality Index (AQI) & Predictive Support
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#F8FAFC', letterSpacing: '-0.02em', margin: 0 }}>
+            Air Quality Index (AQI) & Predictive Support
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.92rem', margin: 0 }}>
-            Lead: <strong>Mohith Madarapu</strong> • Multi-Source Environmental, Traffic & Meteorological Fusion (CPCB Standards)
+          <p style={{ color: '#94A3B8', fontSize: '0.9rem', marginTop: '0.35rem', maxWidth: '680px', lineHeight: 1.5 }}>
+            Multi-source environmental, traffic, and meteorological fusion under statutory CPCB National Air Quality standards.
           </p>
         </div>
 
         <button
           onClick={loadAllData}
           className="btn"
-          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer' }}
+          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 0.9rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
         >
-          <RefreshCw size={15} />
-          <span>Refresh Sensors</span>
+          <RefreshCw size={14} />
+          <span>Refresh Air Quality Data</span>
         </button>
       </div>
 
       {/* 2. Hero Current Status Card */}
       {current && (
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1.5rem', marginBottom: '1.75rem', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', alignItems: 'center' }}>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.5rem', position: 'relative' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', alignItems: 'center' }}>
             {/* Left: Overall AQI Meter */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div
                 style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
+                  minWidth: '105px',
+                  padding: '1rem',
+                  borderRadius: '6px',
+                  background: '#0B132B',
+                  border: '1px solid #334155',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: `6px solid ${current.color}`,
-                  background: current.bg,
-                  boxShadow: `0 0 25px ${current.color}33`,
                   flexShrink: 0
                 }}
               >
-                <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1 }}>
+                <span style={{ fontSize: '2.4rem', fontWeight: 700, color: '#F8FAFC', lineHeight: 1 }}>
                   {current.aqi}
                 </span>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: current.color, textTransform: 'uppercase', marginTop: '4px' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: current.color, textTransform: 'uppercase', marginTop: '6px', letterSpacing: '0.04em' }}>
                   NAQI Score
                 </span>
               </div>
 
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
-                  <div style={{ background: current.color, color: '#0F172A', fontWeight: 800, fontSize: '0.78rem', padding: '3px 10px', borderRadius: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                  <div style={{ background: '#1E293B', border: `1px solid ${current.color}`, color: current.color, fontWeight: 600, fontSize: '0.75rem', padding: '2px 8px', borderRadius: '4px' }}>
                     {current.category} Air Quality
                   </div>
-                  <span style={{ fontSize: '0.70rem', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                    ● Analytical CPCB Formula
+                  <span style={{ fontSize: '0.70rem', background: '#1E293B', color: '#94A3B8', border: '1px solid #334155', padding: '2px 7px', borderRadius: '4px', fontWeight: 600 }}>
+                    CPCB Standard
                   </span>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#F1F5F9', margin: '0 0 0.35rem 0' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#F8FAFC', margin: '0 0 0.25rem 0' }}>
                   Hyderabad City Average
                 </h3>
-                <p style={{ color: '#94A3B8', fontSize: '0.85rem', margin: 0 }}>
+                <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: 0 }}>
                   Dominant Pollutant: <strong style={{ color: '#E2E8F0' }}>{current.dominantPollutant}</strong> • Active Stations: <strong style={{ color: '#38BDF8' }}>{current.activeStationsCount} CPCB / TSPCB</strong>
                 </p>
               </div>
@@ -247,7 +246,7 @@ export default function AirQuality() {
               const ratio = Math.min(100, Math.round((p.info.value / p.info.standard) * 100));
               const isOver = p.info.value > p.info.standard;
               return (
-                <div key={p.key} style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '12px', padding: '1rem' }}>
+                <div key={p.key} style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '6px', padding: '0.85rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                     <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#F8FAFC' }}>{p.name}</span>
                     <span style={{ fontSize: '0.72rem', color: isOver ? '#EF4444' : '#10B981', fontWeight: 600 }}>
@@ -274,32 +273,32 @@ export default function AirQuality() {
       )}
 
       {/* 4. Interactive Trend & Forecast Visualization */}
-      <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1.5rem', marginBottom: '1.75rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#F1F5F9', margin: '0 0 0.25rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <TrendingUp size={20} color="#38BDF8" />
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: '0 0 0.25rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <TrendingUp size={18} color="#38BDF8" />
               <span>Multi-Source ML Air Quality Forecasting & Hourly Patterns</span>
-              <span style={{ fontSize: '0.70rem', background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.3)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                ● SVR ML Model (1h Horizon)
+              <span style={{ fontSize: '0.70rem', background: '#1E293B', color: '#93C5FD', border: '1px solid #334155', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                SVR RBF Model (1h Horizon)
               </span>
             </h2>
-            <p style={{ color: '#94A3B8', fontSize: '0.85rem', margin: 0 }}>
+            <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: 0 }}>
               Comparing historical rush-hour diurnal curves with 24-hour predictive SVR regression outputs.
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.5rem', background: '#0B132B', padding: '4px', borderRadius: '8px', border: '1px solid #1E293B' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', background: '#0B132B', padding: '4px', borderRadius: '6px', border: '1px solid #1E293B' }}>
             <button
               onClick={() => setActiveTab('forecast')}
               style={{
                 background: activeTab === 'forecast' ? '#2563EB' : 'transparent',
                 color: activeTab === 'forecast' ? '#FFF' : '#94A3B8',
                 border: 'none',
-                padding: '6px 14px',
-                borderRadius: '6px',
+                padding: '5px 12px',
+                borderRadius: '4px',
                 fontWeight: 600,
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 cursor: 'pointer'
               }}
             >
@@ -311,14 +310,14 @@ export default function AirQuality() {
                 background: activeTab === 'history' ? '#2563EB' : 'transparent',
                 color: activeTab === 'history' ? '#FFF' : '#94A3B8',
                 border: 'none',
-                padding: '6px 14px',
-                borderRadius: '6px',
+                padding: '5px 12px',
+                borderRadius: '4px',
                 fontWeight: 600,
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 cursor: 'pointer'
               }}
             >
-              24-Hour Sensor History
+              24-Hour Measured History
             </button>
           </div>
         </div>
@@ -370,26 +369,26 @@ export default function AirQuality() {
       </div>
 
       {/* 5. Two-Column: Hyderabad Monitoring Stations Table + Live Scenario Predictor */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1.75rem', marginBottom: '1.75rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
         {/* Left: Continuous Air Quality Monitoring Stations in Hyderabad */}
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#F1F5F9', margin: '0 0 0.35rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <MapPin size={18} color="#38BDF8" />
-            <span>Hyderabad Sensor Stations (Continuous Monitoring)</span>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: '0 0 0.35rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <MapPin size={16} color="#38BDF8" />
+            <span>Hyderabad Monitoring Stations</span>
           </h2>
           <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0 0 1rem 0' }}>
-            TSPCB / CPCB Ambient Air Quality Stations across major city zones.
+            TSPCB / CPCB ambient air quality telemetry across major metropolitan zones.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '420px', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', maxHeight: '420px', overflowY: 'auto' }}>
             {stations.map((s) => (
               <div
                 key={s.id}
                 style={{
                   background: '#0B132B',
                   border: '1px solid #1E293B',
-                  borderRadius: '10px',
-                  padding: '0.85rem 1rem',
+                  borderRadius: '6px',
+                  padding: '0.75rem 0.85rem',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center'
@@ -397,8 +396,8 @@ export default function AirQuality() {
               >
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
-                    <span style={{ fontWeight: 700, color: '#F8FAFC', fontSize: '0.9rem' }}>{s.name}</span>
-                    <span style={{ fontSize: '0.68rem', background: '#1E293B', color: '#94A3B8', padding: '2px 6px', borderRadius: '4px' }}>
+                    <span style={{ fontWeight: 700, color: '#F8FAFC', fontSize: '0.88rem' }}>{s.name}</span>
+                    <span style={{ fontSize: '0.68rem', background: '#1E293B', color: '#94A3B8', padding: '1px 5px', borderRadius: '3px' }}>
                       {s.id}
                     </span>
                   </div>
@@ -413,10 +412,10 @@ export default function AirQuality() {
                 </div>
 
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 900, color: s.color, lineHeight: 1 }}>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 700, color: s.color, lineHeight: 1 }}>
                     {s.aqi}
                   </div>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 700, color: s.color, textTransform: 'uppercase', marginTop: '3px' }}>
+                  <div style={{ fontSize: '0.68rem', fontWeight: 600, color: s.color, textTransform: 'uppercase', marginTop: '3px' }}>
                     {s.category}
                   </div>
                 </div>
@@ -426,9 +425,9 @@ export default function AirQuality() {
         </div>
 
         {/* Right: Interactive Scenario Simulator & Real-Time Predictor */}
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#F1F5F9', margin: '0 0 0.35rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Sliders size={18} color="#38BDF8" />
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: '0 0 0.35rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Sliders size={16} color="#38BDF8" />
             <span>Interactive AQI Scenario Simulator</span>
           </h2>
           <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0 0 1.25rem 0' }}>
@@ -509,10 +508,10 @@ export default function AirQuality() {
                 background: '#2563EB',
                 color: '#FFF',
                 border: 'none',
-                padding: '0.75rem',
-                borderRadius: '8px',
-                fontWeight: 700,
-                fontSize: '0.9rem',
+                padding: '0.65rem 1.25rem',
+                borderRadius: '4px',
+                fontWeight: 600,
+                fontSize: '0.88rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -521,7 +520,7 @@ export default function AirQuality() {
                 marginTop: '0.5rem'
               }}
             >
-              <Zap size={16} />
+              <Zap size={15} />
               <span>{predicting ? 'Computing ML Regression...' : 'Simulate & Predict Future AQI'}</span>
             </button>
           </form>
@@ -532,24 +531,23 @@ export default function AirQuality() {
               style={{
                 marginTop: '1.25rem',
                 background: '#0B132B',
-                border: `1px solid ${predictionResult.color || '#38BDF8'}`,
-                borderRadius: '10px',
-                padding: '1.15rem',
-                boxShadow: `0 0 15px ${predictionResult.color || '#38BDF8'}22`
+                border: '1px solid #1E293B',
+                borderRadius: '6px',
+                padding: '1.15rem'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', flexWrap: 'wrap', gap: '0.4rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: 600 }}>Forecasted Next-Hour AQI:</span>
-                  <span style={{ fontSize: '0.65rem', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '1px 6px', borderRadius: '4px' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: 600 }}>Forecasted Next-Hour AQI:</span>
+                  <span style={{ fontSize: '0.68rem', background: '#1E293B', color: '#93C5FD', border: '1px solid #334155', padding: '1px 6px', borderRadius: '3px' }}>
                     SVR RBF Model (1h Horizon)
                   </span>
                 </div>
-                <span style={{ background: predictionResult.color || '#F59E0B', color: '#0F172A', fontWeight: 800, fontSize: '0.75rem', padding: '2px 8px', borderRadius: '10px' }}>
+                <span style={{ background: '#1E293B', border: `1px solid ${predictionResult.color || '#334155'}`, color: predictionResult.color || '#F59E0B', fontWeight: 600, fontSize: '0.72rem', padding: '2px 8px', borderRadius: '4px' }}>
                   {predictionResult.category}
                 </span>
               </div>
-              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: predictionResult.color || '#F59E0B', lineHeight: 1, marginBottom: '0.4rem' }}>
+              <div style={{ fontSize: '2rem', fontWeight: 700, color: predictionResult.color || '#F59E0B', lineHeight: 1, marginBottom: '0.4rem' }}>
                 {predictionResult.predictedAQI}
               </div>
               <p style={{ color: '#CBD5E1', fontSize: '0.82rem', margin: '0 0 0.5rem 0' }}>
@@ -560,7 +558,7 @@ export default function AirQuality() {
                   {predictionResult.driverAnalysis?.trafficContribution} • {predictionResult.driverAnalysis?.windDispersionEffect}
                 </div>
                 <div style={{ color: '#64748B', fontSize: '0.68rem', marginTop: '0.2rem' }}>
-                  ℹ️ <strong>Methodology:</strong> Current station values use CPCB piecewise linear formula. This forecast is computed via Support Vector Regression (SVR with RBF kernel, R² = 0.7742) incorporating multi-source pollutant and meteorological lag vectors.
+                  <strong>Methodology:</strong> Current station values use CPCB piecewise linear formula. Forecast is computed via Support Vector Regression (SVR with RBF kernel, R² = 0.774) incorporating multi-source pollutant and meteorological lag vectors.
                 </div>
               </div>
             </div>

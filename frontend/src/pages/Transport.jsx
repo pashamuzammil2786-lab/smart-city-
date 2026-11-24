@@ -209,17 +209,17 @@ export default function Transport({ user }) {
       {/* ========================================================================= */}
       {/* SECTION A: WELCOME HEADER                                                 */}
       {/* ========================================================================= */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid #1E293B', paddingBottom: '1.25rem' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '0.25rem 0.65rem', borderRadius: '9999px', color: '#93C5FD', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-            <Bus size={13} />
-            <span>HYDERABAD SMART CITY TRANSIT PLATFORM</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', background: '#1E293B', border: '1px solid #334155', padding: '0.2rem 0.55rem', borderRadius: '4px', color: '#94A3B8', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+            <Bus size={13} color="#3B82F6" />
+            <span>HYDERABAD PUBLIC TRANSIT PLATFORM</span>
           </div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.01em' }}>
-            Smart Public Transport Analytics
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#F8FAFC', letterSpacing: '-0.02em', margin: 0 }}>
+            Public Transit & Route Analytics
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.92rem', marginTop: '0.2rem', maxWidth: '650px' }}>
-            Find Hyderabad bus routes and explore data-driven predictions for journey times, delays, and passenger demand.
+          <p style={{ color: '#94A3B8', fontSize: '0.9rem', marginTop: '0.35rem', maxWidth: '680px', lineHeight: 1.5 }}>
+            GTFS-based timetable route planning with multi-leg transfer calculation and machine-learning passenger demand forecasting.
           </p>
         </div>
 
@@ -228,17 +228,17 @@ export default function Transport({ user }) {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.5rem',
-            background: 'rgba(59, 130, 246, 0.1)',
-            border: '1px solid rgba(59, 130, 246, 0.3)',
-            padding: '0.45rem 0.9rem',
-            borderRadius: '8px',
-            color: '#93C5FD',
-            fontSize: '0.82rem',
-            fontWeight: 700
+            background: '#1E293B',
+            border: '1px solid #334155',
+            padding: '0.4rem 0.8rem',
+            borderRadius: '6px',
+            color: '#E2E8F0',
+            fontSize: '0.8rem',
+            fontWeight: 600
           }}
         >
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#3B82F6', display: 'inline-block' }}></span>
-          <span>GTFS Direct & Transfer Routing</span>
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }}></span>
+          <span>GTFS Schedule & Transfer Engine Active</span>
         </div>
       </div>
 
@@ -331,11 +331,11 @@ export default function Transport({ user }) {
               type="button"
               onClick={handleSwap}
               className="btn btn-secondary"
-              style={{ padding: '0.3rem 0.75rem', fontSize: '0.78rem', borderRadius: '20px' }}
+              style={{ padding: '0.35rem 0.85rem', fontSize: '0.78rem', borderRadius: '6px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               title="Swap Origin and Destination"
             >
               <ArrowLeftRight size={13} />
-              <span>Swap Stops</span>
+              <span>Swap Origin & Destination</span>
             </button>
           </div>
 
@@ -362,13 +362,13 @@ export default function Transport({ user }) {
                   left: 0,
                   right: 0,
                   background: '#0F1A33',
-                  border: '1px solid #233554',
-                  borderRadius: '8px',
+                  border: '1px solid #334155',
+                  borderRadius: '6px',
                   marginTop: '4px',
                   maxHeight: '180px',
                   overflowY: 'auto',
                   zIndex: 2000,
-                  boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+                  boxShadow: '0 8px 20px rgba(0,0,0,0.4)'
                 }}
               >
                 {destSuggestions.map((s) => (
@@ -378,8 +378,8 @@ export default function Transport({ user }) {
                       setDestination(s.stop_name);
                       setShowDestSugg(false);
                     }}
-                    style={{ padding: '0.55rem 0.85rem', borderBottom: '1px solid #1E2E4A', cursor: 'pointer', fontSize: '0.85rem', color: '#E2E8F0' }}
-                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1C2E52')}
+                    style={{ padding: '0.55rem 0.85rem', borderBottom: '1px solid #1E293B', cursor: 'pointer', fontSize: '0.85rem', color: '#E2E8F0' }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1E293B')}
                     onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                   >
                     <strong>{s.stop_name}</strong>
@@ -396,23 +396,23 @@ export default function Transport({ user }) {
             onClick={() => executeSearch(origin, destination)}
             disabled={loading}
             className="btn btn-primary"
-            style={{ width: '100%', padding: '0.8rem', marginTop: '0.2rem' }}
+            style={{ width: '100%', padding: '0.75rem', marginTop: '0.2rem', borderRadius: '6px', fontWeight: 600 }}
           >
-            {loading ? 'Searching GTFS Network...' : 'Find Available Bus Routes'}
-            <Search size={18} />
+            {loading ? 'Searching Timetable Network...' : 'Find Transit Routes'}
+            <Search size={16} />
           </button>
 
           {/* Popular Corridors Chips */}
-          <div style={{ paddingTop: '0.6rem', borderTop: '1px solid #233554' }}>
-            <span style={{ fontSize: '0.75rem', color: '#64748B', display: 'block', marginBottom: '0.4rem', fontWeight: 600 }}>
-              Sample Corridor Queries:
+          <div style={{ paddingTop: '0.65rem', borderTop: '1px solid #1E293B' }}>
+            <span style={{ fontSize: '0.75rem', color: '#94A3B8', display: 'block', marginBottom: '0.45rem', fontWeight: 600 }}>
+              Quick Corridor Tests:
             </span>
             <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
               <button
                 type="button"
                 onClick={() => handleCorridorClick('Charminar', 'Afzalgunj')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem' }}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               >
                 Charminar → Afzalgunj
               </button>
@@ -420,7 +420,7 @@ export default function Transport({ user }) {
                 type="button"
                 onClick={() => handleCorridorClick('Mehdipatnam', 'Dondanpally')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem', borderColor: '#3B82F6', color: '#60A5FA' }}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               >
                 Mehdipatnam → Dondanpally
               </button>
@@ -428,7 +428,7 @@ export default function Transport({ user }) {
                 type="button"
                 onClick={() => handleCorridorClick('Shaikpet', 'ISB')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem', borderColor: '#8B5CF6', color: '#C084FC' }}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               >
                 Shaikpet → ISB
               </button>
@@ -436,7 +436,7 @@ export default function Transport({ user }) {
                 type="button"
                 onClick={() => handleCorridorClick('Secunderabad', 'Mehdipatnam')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem' }}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               >
                 Secunderabad → Mehdipatnam
               </button>
@@ -444,7 +444,7 @@ export default function Transport({ user }) {
                 type="button"
                 onClick={() => handleCorridorClick('Koti', 'Dilsukhnagar')}
                 className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem' }}
+                style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1' }}
               >
                 Koti → Dilsukhnagar
               </button>
@@ -481,63 +481,63 @@ export default function Transport({ user }) {
       {/* SECTION C: 4 TRANSPORT SUMMARY CARDS                                      */}
       {/* ========================================================================= */}
       <div>
-        <h2 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.75rem', color: '#fff' }}>
-          Journey & Predictive Summary
+        <h2 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.75rem', color: '#F8FAFC' }}>
+          Transit Journey & Prediction Summary
         </h2>
         <div className="grid-4">
           {/* Card 1: Available Routes */}
-          <div className="card">
-            <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>
-              1. Available Direct Routes
+          <div className="card" style={{ background: '#111C35', border: '1px solid #1E293B', padding: '1rem' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.35rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Direct Routes Available
             </span>
-            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: searchResult ? '#38BDF8' : '#64748B' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: searchResult ? '#38BDF8' : '#64748B' }}>
               {searchResult ? `${searchResult.total_routes_found} Line${searchResult.total_routes_found === 1 ? '' : 's'}` : '--'}
             </div>
-            <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.72rem', color: '#94A3B8', marginTop: '0.25rem', margin: 0 }}>
               {searchResult ? `Filtered top ${searchResult.displayed_options_count} scheduled options` : 'Search for a route to view options'}
             </p>
           </div>
 
           {/* Card 2: Estimated Duration */}
-          <div className="card">
-            <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>
-              2. Estimated Total Duration
+          <div className="card" style={{ background: '#111C35', border: '1px solid #1E293B', padding: '1rem' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.35rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Estimated Duration
             </span>
-            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: activeRoute ? '#34D399' : '#64748B' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: activeRoute ? '#34D399' : '#64748B' }}>
               {activeRoute ? `${activeRoute.total_estimated_travel_time_mins} mins` : '--'}
             </div>
-            <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.72rem', color: '#94A3B8', marginTop: '0.25rem', margin: 0 }}>
               {activeRoute ? `${activeRoute.duration_source || 'Scheduled Timetable'} • ${activeRoute.stops_count || 0} stops` : 'Select a route to view duration'}
             </p>
           </div>
 
           {/* Card 3: Predicted Delay */}
-          <div className="card">
-            <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.25rem' }}>
-              3. Predicted Traffic Delay
+          <div className="card" style={{ background: '#111C35', border: '1px solid #1E293B', padding: '1rem' }}>
+            <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, display: 'block', marginBottom: '0.35rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              Traffic Delay Adjustment
             </span>
-            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: activeRoute ? (activeRoute.expected_delay_mins > 3 ? '#FBBF24' : '#34D399') : '#64748B' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: activeRoute ? (activeRoute.expected_delay_mins > 3 ? '#FBBF24' : '#34D399') : '#64748B' }}>
               {activeRoute ? `+${activeRoute.expected_delay_mins} mins` : '--'}
             </div>
-            <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.72rem', color: '#94A3B8', marginTop: '0.25rem', margin: 0 }}>
               {activeRoute ? activeRoute.traffic_condition : 'Traffic friction heuristic based on hour'}
             </p>
           </div>
 
-          {/* Card 4: Bus Crowding Level (Departure-Hour Heuristic) */}
-          <div className="card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
-              <span style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 600 }}>
-                4. Bus Crowding Level
+          {/* Card 4: Bus Crowding Level */}
+          <div className="card" style={{ background: '#111C35', border: '1px solid #1E293B', padding: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                Occupancy Heuristic
               </span>
-              <span style={{ fontSize: '0.62rem', background: '#1E293B', color: '#93C5FD', padding: '1px 5px', borderRadius: '4px' }}>
-                Hourly Heuristic
+              <span style={{ fontSize: '0.65rem', background: '#1E293B', color: '#94A3B8', padding: '1px 6px', borderRadius: '3px' }}>
+                Hourly
               </span>
             </div>
-            <div style={{ fontSize: '1.25rem', fontWeight: 800, color: activeRoute ? '#93C5FD' : '#64748B', marginTop: '0.25rem' }}>
+            <div style={{ fontSize: '1.35rem', fontWeight: 700, color: activeRoute ? '#93C5FD' : '#64748B' }}>
               {activeRoute ? activeRoute.crowd_level : '--'}
             </div>
-            <p style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '0.2rem' }}>
+            <p style={{ fontSize: '0.72rem', color: '#94A3B8', marginTop: '0.25rem', margin: 0 }}>
               {activeRoute ? activeRoute.crowd_badge : 'Departure-hour occupancy heuristic'}
             </p>
           </div>
@@ -547,16 +547,16 @@ export default function Transport({ user }) {
       {/* ========================================================================= */}
       {/* SECTION D: MACHINE LEARNING TRANSIT DEMAND FORECAST (RANDOM FOREST)       */}
       {/* ========================================================================= */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <TrendingUp size={18} color="#38BDF8" />
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <TrendingUp size={16} color="#38BDF8" />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
                 Metropolitan Transit Passenger Demand Forecast
               </h3>
-              <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 8px', borderRadius: '6px' }}>
-                Live ML: Random Forest (R² = 0.6413)
+              <span style={{ fontSize: '0.72rem', fontWeight: 600, background: '#1E293B', color: '#38BDF8', border: '1px solid #334155', padding: '2px 8px', borderRadius: '4px' }}>
+                Random Forest Regressor • R² = 0.641
               </span>
             </div>
             <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.25rem 0 0 0' }}>
@@ -569,10 +569,10 @@ export default function Transport({ user }) {
             disabled={demandLoading}
             style={{
               background: '#0B132B',
-              border: '1px solid #233554',
+              border: '1px solid #334155',
               color: '#38BDF8',
-              padding: '0.4rem 0.85rem',
-              borderRadius: '6px',
+              padding: '0.35rem 0.75rem',
+              borderRadius: '4px',
               fontSize: '0.78rem',
               fontWeight: 600,
               cursor: 'pointer',
@@ -610,7 +610,7 @@ export default function Transport({ user }) {
                     style={{
                       background: '#0B132B',
                       border: '1px solid #1E293B',
-                      borderRadius: '8px',
+                      borderRadius: '6px',
                       padding: '0.75rem 0.65rem',
                       textAlign: 'center'
                     }}
@@ -621,7 +621,7 @@ export default function Transport({ user }) {
                     <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block', marginBottom: '0.35rem' }}>
                       {day.date}
                     </span>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: isWeekend ? '#FBBF24' : '#34D399' }}>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: isWeekend ? '#FBBF24' : '#34D399' }}>
                       {day.predicted_total_ridership?.toLocaleString()}
                     </div>
                     <span style={{ fontSize: '0.65rem', color: '#94A3B8', display: 'block', marginTop: '0.15rem' }}>
@@ -633,8 +633,8 @@ export default function Transport({ user }) {
                         marginTop: '0.35rem',
                         fontSize: '0.62rem',
                         padding: '1px 6px',
-                        borderRadius: '4px',
-                        background: isWeekend ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+                        borderRadius: '3px',
+                        background: isWeekend ? 'rgba(245, 158, 11, 0.12)' : 'rgba(16, 185, 129, 0.12)',
                         color: isWeekend ? '#FCD34D' : '#6EE7B7'
                       }}
                     >
@@ -647,10 +647,10 @@ export default function Transport({ user }) {
 
             <div style={{ borderTop: '1px solid #1E293B', paddingTop: '0.65rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', fontSize: '0.75rem', color: '#64748B' }}>
               <span>
-                🎯 Target: <strong>total_rides</strong> • Horizon: <strong>{demandForecast.prediction_horizon || demandForecast.forecast_horizon}</strong> • Split: <strong>80/20 Chronological</strong>
+                Target: <strong>total_rides</strong> • Horizon: <strong>{demandForecast.prediction_horizon || demandForecast.forecast_horizon}</strong> • Split: <strong>80/20 Chronological</strong>
               </span>
-              <span style={{ color: '#38BDF8' }}>
-                ℹ️ Travel times above are calculated from GTFS timetables, independent of ridership volume.
+              <span style={{ color: '#94A3B8' }}>
+                Note: Travel durations are calculated from GTFS timetables independently of network ridership volume.
               </span>
             </div>
           </div>
@@ -701,64 +701,46 @@ export default function Transport({ user }) {
                     key={opt.trip_id || opt.route_id}
                     className="card"
                     style={{
-                      borderColor: isSelected ? '#3B82F6' : (isRecommended ? '#2563EB' : '#233554'),
-                      background: isSelected
-                        ? 'linear-gradient(135deg, #162444 0%, #111C35 100%)'
-                        : '#111C35',
-                      boxShadow: isSelected ? '0 0 16px rgba(59, 130, 246, 0.25)' : 'none',
+                      borderColor: isSelected ? '#3B82F6' : '#1E293B',
+                      background: '#111C35',
+                      borderRadius: '8px',
+                      padding: '1.25rem',
                       position: 'relative'
                     }}
                   >
-                    {/* Recommended Tag */}
-                    {isRecommended && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: '-11px',
-                          right: '1.25rem',
-                          background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
-                          color: '#fff',
-                          padding: '0.15rem 0.65rem',
-                          borderRadius: '20px',
-                          fontSize: '0.72rem',
-                          fontWeight: 800,
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.3rem',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.3)'
-                        }}
-                      >
-                        <Sparkles size={11} />
-                        <span>RECOMMENDED BEST OPTION</span>
-                      </div>
-                    )}
-
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
                       <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.2rem', flexWrap: 'wrap' }}>
-                          <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '1.2rem', fontWeight: 700, color: '#F8FAFC' }}>
                             {opt.route_name}
                           </span>
-                          <span className="badge badge-info">{isTransfer ? (opt.num_transfers === 2 ? '2 Transfers' : '1 Transfer') : `ID: ${opt.route_id}`}</span>
+                          {isRecommended && (
+                            <span style={{ fontSize: '0.72rem', background: 'rgba(37, 99, 235, 0.15)', border: '1px solid #2563EB', color: '#93C5FD', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                              Recommended Option
+                            </span>
+                          )}
+                          <span className="badge badge-info" style={{ borderRadius: '4px', fontSize: '0.72rem' }}>
+                            {isTransfer ? (opt.num_transfers === 2 ? '2 Transfers' : '1 Transfer') : `ID: ${opt.route_id}`}
+                          </span>
                           {isTransfer && (
-                            <span style={{ fontSize: '0.74rem', background: '#312E81', color: '#A5B4FC', border: '1px solid #4338CA', padding: '2px 7px', borderRadius: '4px', fontWeight: 700 }}>
+                            <span style={{ fontSize: '0.72rem', background: '#1E293B', color: '#CBD5E1', border: '1px solid #334155', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
                               via {opt.transfers?.map(t => t.transfer_stop_name).join(' → ') || 'Interchange'}
                             </span>
                           )}
                           <span style={{
                             fontSize: '0.70rem',
-                            background: opt.duration_source === 'Scheduled Timetable' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(168, 85, 247, 0.15)',
-                            color: opt.duration_source === 'Scheduled Timetable' ? '#60A5FA' : '#C084FC',
-                            border: `1px solid ${opt.duration_source === 'Scheduled Timetable' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(168, 85, 247, 0.3)'}`,
+                            background: '#1E293B',
+                            color: '#94A3B8',
+                            border: '1px solid #334155',
                             padding: '2px 7px',
                             borderRadius: '4px',
                             fontWeight: 600
                           }}>
-                            {opt.duration_source === 'Scheduled Timetable' ? '● Timetable' : '● Calibrated Transit Model'}
+                            {opt.duration_source === 'Scheduled Timetable' ? 'Timetable Schedule' : 'Calibrated Transit Model'}
                           </span>
                         </div>
                         {opt.trip_title && (
-                          <p style={{ color: '#94A3B8', fontSize: '0.82rem' }}>
+                          <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: 0 }}>
                             {opt.trip_title}
                           </p>
                         )}
@@ -773,6 +755,7 @@ export default function Transport({ user }) {
                               ? 'badge-warning'
                               : 'badge-success'
                           }`}
+                          style={{ borderRadius: '4px' }}
                         >
                           <Users size={12} />
                           <span>{opt.crowd_badge}</span>
@@ -782,7 +765,7 @@ export default function Transport({ user }) {
                           type="button"
                           onClick={() => handleSelectRoute(opt)}
                           className={`btn ${isSelected ? 'btn-primary' : 'btn-secondary'}`}
-                          style={{ fontSize: '0.78rem', padding: '0.35rem 0.75rem' }}
+                          style={{ fontSize: '0.78rem', padding: '0.35rem 0.85rem', borderRadius: '4px', fontWeight: 600 }}
                         >
                           {isSelected ? 'Selected on Map' : 'Select Route'}
                         </button>
@@ -790,9 +773,9 @@ export default function Transport({ user }) {
                     </div>
 
                     {/* Metrics Grid */}
-                    <div className="grid-4" style={{ marginBottom: '1rem' }}>
-                      <div style={{ background: '#091022', padding: '0.75rem', borderRadius: '8px', border: '1px solid #1E2E4A' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem' }}>
+                    <div className="grid-4" style={{ marginBottom: '1rem', gap: '0.75rem' }}>
+                      <div style={{ background: '#0F172A', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                           Departure → Arrival
                         </span>
                         <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#F8FAFC' }}>
@@ -800,35 +783,35 @@ export default function Transport({ user }) {
                         </span>
                       </div>
 
-                      <div style={{ background: '#091022', padding: '0.75rem', borderRadius: '8px', border: '1px solid #1E2E4A' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem' }}>
+                      <div style={{ background: '#0F172A', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                           Scheduled Duration
                         </span>
                         <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#F8FAFC' }}>
                           {opt.scheduled_duration_mins} mins
                         </span>
-                        <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block' }}>
+                        <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block', marginTop: '2px' }}>
                           {isTransfer ? `(${opt.in_vehicle_duration_mins}m ride + ${opt.transfer_waiting_mins}m wait)` : `(${opt.stops_count} intermediate stops)`}
                         </span>
                       </div>
 
-                      <div style={{ background: '#091022', padding: '0.75rem', borderRadius: '8px', border: '1px solid #1E2E4A' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem' }}>
+                      <div style={{ background: '#0F172A', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#94A3B8', display: 'block', marginBottom: '0.2rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                           Predicted Delay
                         </span>
                         <span style={{ fontSize: '0.95rem', fontWeight: 700, color: opt.expected_delay_mins > 3 ? '#FBBF24' : '#34D399' }}>
                           +{opt.expected_delay_mins} mins
                         </span>
-                        <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block' }}>
+                        <span style={{ fontSize: '0.68rem', color: '#64748B', display: 'block', marginTop: '2px' }}>
                           {opt.traffic_condition}
                         </span>
                       </div>
 
-                      <div style={{ background: '#091022', padding: '0.75rem', borderRadius: '8px', border: '1px solid #2563EB' }}>
-                        <span style={{ fontSize: '0.72rem', color: '#38BDF8', display: 'block', marginBottom: '0.2rem' }}>
+                      <div style={{ background: '#0F172A', padding: '0.75rem', borderRadius: '6px', border: '1px solid #334155' }}>
+                        <span style={{ fontSize: '0.7rem', color: '#38BDF8', display: 'block', marginBottom: '0.2rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                           Total Estimated Time
                         </span>
-                        <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fff' }}>
+                        <span style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC' }}>
                           {opt.total_estimated_travel_time_mins} mins
                         </span>
                       </div>
@@ -836,23 +819,26 @@ export default function Transport({ user }) {
 
                     {/* Ordered Leg Breakdown for Multi-Leg Journeys */}
                     {opt.legs && opt.legs.length > 1 && (
-                      <div style={{ margin: '0.75rem 0', padding: '0.65rem', background: '#0B132B', borderRadius: '8px', border: '1px solid #1E293B', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                      <div style={{ margin: '0.75rem 0', padding: '0.75rem', background: '#0F172A', borderRadius: '6px', border: '1px solid #1E293B', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                        <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                          Transit Itinerary Legs
+                        </span>
                         {opt.legs.map((leg, legIdx) => (
-                          <div key={legIdx} style={{ fontSize: '0.76rem', color: '#CBD5E1' }}>
+                          <div key={legIdx} style={{ fontSize: '0.8rem', color: '#CBD5E1', borderLeft: '2px solid #3B82F6', paddingLeft: '0.65rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                              <span style={{ fontWeight: 700, color: '#38BDF8' }}>
-                                Leg {leg.leg_number}: Route {leg.route_id}
+                              <span style={{ fontWeight: 700, color: '#F8FAFC' }}>
+                                Leg {leg.leg_number}: Line {leg.route_id}
                               </span>
-                              <span style={{ color: '#94A3B8' }}>
+                              <span style={{ color: '#94A3B8', fontSize: '0.75rem' }}>
                                 {leg.duration_mins}m ride ({leg.stops_count} stops)
                               </span>
                             </div>
-                            <div style={{ color: '#94A3B8', marginTop: '2px' }}>
+                            <div style={{ color: '#94A3B8', marginTop: '2px', fontSize: '0.75rem' }}>
                               Board: <strong style={{ color: '#E2E8F0' }}>{leg.boarding_stop?.stop_name}</strong> ({leg.departure_time}) ➔ Alight: <strong style={{ color: '#E2E8F0' }}>{leg.alighting_stop?.stop_name}</strong> ({leg.arrival_time})
                             </div>
                             {opt.transfers?.[legIdx] && (
-                              <div style={{ marginTop: '0.35rem', paddingTop: '0.35rem', borderTop: '1px dashed #233554', color: '#F59E0B', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                                <span>🚶 Interchange: {opt.transfers[legIdx].transfer_stop_name} • Wait {opt.transfers[legIdx].waiting_time_mins} mins</span>
+                              <div style={{ marginTop: '0.4rem', paddingTop: '0.4rem', borderTop: '1px solid #1E293B', color: '#FCD34D', fontWeight: 600, fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                                <span>Interchange: {opt.transfers[legIdx].transfer_stop_name} • Transfer Wait {opt.transfers[legIdx].waiting_time_mins} mins</span>
                               </div>
                             )}
                           </div>
@@ -862,13 +848,13 @@ export default function Transport({ user }) {
 
                     {/* Upcoming Timetables */}
                     {opt.upcoming_timings && opt.upcoming_timings.length > 0 && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap', fontSize: '0.78rem', color: '#94A3B8', borderTop: '1px solid #1E2E4A', paddingTop: '0.65rem' }}>
-                        <Clock size={13} />
-                        <span>Upcoming departures on this line:</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap', fontSize: '0.75rem', color: '#94A3B8', borderTop: '1px solid #1E293B', paddingTop: '0.65rem' }}>
+                        <Clock size={12} />
+                        <span>Upcoming departures:</span>
                         {opt.upcoming_timings.map((t, tidx) => (
                           <span
                             key={tidx}
-                            style={{ background: '#0B132B', padding: '0.15rem 0.45rem', borderRadius: '4px', color: '#CBD5E1', fontSize: '0.72rem', border: '1px solid #1E2E4A' }}
+                            style={{ background: '#0F172A', padding: '0.15rem 0.45rem', borderRadius: '3px', color: '#CBD5E1', fontSize: '0.72rem', border: '1px solid #1E293B' }}
                           >
                             {t}
                           </span>

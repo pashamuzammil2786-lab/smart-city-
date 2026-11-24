@@ -116,13 +116,17 @@ export default function AuthPage({ defaultTab = 'login', onLoginSuccess }) {
         if (onLoginSuccess) onLoginSuccess(data.user);
         navigate('/');
       } else {
-        const data = await api.signup(name || 'Student Commuter', email, password);
+        const data = await api.signup(name || 'Commuter', email, password);
         localStorage.setItem('smart_city_token', data.token);
         if (onLoginSuccess) onLoginSuccess(data.user);
         navigate('/');
       }
     } catch (err) {
-      setError(err.message || 'Authentication failed. Please verify your credentials.');
+      if (err.message === 'Failed to fetch' || err.name === 'TypeError') {
+        setError('Cannot connect to backend server. Please verify that the backend is running on http://localhost:5000 (run "npm start" in the backend directory).');
+      } else {
+        setError(err.message || 'Authentication failed. Please verify your credentials.');
+      }
     } finally {
       setLoading(false);
     }
@@ -194,8 +198,7 @@ export default function AuthPage({ defaultTab = 'login', onLoginSuccess }) {
                 background: '#10B981',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)'
+                justifyContent: 'center'
               }}
             >
               <Building2 size={18} color="#0B1A17" strokeWidth={2.5} />
@@ -291,7 +294,7 @@ export default function AuthPage({ defaultTab = 'login', onLoginSuccess }) {
                         {slide.module}
                       </div>
                       <div style={{ fontSize: '0.78rem', color: '#CBD5E1' }}>
-                        Lead: <strong>{slide.lead}</strong>
+                        Domain: <strong>{slide.lead}</strong>
                       </div>
                     </div>
                   </div>
@@ -706,7 +709,7 @@ export default function AuthPage({ defaultTab = 'login', onLoginSuccess }) {
 
         {/* Bottom copyright placeholder */}
         <div style={{ textAlign: 'center', fontSize: '0.75rem', color: '#94A3B8' }}>
-          Smart City Urban Analytics • Student Academic Project
+          © 2026 Smart City Urban Analytics • Hyderabad, Telangana
         </div>
       </div>
     </div>

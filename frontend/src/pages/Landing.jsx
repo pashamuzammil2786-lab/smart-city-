@@ -59,8 +59,7 @@ export default function Landing() {
               background: '#10B981',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)'
+              justifyContent: 'center'
             }}
           >
             <Building2 size={18} color="#0B1A17" strokeWidth={2.5} />
@@ -505,7 +504,7 @@ export default function Landing() {
         }}
       >
         <div>
-          © 2026 SmartCity Urban Analytics • B.Tech Special Academic Project • Hyderabad, Telangana
+          © 2026 Smart City Urban Analytics • Hyderabad, Telangana
         </div>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <Link to="/login" style={{ color: '#A7BDB6', textDecoration: 'none' }}>

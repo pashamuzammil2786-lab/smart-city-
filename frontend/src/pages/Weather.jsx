@@ -148,73 +148,72 @@ export default function Weather() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* 1. Header Banner */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid #1E293B', paddingBottom: '1.25rem' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(168, 85, 247, 0.12)', border: '1px solid rgba(168, 85, 247, 0.3)', padding: '4px 12px', borderRadius: '20px', color: '#D8B4FE', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-            <CloudSun size={15} />
-            <span>Smart City Module 2: Weather & Urban Microclimate Intelligence</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', background: '#1E293B', border: '1px solid #334155', padding: '0.2rem 0.55rem', borderRadius: '4px', color: '#94A3B8', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+            <CloudSun size={13} color="#A855F7" />
+            <span>HYDERABAD METEOROLOGICAL & CLIMATE PLATFORM</span>
           </div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#F8FAFC', margin: '0 0 0.35rem 0' }}>
-            Hyderabad Urban Microclimate & Meteorological Intelligence
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#F8FAFC', letterSpacing: '-0.02em', margin: 0 }}>
+            Urban Microclimate & Weather Intelligence
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.92rem', margin: 0 }}>
-            Lead: <strong>Laskar Varshini Reddy</strong> • Urban Heat Island (UHI) Thermal Mapping, 7-Day Forecasting & Environmental Mitigation
+          <p style={{ color: '#94A3B8', fontSize: '0.9rem', marginTop: '0.35rem', maxWidth: '680px', lineHeight: 1.5 }}>
+            Urban Heat Island (UHI) thermal mapping, 7-day meteorological forecasting, and environmental regression modeling.
           </p>
         </div>
 
         <button
           onClick={loadAllWeatherData}
           className="btn"
-          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer' }}
+          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 0.9rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
         >
-          <RefreshCw size={15} />
+          <RefreshCw size={14} />
           <span>Refresh Weather</span>
         </button>
       </div>
 
       {/* 2. Hero Current Status & Climate Metrics */}
       {overview && (
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', alignItems: 'center' }}>
-            {/* Left: Big Temperature Meter */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', alignItems: 'center' }}>
+            {/* Left: Clean Temperature Display */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <div
                 style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
+                  minWidth: '105px',
+                  padding: '1rem',
+                  borderRadius: '6px',
+                  background: '#0B132B',
+                  border: '1px solid #334155',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '6px solid #A855F7',
-                  background: 'rgba(168, 85, 247, 0.15)',
-                  boxShadow: '0 0 25px rgba(168, 85, 247, 0.25)',
                   flexShrink: 0
                 }}
               >
-                <span style={{ fontSize: '2.4rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1 }}>
+                <span style={{ fontSize: '2.4rem', fontWeight: 700, color: '#F8FAFC', lineHeight: 1 }}>
                   {overview.currentTempC}°
                 </span>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#D8B4FE', textTransform: 'uppercase', marginTop: '4px' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 600, color: '#94A3B8', textTransform: 'uppercase', marginTop: '6px', letterSpacing: '0.04em' }}>
                   Celsius
                 </span>
               </div>
 
               <div>
-                <div style={{ display: 'inline-block', background: 'rgba(168, 85, 247, 0.2)', color: '#D8B4FE', fontWeight: 800, fontSize: '0.78rem', padding: '3px 10px', borderRadius: '12px', marginBottom: '0.5rem' }}>
+                <div style={{ display: 'inline-block', background: '#1E293B', border: '1px solid #334155', color: '#CBD5E1', fontWeight: 600, fontSize: '0.75rem', padding: '2px 8px', borderRadius: '4px', marginBottom: '0.4rem' }}>
                   Feels Like {overview.feelsLikeC}°C
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#F1F5F9', margin: '0 0 0.25rem 0' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#F8FAFC', margin: '0 0 0.25rem 0' }}>
                   {overview.condition}
                 </h3>
-                <p style={{ color: '#94A3B8', fontSize: '0.85rem', margin: 0 }}>
+                <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: 0 }}>
                   High: <strong style={{ color: '#FCD34D' }}>{overview.highTempC}°C</strong> • Low: <strong style={{ color: '#38BDF8' }}>{overview.lowTempC}°C</strong> • Max UHI: <strong style={{ color: '#EF4444' }}>+{overview.maxUHIDifferentialC}°C</strong>
                 </p>
                 {overview.ml_temperature && (
-                  <div style={{ marginTop: '0.45rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: '#0B132B', border: '1px solid #7C3AED', padding: '2px 8px', borderRadius: '6px', fontSize: '0.72rem' }}>
-                    <span style={{ color: '#A855F7', fontWeight: 700 }}>ML Model Prediction:</span>
-                    <strong style={{ color: '#FFF' }}>{overview.ml_temperature.predicted_temperature_c}°C</strong>
+                  <div style={{ marginTop: '0.45rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', background: '#0B132B', border: '1px solid #334155', padding: '2px 8px', borderRadius: '4px', fontSize: '0.72rem' }}>
+                    <span style={{ color: '#94A3B8', fontWeight: 600 }}>ML Prediction:</span>
+                    <strong style={{ color: '#F8FAFC' }}>{overview.ml_temperature.predicted_temperature_c}°C</strong>
                     <span style={{ color: '#94A3B8' }}>({overview.ml_temperature.thermal_comfort_level})</span>
                   </div>
                 )}
@@ -276,10 +275,10 @@ export default function Weather() {
       )}
 
       {/* 3. Urban Heat Island (UHI) Microclimate Zones Matrix */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
               Hyderabad Urban Heat Island (UHI) Microclimate Spatial Zones
             </h2>
             <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.2rem 0 0 0' }}>
@@ -299,23 +298,22 @@ export default function Weather() {
                 key={z.id}
                 onClick={() => setSelectedZone(z)}
                 style={{
-                  background: isSelected ? 'rgba(168, 85, 247, 0.12)' : '#0F1A33',
-                  border: `1px solid ${isSelected ? '#A855F7' : '#233554'}`,
-                  borderRadius: '10px',
-                  padding: '1.1rem',
+                  background: isSelected ? 'rgba(59, 130, 246, 0.08)' : '#0F172A',
+                  border: `1px solid ${isSelected ? '#3B82F6' : '#1E293B'}`,
+                  borderRadius: '6px',
+                  padding: '1rem',
                   cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  boxShadow: isSelected ? '0 0 15px rgba(168, 85, 247, 0.2)' : 'none'
+                  transition: 'all 0.15s ease'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                   <div>
-                    <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 700 }}>{z.id}</span>
-                    <h3 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#F1F5F9', margin: '0.2rem 0 0' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600 }}>{z.id}</span>
+                    <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#F1F5F9', margin: '0.2rem 0 0' }}>
                       {z.name}
                     </h3>
                   </div>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 800, background: z.statusColor, color: '#FFF', padding: '2px 8px', borderRadius: '4px' }}>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 600, background: z.statusColor, color: '#FFF', padding: '2px 8px', borderRadius: '3px' }}>
                     {z.heatStressCategory}
                   </span>
                 </div>
@@ -325,14 +323,14 @@ export default function Weather() {
                 </div>
 
                 {/* Temperature & UHI */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem', background: '#111C35', padding: '0.5rem 0.75rem', borderRadius: '6px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem', background: '#111C35', padding: '0.5rem 0.75rem', borderRadius: '4px', border: '1px solid #1E293B' }}>
                   <div>
                     <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Local Temp:</span>
-                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF' }}>{z.currentTempC}°C</div>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#FFF' }}>{z.currentTempC}°C</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>UHI Thermal Differential:</span>
-                    <div style={{ fontSize: '1.15rem', fontWeight: 800, color: z.uhiDifferentialC > 2.0 ? '#EF4444' : '#10B981' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>UHI Differential:</span>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: z.uhiDifferentialC > 2.0 ? '#EF4444' : '#10B981' }}>
                       +{z.uhiDifferentialC}°C
                     </div>
                   </div>
@@ -345,7 +343,7 @@ export default function Weather() {
                     <strong style={{ color: '#34D399' }}>{z.treeCanopyCoverPct}%</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Impervious Concrete Surface:</span>
+                    <span>Impervious Surface:</span>
                     <strong style={{ color: '#F87171' }}>{z.imperviousSurfacePct}%</strong>
                   </div>
                 </div>
@@ -357,11 +355,11 @@ export default function Weather() {
 
       {/* 4. 24-Hour Diurnal Temperature & Humidity Trend Chart */}
       {forecast && forecast.hourlyProfile && (
-        <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
           <div style={{ marginBottom: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-              <TrendingUp size={18} color="#A855F7" />
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+              <TrendingUp size={16} color="#A855F7" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
                 Hyderabad 24-Hour Diurnal Temperature & Humidity Cycle
               </h2>
             </div>
@@ -417,9 +415,9 @@ export default function Weather() {
 
       {/* 5. 7-Day Forward Weather Forecast Cards */}
       {forecast && forecast.sevenDay && (
-        <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
           <div style={{ marginBottom: '1rem' }}>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
               Hyderabad 7-Day Meteorological Outlook
             </h2>
             <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.2rem 0 0 0' }}>
@@ -427,27 +425,27 @@ export default function Weather() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.85rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
             {forecast.sevenDay.map((d, i) => (
               <div
                 key={i}
                 style={{
                   background: '#0B132B',
                   border: '1px solid #1E293B',
-                  borderRadius: '10px',
-                  padding: '1rem 0.85rem',
+                  borderRadius: '6px',
+                  padding: '0.85rem 0.75rem',
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  gap: '0.4rem'
+                  gap: '0.35rem'
                 }}
               >
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#F1F5F9' }}>{d.day}</span>
                 <span style={{ fontSize: '0.72rem', color: '#64748B' }}>{d.date}</span>
-                <div style={{ margin: '0.4rem 0' }}>{getWeatherIcon(d.icon)}</div>
+                <div style={{ margin: '0.3rem 0' }}>{getWeatherIcon(d.icon)}</div>
                 <div style={{ fontSize: '0.78rem', color: '#CBD5E1', fontWeight: 600 }}>{d.condition}</div>
-                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#FFF' }}>
+                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#FFF' }}>
                   <span style={{ color: '#FCD34D' }}>{d.maxTemp}°</span> / <span style={{ color: '#38BDF8' }}>{d.minTemp}°</span>
                 </div>
                 <div style={{ fontSize: '0.72rem', color: '#60A5FA', display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
@@ -461,15 +459,15 @@ export default function Weather() {
       )}
 
       {/* 6. Interactive Live ML Ambient Temperature Predictor */}
-      <div style={{ background: '#111C35', border: '1px solid #7C3AED', borderRadius: '14px', padding: '1.5rem', boxShadow: '0 0 20px rgba(124, 58, 237, 0.12)' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Thermometer size={20} color="#C084FC" />
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
-              Live ML Microclimate Temperature Predictor
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <Thermometer size={18} color="#A855F7" />
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
+              Microclimate Temperature Predictor
             </h2>
-            <span style={{ fontSize: '0.7rem', fontWeight: 700, background: 'rgba(168, 85, 247, 0.15)', color: '#D8B4FE', border: '1px solid rgba(168, 85, 247, 0.3)', padding: '2px 8px', borderRadius: '6px' }}>
-              Linear Regression Pipeline (R² = 0.9894)
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, background: '#1E293B', color: '#D8B4FE', border: '1px solid #334155', padding: '2px 8px', borderRadius: '4px' }}>
+              Linear Regression Pipeline (R² = 0.989)
             </span>
           </div>
         </div>
@@ -564,80 +562,80 @@ export default function Weather() {
               type="submit"
               disabled={mlPredicting}
               className="btn btn-primary"
-              style={{ background: '#7C3AED', border: 'none', padding: '0.65rem 1.5rem', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+              style={{ background: '#2563EB', border: 'none', padding: '0.65rem 1.25rem', fontWeight: 600, fontSize: '0.88rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
             >
-              <Zap size={16} />
+              <Zap size={15} />
               <span>{mlPredicting ? 'Executing ML Regression Pipeline...' : 'Predict Ambient Temperature'}</span>
             </button>
           </div>
         </form>
 
         {mlError && (
-          <div style={{ marginTop: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', padding: '0.65rem 0.85rem', borderRadius: '6px', color: '#F87171', fontSize: '0.8rem' }}>
+          <div style={{ marginTop: '1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)', padding: '0.65rem 0.85rem', borderRadius: '4px', color: '#F87171', fontSize: '0.8rem' }}>
             {mlError}
           </div>
         )}
 
         {mlResult && mlResult.prediction && (
-          <div style={{ marginTop: '1.25rem', background: '#0B132B', border: '1px solid #7C3AED', borderRadius: '10px', padding: '1.25rem' }}>
+          <div style={{ marginTop: '1.25rem', background: '#0B132B', border: '1px solid #1E293B', borderRadius: '6px', padding: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#D8B4FE', fontWeight: 700 }}>ML INFERENCE RESULT</span>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', margin: '0.2rem 0 0' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>ML Inference Result</span>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#F8FAFC', margin: '0.2rem 0 0' }}>
                   Predicted Ambient Temperature: {mlResult.prediction.predicted_temperature_c}°C
                 </h3>
               </div>
-              <span style={{ fontSize: '0.82rem', fontWeight: 800, background: '#7C3AED', color: '#FFF', padding: '3px 10px', borderRadius: '6px' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600, background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', padding: '3px 10px', borderRadius: '4px' }}>
                 {mlResult.prediction.thermal_comfort_level}
               </span>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem' }}>
-              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '8px' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
                 <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Predicted Dry-Bulb Temp:</span>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#FCD34D' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#FCD34D' }}>
                   {mlResult.prediction.predicted_temperature_c}°C
                 </div>
-                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Target variable: tempC</span>
+                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Target: tempC</span>
               </div>
 
-              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Steadman Apparent Temp:</span>
-                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#EF4444' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Apparent Temperature:</span>
+                <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#F87171' }}>
                   {mlResult.prediction.feels_like_c}°C
                 </div>
-                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Humidity + Wind chill effect</span>
+                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Humidity + Wind effect</span>
               </div>
 
-              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Thermal Comfort Category:</span>
-                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#38BDF8' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Thermal Comfort:</span>
+                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#38BDF8' }}>
                   {mlResult.prediction.thermal_comfort_level}
                 </div>
                 <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Public health heat index</span>
               </div>
 
-              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '8px' }}>
-                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Urban Heat Island Capacity:</span>
-                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#10B981' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>UHI Differential Capacity:</span>
+                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#10B981' }}>
                   {mlResult.prediction.uhi_maximum_potential_delta}
                 </div>
                 <span style={{ fontSize: '0.68rem', color: '#64748B' }}>Dense core gradient</span>
               </div>
             </div>
 
-            <div style={{ marginTop: '0.75rem', paddingTop: '0.65rem', borderTop: '1px dashed #1E293B', fontSize: '0.72rem', color: '#64748B' }}>
-              ℹ️ <strong>Model Provenance:</strong> Evaluated on 96,432 hourly observations for Hyderabad ($R^2 = 0.9894, \text{MAE} = 0.41^\circ\text{C}$). Note that rainfall probabilities and multi-day synoptic weather systems are provided by the meteorological model above.
+            <div style={{ marginTop: '0.75rem', paddingTop: '0.65rem', borderTop: '1px solid #1E293B', fontSize: '0.72rem', color: '#64748B' }}>
+              <strong>Model Evaluation:</strong> Trained on 96,432 hourly observations for Hyderabad (R² = 0.989, MAE = 0.41°C). Synoptic weather systems and rain forecasts are provided by the meteorological model above.
             </div>
           </div>
         )}
       </div>
 
       {/* 7. Interactive Urban Heat Island Cooling Simulator */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-          <TreePine size={20} color="#10B981" />
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+          <TreePine size={18} color="#10B981" />
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
             Urban Heat Island (UHI) Cooling & Policy Simulator
           </h2>
         </div>
@@ -725,9 +723,9 @@ export default function Weather() {
               type="submit"
               disabled={simulating}
               className="btn btn-primary"
-              style={{ background: '#7C3AED', border: 'none', padding: '0.65rem 1.5rem', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+              style={{ background: '#2563EB', border: 'none', padding: '0.65rem 1.25rem', fontWeight: 600, fontSize: '0.88rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
             >
-              <Zap size={16} />
+              <Zap size={15} />
               <span>{simulating ? 'Simulating Thermal Dynamics...' : 'Run Cooling Simulation'}</span>
             </button>
           </div>
@@ -735,15 +733,15 @@ export default function Weather() {
 
         {/* Simulation Output Card */}
         {simResult && (
-          <div style={{ marginTop: '1.5rem', background: '#0B132B', border: '1px solid #A855F7', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 0 20px rgba(168, 85, 247, 0.15)' }}>
+          <div style={{ marginTop: '1.25rem', background: '#0B132B', border: '1px solid #1E293B', borderRadius: '6px', padding: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#D8B4FE', fontWeight: 700 }}>CLIMATE INTERVENTION IMPACT</span>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', margin: '0.2rem 0 0' }}>
+                <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Climate Intervention Impact</span>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#F8FAFC', margin: '0.2rem 0 0' }}>
                   {simResult.zoneName}
                 </h3>
               </div>
-              <span style={{ fontSize: '0.85rem', fontWeight: 800, background: '#10B981', color: '#FFF', padding: '4px 12px', borderRadius: '6px' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600, background: '#1E293B', border: '1px solid #10B981', color: '#34D399', padding: '3px 10px', borderRadius: '4px' }}>
                 {simResult.comfortRecommendation}
               </span>
             </div>

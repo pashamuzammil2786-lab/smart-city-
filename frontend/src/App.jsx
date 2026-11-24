@@ -84,8 +84,8 @@ function AppContent({ user, setUser, handleLogout }) {
             element={user ? <Navigate to="/dashboard" replace /> : <Signup onSignupSuccess={setUser} />}
           />
 
-          {/* Dedicated Model Performance & Research Audit Portal */}
-          <Route path="/model-performance" element={<ModelPerformance />} />
+          {/* Redirect Model Performance to Dashboard */}
+          <Route path="/model-performance" element={<Navigate to="/dashboard" replace />} />
 
           {/* Redirect any legacy ML links directly into Dashboard */}
           <Route path="/ml" element={<Navigate to="/dashboard" replace />} />

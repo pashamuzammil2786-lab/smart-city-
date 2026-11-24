@@ -102,27 +102,27 @@ export default function Traffic() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* 1. Module Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid #1E293B', paddingBottom: '1.25rem' }}>
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.3)', padding: '4px 12px', borderRadius: '20px', color: '#FCD34D', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem' }}>
-            <Activity size={15} />
-            <span>Smart City Module 3: Urban Traffic Velocity & Congestion Analytics</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', background: '#1E293B', border: '1px solid #334155', padding: '0.2rem 0.55rem', borderRadius: '4px', color: '#94A3B8', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+            <Activity size={13} color="#F59E0B" />
+            <span>HYDERABAD TRAFFIC VELOCITY & CONGESTION PLATFORM</span>
           </div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 800, color: '#F8FAFC', margin: '0 0 0.35rem 0' }}>
-            Hyderabad Traffic Congestion & Arterial Flow Analytics
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, color: '#F8FAFC', letterSpacing: '-0.02em', margin: 0 }}>
+            Urban Traffic Velocity & Congestion Analytics
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.92rem', margin: 0 }}>
-            Lead: <strong>Navkar Gelda Jain</strong> • Junction Detector Telemetry, Bottleneck Vulnerability & Gradient Boosting Flow ML
+          <p style={{ color: '#94A3B8', fontSize: '0.9rem', marginTop: '0.35rem', maxWidth: '680px', lineHeight: 1.5 }}>
+            Arterial corridor velocities, bottleneck detection, and machine-learning traffic volume prediction across Hyderabad.
           </p>
         </div>
 
         <button
           onClick={loadAllTrafficData}
           className="btn"
-          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer' }}
+          style={{ background: '#1E293B', border: '1px solid #334155', color: '#E2E8F0', display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.45rem 0.9rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
         >
-          <RefreshCw size={15} />
-          <span>Refresh Telemetry</span>
+          <RefreshCw size={14} />
+          <span>Refresh Traffic Data</span>
         </button>
       </div>
 
@@ -130,66 +130,66 @@ export default function Traffic() {
       {overview && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
           {/* Card 1: Overall Congestion */}
-          <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+          <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 City Congestion Index
               </span>
-              <Activity size={18} color="#F59E0B" />
+              <Activity size={16} color="#F59E0B" />
             </div>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: overview.overallCongestionIndex > 65 ? '#EF4444' : '#F59E0B', lineHeight: 1, marginBottom: '0.35rem' }}>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: overview.overallCongestionIndex > 65 ? '#EF4444' : '#F59E0B', lineHeight: 1, marginBottom: '0.35rem' }}>
               {overview.overallCongestionIndex}%
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+            <div style={{ fontSize: '0.72rem', color: '#94A3B8' }}>
               {overview.networkStatus} • {overview.criticalBottlenecksCount} Severe Arteries
             </div>
           </div>
 
           {/* Card 2: Average Arterial Velocity */}
-          <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+          <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Average Network Speed
               </span>
-              <Compass size={18} color="#38BDF8" />
+              <Compass size={16} color="#38BDF8" />
             </div>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#38BDF8', lineHeight: 1, marginBottom: '0.35rem' }}>
-              {overview.averageVelocityKmH} <span style={{ fontSize: '1rem', fontWeight: 600 }}>km/h</span>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#38BDF8', lineHeight: 1, marginBottom: '0.35rem' }}>
+              {overview.averageVelocityKmH} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>km/h</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+            <div style={{ fontSize: '0.72rem', color: '#94A3B8' }}>
               Free-flow target: {overview.freeFlowVelocityKmH} km/h (-{overview.speedDeficitPct}% deficit)
             </div>
           </div>
 
           {/* Card 3: Monitored Corridors */}
-          <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+          <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Monitored Corridors
               </span>
-              <Car size={18} color="#10B981" />
+              <Car size={16} color="#10B981" />
             </div>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#10B981', lineHeight: 1, marginBottom: '0.35rem' }}>
-              {overview.monitoredCorridorsCount} <span style={{ fontSize: '1rem', fontWeight: 600 }}>routes</span>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#10B981', lineHeight: 1, marginBottom: '0.35rem' }}>
+              {overview.monitoredCorridorsCount} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>routes</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
-              {overview.totalRoadNetworkKm} km arterial telemetry network
+            <div style={{ fontSize: '0.72rem', color: '#94A3B8' }}>
+              {overview.totalRoadNetworkKm} km arterial corridor network
             </div>
           </div>
 
           {/* Card 4: Active Incidents */}
-          <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '12px', padding: '1.25rem' }}>
+          <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Active Incident Alerts
               </span>
-              <ShieldAlert size={18} color="#EC4899" />
+              <ShieldAlert size={16} color="#EC4899" />
             </div>
-            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#EC4899', lineHeight: 1, marginBottom: '0.35rem' }}>
-              {overview.activeIncidentsCount} <span style={{ fontSize: '1rem', fontWeight: 600 }}>alerts</span>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#EC4899', lineHeight: 1, marginBottom: '0.35rem' }}>
+              {overview.activeIncidentsCount} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>alerts</span>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
-              Live CCTV and traffic police telemetry feed
+            <div style={{ fontSize: '0.72rem', color: '#94A3B8' }}>
+              Municipal traffic feeds and advisory logs
             </div>
           </div>
         </div>
@@ -197,17 +197,17 @@ export default function Traffic() {
 
       {/* 3. Active Incident Notice Banner */}
       {overview && overview.activeIncidents && overview.activeIncidents.length > 0 && (
-        <div style={{ background: '#0F1A33', border: '1px solid #233554', borderRadius: '12px', padding: '1rem 1.25rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', color: '#F59E0B', fontWeight: 700, fontSize: '0.9rem' }}>
-            <AlertTriangle size={17} />
-            <span>Live Traffic Bottlenecks & Incident Advisories</span>
+        <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1rem 1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', color: '#F59E0B', fontWeight: 600, fontSize: '0.88rem' }}>
+            <AlertTriangle size={16} />
+            <span>Active Traffic Bottlenecks & Incident Advisories</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '0.75rem' }}>
             {overview.activeIncidents.map((inc) => (
-              <div key={inc.id} style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '0.85rem' }}>
+              <div key={inc.id} style={{ background: '#0F172A', border: '1px solid #1E293B', borderRadius: '6px', padding: '0.85rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.25rem' }}>
                   <span style={{ fontWeight: 700, fontSize: '0.88rem', color: '#F1F5F9' }}>{inc.type}</span>
-                  <span style={{ fontSize: '0.7rem', background: 'rgba(239, 68, 68, 0.2)', color: '#F87171', padding: '2px 8px', borderRadius: '4px', fontWeight: 700 }}>
+                  <span style={{ fontSize: '0.7rem', background: 'rgba(239, 68, 68, 0.15)', color: '#F87171', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '2px 8px', borderRadius: '3px', fontWeight: 600 }}>
                     {inc.severity} Severity
                   </span>
                 </div>
@@ -225,10 +225,10 @@ export default function Traffic() {
       )}
 
       {/* 4. Eight Arterial Corridors Live Matrix */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
               Hyderabad Arterial Corridors Analytical Telemetry Matrix
             </h2>
             <p style={{ color: '#94A3B8', fontSize: '0.82rem', margin: '0.2rem 0 0 0' }}>
@@ -248,23 +248,22 @@ export default function Traffic() {
                 key={c.id}
                 onClick={() => setSelectedCorridor(c)}
                 style={{
-                  background: isSelected ? 'rgba(245, 158, 11, 0.12)' : '#0F1A33',
-                  border: `1px solid ${isSelected ? '#F59E0B' : '#233554'}`,
-                  borderRadius: '10px',
-                  padding: '1.1rem',
+                  background: isSelected ? 'rgba(59, 130, 246, 0.08)' : '#0F172A',
+                  border: `1px solid ${isSelected ? '#3B82F6' : '#1E293B'}`,
+                  borderRadius: '6px',
+                  padding: '1rem',
                   cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  boxShadow: isSelected ? '0 0 15px rgba(245, 158, 11, 0.2)' : 'none'
+                  transition: 'all 0.15s ease'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                   <div>
-                    <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 700 }}>{c.id} • {c.lengthKm} km</span>
-                    <h3 style={{ fontSize: '0.98rem', fontWeight: 800, color: '#F1F5F9', margin: '0.2rem 0 0' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600 }}>{c.id} • {c.lengthKm} km</span>
+                    <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#F1F5F9', margin: '0.2rem 0 0' }}>
                       {c.name}
                     </h3>
                   </div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, background: c.statusColor, color: '#FFF', padding: '2px 8px', borderRadius: '4px' }}>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 600, background: c.statusColor, color: '#FFF', padding: '2px 8px', borderRadius: '3px' }}>
                     LOS {c.levelOfService}
                   </span>
                 </div>
@@ -310,11 +309,11 @@ export default function Traffic() {
       </div>
 
       {/* 5. 24-Hour Diurnal Congestion & Hourly Speed Trend Chart */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ marginBottom: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-            <TrendingUp size={18} color="#F59E0B" />
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+            <TrendingUp size={16} color="#F59E0B" />
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
               Hyderabad 24-Hour Network Congestion & Velocity Diurnal Profile
             </h2>
           </div>
@@ -328,8 +327,8 @@ export default function Traffic() {
             <AreaChart data={history} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
               <defs>
                 <linearGradient id="trafficGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#F59E0B" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#F59E0B" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
@@ -363,10 +362,10 @@ export default function Traffic() {
       </div>
 
       {/* 6. Interactive What-If Scenario Predictor */}
-      <div style={{ background: '#111C35', border: '1px solid #233554', borderRadius: '14px', padding: '1.5rem' }}>
+      <div style={{ background: '#111C35', border: '1px solid #1E293B', borderRadius: '8px', padding: '1.25rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-          <Sliders size={20} color="#F59E0B" />
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F8FAFC', margin: 0 }}>
+          <Sliders size={18} color="#F59E0B" />
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#F8FAFC', margin: 0 }}>
             Interactive What-If Scenario Simulator
           </h2>
         </div>
@@ -451,9 +450,9 @@ export default function Traffic() {
               type="submit"
               disabled={predicting}
               className="btn btn-primary"
-              style={{ background: '#D97706', border: 'none', padding: '0.65rem 1.5rem', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+              style={{ background: '#2563EB', border: 'none', padding: '0.65rem 1.25rem', fontWeight: 600, fontSize: '0.88rem', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
             >
-              <Zap size={16} />
+              <Zap size={15} />
               <span>{predicting ? 'Calculating Flow Prediction...' : 'Run Scenario Prediction'}</span>
             </button>
           </div>
@@ -461,58 +460,58 @@ export default function Traffic() {
 
         {/* Prediction Results Banner */}
         {predictionResult && (
-          <div style={{ marginTop: '1.5rem', background: '#0B132B', border: '1px solid #F59E0B', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 0 20px rgba(245, 158, 11, 0.15)' }}>
+          <div style={{ marginTop: '1.25rem', background: '#0B132B', border: '1px solid #1E293B', borderRadius: '6px', padding: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#FCD34D', fontWeight: 700 }}>HYBRID ML + SIMULATION RESULTS</span>
-                  <span style={{ fontSize: '0.68rem', background: 'rgba(56, 189, 248, 0.15)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 6px', borderRadius: '4px' }}>
-                    Gradient Boosting (R² = 0.9684)
+                  <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Hybrid ML & Simulation Results</span>
+                  <span style={{ fontSize: '0.68rem', background: '#1E293B', color: '#93C5FD', border: '1px solid #334155', padding: '2px 6px', borderRadius: '3px' }}>
+                    Gradient Boosting (R² = 0.968)
                   </span>
                 </div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFF', margin: '0.2rem 0 0' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#F8FAFC', margin: '0.2rem 0 0' }}>
                   {predictionResult.corridorName}
                 </h3>
               </div>
-              <span style={{ fontSize: '0.85rem', fontWeight: 800, background: predictionResult.predictedCongestionIndex > 65 ? '#EF4444' : '#F59E0B', color: '#FFF', padding: '4px 12px', borderRadius: '6px' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 600, background: '#1E293B', border: `1px solid ${predictionResult.predictedCongestionIndex > 65 ? '#EF4444' : '#F59E0B'}`, color: predictionResult.predictedCongestionIndex > 65 ? '#F87171' : '#FCD34D', padding: '3px 10px', borderRadius: '4px' }}>
                 Level of Service: LOS {predictionResult.levelOfService}
               </span>
             </div>
 
             {/* Hybrid KPI Grid: ML Output + Corridor Sim */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem', marginBottom: '1rem' }}>
               {/* Card A: ML Predicted Vehicles */}
-              <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px', border: '1px solid #2563EB' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.72rem', color: '#93C5FD', fontWeight: 700 }}>ML Junction Flow:</span>
-                  <span style={{ fontSize: '0.62rem', background: '#1E293B', color: '#38BDF8', padding: '1px 5px', borderRadius: '3px' }}>Live ML</span>
+                  <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Junction Flow:</span>
+                  <span style={{ fontSize: '0.62rem', background: '#0F172A', color: '#93C5FD', padding: '1px 5px', borderRadius: '3px' }}>ML Prediction</span>
                 </div>
-                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#38BDF8' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#38BDF8', marginTop: '0.2rem' }}>
                   {predictionResult.predictedVehiclesPerHour} veh/hr
                 </div>
-                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
-                  Trained Gradient Boosting model
+                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>
+                  Gradient Boosting regressor
                 </span>
               </div>
 
               {/* Card B: Predicted Travel Time */}
-              <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
                 <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Predicted Travel Time:</span>
-                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FCD34D' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#FCD34D', marginTop: '0.2rem' }}>
                   {predictionResult.predictedTravelTimeMin} mins
                 </div>
-                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
-                  Baseline: {predictionResult.freeFlowTimeMin} mins
+                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>
+                  Free-flow: {predictionResult.freeFlowTimeMin} mins
                 </span>
               </div>
 
               {/* Card C: Predicted Delay */}
-              <div style={{ background: '#111C35', padding: '0.85rem', borderRadius: '8px' }}>
+              <div style={{ background: '#111C35', padding: '0.75rem', borderRadius: '6px', border: '1px solid #1E293B' }}>
                 <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>Traffic Delay Penalty:</span>
-                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#EF4444' }}>
+                <div style={{ fontSize: '1.35rem', fontWeight: 700, color: '#F87171', marginTop: '0.2rem' }}>
                   +{predictionResult.predictedDelayMin} mins
                 </div>
-                <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+                <span style={{ fontSize: '0.68rem', color: '#64748B' }}>
                   Corridor queue congestion
                 </span>
               </div>

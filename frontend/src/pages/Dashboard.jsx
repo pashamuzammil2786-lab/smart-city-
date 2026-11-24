@@ -54,31 +54,30 @@ export default function Dashboard({ user }) {
         <div
           onClick={() => setActiveModule('transport')}
           style={{
-            background: activeModule === 'transport' ? 'rgba(37, 99, 235, 0.15)' : '#111C35',
-            border: `2px solid ${activeModule === 'transport' ? '#3B82F6' : '#233554'}`,
-            borderRadius: '12px',
-            padding: '1.15rem',
+            background: activeModule === 'transport' ? '#1E293B' : '#111C35',
+            border: `1px solid ${activeModule === 'transport' ? '#3B82F6' : '#1E293B'}`,
+            borderRadius: '8px',
+            padding: '1.1rem',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: activeModule === 'transport' ? '0 0 16px rgba(59, 130, 246, 0.25)' : 'none'
+            transition: 'all 0.15s ease'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Bus size={20} color="#fff" />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+            <div style={{ width: '34px', height: '34px', borderRadius: '6px', background: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Bus size={18} color="#fff" />
             </div>
-            <span style={{ fontSize: '0.72rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
-              ● Live ML
+            <span style={{ fontSize: '0.7rem', background: '#0F172A', color: '#93C5FD', border: '1px solid #334155', padding: '2px 7px', borderRadius: '4px', fontWeight: 600 }}>
+              GTFS Schedules
             </span>
           </div>
-          <div style={{ fontWeight: 800, fontSize: '1rem', color: '#FFFFFF', marginBottom: '0.2rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#F8FAFC', marginBottom: '0.2rem' }}>
             1. Public Transport
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#93C5FD', fontWeight: 600, marginBottom: '0.35rem' }}>
-            GTFS Multi-Leg & 7-Day Demand ML
+          <div style={{ fontSize: '0.75rem', color: '#93C5FD', fontWeight: 500, marginBottom: '0.35rem' }}>
+            Multi-Leg Transit & Demand Forecast
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
-            5,028 Stops • Random Forest Regressor
+          <div style={{ fontSize: '0.72rem', color: '#64748B' }}>
+            5,028 Stops • Random Forest Model
           </div>
         </div>
 
@@ -86,31 +85,30 @@ export default function Dashboard({ user }) {
         <div
           onClick={() => setActiveModule('weather')}
           style={{
-            background: activeModule === 'weather' ? 'rgba(168, 85, 247, 0.15)' : '#111C35',
-            border: `2px solid ${activeModule === 'weather' ? '#A855F7' : '#233554'}`,
-            borderRadius: '12px',
-            padding: '1.15rem',
+            background: activeModule === 'weather' ? '#1E293B' : '#111C35',
+            border: `1px solid ${activeModule === 'weather' ? '#3B82F6' : '#1E293B'}`,
+            borderRadius: '8px',
+            padding: '1.1rem',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: activeModule === 'weather' ? '0 0 16px rgba(168, 85, 247, 0.25)' : 'none'
+            transition: 'all 0.15s ease'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#7C3AED', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <CloudSun size={20} color="#fff" />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+            <div style={{ width: '34px', height: '34px', borderRadius: '6px', background: '#7C3AED', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CloudSun size={18} color="#fff" />
             </div>
-            <span style={{ fontSize: '0.72rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
-              ● Live ML
+            <span style={{ fontSize: '0.7rem', background: '#0F172A', color: '#C084FC', border: '1px solid #334155', padding: '2px 7px', borderRadius: '4px', fontWeight: 600 }}>
+              UHI Microclimate
             </span>
           </div>
-          <div style={{ fontWeight: 800, fontSize: '1rem', color: '#FFFFFF', marginBottom: '0.2rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#F8FAFC', marginBottom: '0.2rem' }}>
             2. Weather & Climate
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#E9D5FF', fontWeight: 600, marginBottom: '0.35rem' }}>
-            Microclimate & Urban Heat Index
+          <div style={{ fontSize: '0.75rem', color: '#E9D5FF', fontWeight: 500, marginBottom: '0.35rem' }}>
+            Thermal Gradients & 7-Day Forecast
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
-            Linear Regression • 6 Urban Zones
+          <div style={{ fontSize: '0.72rem', color: '#64748B' }}>
+            Linear Regression • 6 Spatial Zones
           </div>
         </div>
 
@@ -118,31 +116,30 @@ export default function Dashboard({ user }) {
         <div
           onClick={() => setActiveModule('traffic')}
           style={{
-            background: activeModule === 'traffic' ? 'rgba(245, 158, 11, 0.15)' : '#111C35',
-            border: `2px solid ${activeModule === 'traffic' ? '#F59E0B' : '#233554'}`,
-            borderRadius: '12px',
-            padding: '1.15rem',
+            background: activeModule === 'traffic' ? '#1E293B' : '#111C35',
+            border: `1px solid ${activeModule === 'traffic' ? '#3B82F6' : '#1E293B'}`,
+            borderRadius: '8px',
+            padding: '1.1rem',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: activeModule === 'traffic' ? '0 0 16px rgba(245, 158, 11, 0.25)' : 'none'
+            transition: 'all 0.15s ease'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#D97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Activity size={20} color="#fff" />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+            <div style={{ width: '34px', height: '34px', borderRadius: '6px', background: '#D97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Activity size={18} color="#fff" />
             </div>
-            <span style={{ fontSize: '0.72rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
-              ● Live ML
+            <span style={{ fontSize: '0.7rem', background: '#0F172A', color: '#FCD34D', border: '1px solid #334155', padding: '2px 7px', borderRadius: '4px', fontWeight: 600 }}>
+              Arterial Flow
             </span>
           </div>
-          <div style={{ fontWeight: 800, fontSize: '1rem', color: '#FFFFFF', marginBottom: '0.2rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#F8FAFC', marginBottom: '0.2rem' }}>
             3. Traffic Flow & Congestion
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#FDE68A', fontWeight: 600, marginBottom: '0.35rem' }}>
-            Junction Vehicles & Arterial Delays
+          <div style={{ fontSize: '0.75rem', color: '#FDE68A', fontWeight: 500, marginBottom: '0.35rem' }}>
+            Corridor Velocity & Incident Delays
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
-            Gradient Boosting • 8 Corridors
+          <div style={{ fontSize: '0.72rem', color: '#64748B' }}>
+            Gradient Boosting • 8 Arteries
           </div>
         </div>
 
@@ -150,49 +147,48 @@ export default function Dashboard({ user }) {
         <div
           onClick={() => setActiveModule('aqi')}
           style={{
-            background: activeModule === 'aqi' ? 'rgba(56, 189, 248, 0.15)' : '#111C35',
-            border: `2px solid ${activeModule === 'aqi' ? '#38BDF8' : '#233554'}`,
-            borderRadius: '12px',
-            padding: '1.15rem',
+            background: activeModule === 'aqi' ? '#1E293B' : '#111C35',
+            border: `1px solid ${activeModule === 'aqi' ? '#3B82F6' : '#1E293B'}`,
+            borderRadius: '8px',
+            padding: '1.1rem',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
-            boxShadow: activeModule === 'aqi' ? '0 0 16px rgba(56, 189, 248, 0.25)' : 'none'
+            transition: 'all 0.15s ease'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Wind size={20} color="#fff" />
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+            <div style={{ width: '34px', height: '34px', borderRadius: '6px', background: '#0284C7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Wind size={18} color="#fff" />
             </div>
-            <span style={{ fontSize: '0.72rem', background: 'rgba(16, 185, 129, 0.15)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '12px', fontWeight: 700 }}>
-              ● Live ML
+            <span style={{ fontSize: '0.7rem', background: '#0F172A', color: '#7DD3FC', border: '1px solid #334155', padding: '2px 7px', borderRadius: '4px', fontWeight: 600 }}>
+              CPCB NAQI
             </span>
           </div>
-          <div style={{ fontWeight: 800, fontSize: '1rem', color: '#FFFFFF', marginBottom: '0.2rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#F8FAFC', marginBottom: '0.2rem' }}>
             4. Air Quality (NAQI)
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#7DD3FC', fontWeight: 600, marginBottom: '0.35rem' }}>
-            CPCB Statutory Index & 1-Hr Forecast
+          <div style={{ fontSize: '0.75rem', color: '#7DD3FC', fontWeight: 500, marginBottom: '0.35rem' }}>
+            Sub-Index Breakdown & 1-Hr SVR
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
-            SVR RBF Kernel • 6 Stations
+          <div style={{ fontSize: '0.72rem', color: '#64748B' }}>
+            Support Vector Regression • 6 Stations
           </div>
         </div>
       </div>
 
       {/* 3. Segmented Navigation Bar to Switch Active View */}
-      <div style={{ display: 'flex', background: '#111C35', border: '1px solid #233554', borderRadius: '10px', padding: '4px', gap: '4px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', background: '#111C35', border: '1px solid #1E293B', borderRadius: '6px', padding: '3px', gap: '4px', flexWrap: 'wrap' }}>
         <button
           onClick={() => setActiveModule('transport')}
           style={{
             flex: 1,
-            minWidth: '180px',
-            padding: '0.65rem 1rem',
-            borderRadius: '8px',
+            minWidth: '160px',
+            padding: '0.55rem 0.85rem',
+            borderRadius: '4px',
             border: 'none',
             background: activeModule === 'transport' ? '#2563EB' : 'transparent',
             color: activeModule === 'transport' ? '#FFFFFF' : '#94A3B8',
-            fontWeight: 700,
-            fontSize: '0.88rem',
+            fontWeight: 600,
+            fontSize: '0.84rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -201,7 +197,7 @@ export default function Dashboard({ user }) {
             transition: 'all 0.15s ease'
           }}
         >
-          <Bus size={17} />
+          <Bus size={15} />
           <span>Public Transport</span>
         </button>
 
@@ -209,14 +205,14 @@ export default function Dashboard({ user }) {
           onClick={() => setActiveModule('weather')}
           style={{
             flex: 1,
-            minWidth: '180px',
-            padding: '0.65rem 1rem',
-            borderRadius: '8px',
+            minWidth: '160px',
+            padding: '0.55rem 0.85rem',
+            borderRadius: '4px',
             border: 'none',
-            background: activeModule === 'weather' ? '#7C3AED' : 'transparent',
+            background: activeModule === 'weather' ? '#2563EB' : 'transparent',
             color: activeModule === 'weather' ? '#FFFFFF' : '#94A3B8',
-            fontWeight: 700,
-            fontSize: '0.88rem',
+            fontWeight: 600,
+            fontSize: '0.84rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -225,7 +221,7 @@ export default function Dashboard({ user }) {
             transition: 'all 0.15s ease'
           }}
         >
-          <CloudSun size={17} />
+          <CloudSun size={15} />
           <span>Weather & Climate</span>
         </button>
 
@@ -233,14 +229,14 @@ export default function Dashboard({ user }) {
           onClick={() => setActiveModule('traffic')}
           style={{
             flex: 1,
-            minWidth: '180px',
-            padding: '0.65rem 1rem',
-            borderRadius: '8px',
+            minWidth: '160px',
+            padding: '0.55rem 0.85rem',
+            borderRadius: '4px',
             border: 'none',
-            background: activeModule === 'traffic' ? '#D97706' : 'transparent',
+            background: activeModule === 'traffic' ? '#2563EB' : 'transparent',
             color: activeModule === 'traffic' ? '#FFFFFF' : '#94A3B8',
-            fontWeight: 700,
-            fontSize: '0.88rem',
+            fontWeight: 600,
+            fontSize: '0.84rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -249,7 +245,7 @@ export default function Dashboard({ user }) {
             transition: 'all 0.15s ease'
           }}
         >
-          <Activity size={17} />
+          <Activity size={15} />
           <span>Traffic Flow</span>
         </button>
 
@@ -257,14 +253,14 @@ export default function Dashboard({ user }) {
           onClick={() => setActiveModule('aqi')}
           style={{
             flex: 1,
-            minWidth: '180px',
-            padding: '0.65rem 1rem',
-            borderRadius: '8px',
+            minWidth: '160px',
+            padding: '0.55rem 0.85rem',
+            borderRadius: '4px',
             border: 'none',
-            background: activeModule === 'aqi' ? '#0284C7' : 'transparent',
+            background: activeModule === 'aqi' ? '#2563EB' : 'transparent',
             color: activeModule === 'aqi' ? '#FFFFFF' : '#94A3B8',
-            fontWeight: 700,
-            fontSize: '0.88rem',
+            fontWeight: 600,
+            fontSize: '0.84rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -273,7 +269,7 @@ export default function Dashboard({ user }) {
             transition: 'all 0.15s ease'
           }}
         >
-          <Wind size={17} />
+          <Wind size={15} />
           <span>Air Quality (AQI)</span>
         </button>
       </div>
@@ -289,23 +285,17 @@ export default function Dashboard({ user }) {
 
       {/* VIEW 2: WEATHER & CLIMATE MODULE */}
       {activeModule === 'weather' && (
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1rem' }}>
-          <Weather />
-        </div>
+        <Weather />
       )}
 
       {/* VIEW 3: TRAFFIC FLOW MODULE */}
       {activeModule === 'traffic' && (
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1rem' }}>
-          <Traffic />
-        </div>
+        <Traffic />
       )}
 
       {/* VIEW 4: AIR QUALITY (AQI) MODULE */}
       {activeModule === 'aqi' && (
-        <div style={{ background: '#101B33', border: '1px solid #1E293B', borderRadius: '14px', padding: '1rem' }}>
-          <AirQuality />
-        </div>
+        <AirQuality />
       )}
     </div>
   );
