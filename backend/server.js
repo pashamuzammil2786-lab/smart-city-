@@ -15,8 +15,52 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-const corsOrigin = process.env.CORS_ORIGIN;
-app.use(cors(corsOrigin ? { origin: corsOrigin.split(',').map(s => s.trim()), credentials: true } : {}));
+const corsOriginEnv = process.env.CORS_ORIGIN;
+const allowedOrigins = corsOriginEnv
+  ? corsOriginEnv.split(',').map(s => s.trim().replace(/\/+$/, '')).filter(Boolean)
+  : null;
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow non-browser requests (e.g. server-to-server, curl, Render health checks)
+    if (!origin) return callback(null, true);
+
+    // If CORS_ORIGIN is not configured or set to wildcard '*', allow all
+    if (!allowedOrigins || allowedOrigins.includes('*')) {
+      return callback(null, true);
+    }
+
+    const normalizedOrigin = origin.replace(/\/+$/, '');
+
+    // 1. Exact origin match
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    // 2. Wildcard domain match (e.g. *.vercel.app or .vercel.app)
+    const matchesWildcard = allowedOrigins.some(allowed => {
+      if (allowed.startsWith('*.')) {
+        return normalizedOrigin.endsWith(allowed.slice(1));
+      }
+      if (allowed.startsWith('.')) {
+        return normalizedOrigin.endsWith(allowed);
+      }
+      return false;
+    });
+    if (matchesWildcard) {
+      return callback(null, true);
+    }
+
+    // 3. Localhost / Loopback origins (always allow for local development)
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    console.warn(`[CORS Blocked]: Request from unauthorized origin ${origin}. Allowed:`, allowedOrigins);
+    return callback(new Error(`CORS blocked request from origin: ${origin}`));
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // API Routes

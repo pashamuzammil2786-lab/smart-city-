@@ -1,17 +1,68 @@
-const getApiBaseUrl = () => {
-  const envUrl = import.meta.env.VITE_API_BASE_URL;
+// Production Render Backend URL (Default for Vercel and cloud deployments)
+const PRODUCTION_API_URL = 'https://smart-city-4-4jzm.onrender.com/api';
+
+// Local Development Backend URL
+const LOCAL_DEV_API_URL = 'http://localhost:5000/api';
+
+/**
+ * Normalizes an API URL to ensure no trailing slash and consistent '/api' path.
+ */
+function normalizeApiUrl(url) {
+  if (!url) return '';
+  const trimmed = url.trim().replace(/\/+$/, '');
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
+}
+
+/**
+ * Resolves the active API base URL.
+ * Guarantees:
+ * - Production builds (vite build / Vercel) NEVER point to localhost or loopback IPs.
+ * - If VITE_API_BASE_URL is provided in Vercel settings, it is used (after validation).
+ * - If VITE_API_BASE_URL is omitted or contains localhost during production, it safely defaults
+ *   to PRODUCTION_API_URL (https://smart-city-4-4jzm.onrender.com/api).
+ * - Local development (npm run dev) continues to use http://localhost:5000/api.
+ * - LAN devices (e.g. mobile testing on 192.168.x.x) during development route to the host machine's port 5000.
+ */
+export const getApiBaseUrl = () => {
+  const envUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+
+  // 1. Production Mode Check (compiled into bundle when 'npm run build' / 'vite build' runs)
+  if (import.meta.env.PROD) {
+    if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+      return normalizeApiUrl(envUrl);
+    }
+    return PRODUCTION_API_URL;
+  }
+
+  // 2. Runtime Browser Hostname Check (protects against preview deployments and non-localhost hosts)
   if (typeof window !== 'undefined' && window.location) {
-    const hostname = window.location.hostname;
-    if (hostname && hostname !== 'localhost' && hostname !== '127.0.0.1') {
-      if (!envUrl || envUrl.includes('localhost') || envUrl.includes('127.0.0.1')) {
-        return `${window.location.protocol}//${hostname}:5000/api`;
+    const hostname = window.location.hostname || '';
+    const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+    const isLanPrivateIp = /^192\.168\.|^10\.|^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(hostname);
+
+    // If loaded on Vercel (*.vercel.app) or any public production domain:
+    if (!isLocalhost && !isLanPrivateIp) {
+      if (envUrl && !envUrl.includes('localhost') && !envUrl.includes('127.0.0.1')) {
+        return normalizeApiUrl(envUrl);
       }
+      return PRODUCTION_API_URL;
+    }
+
+    // If testing on local network via mobile phone / tablet in dev mode:
+    if (isLanPrivateIp) {
+      return `${window.location.protocol}//${hostname}:5000/api`;
     }
   }
-  return envUrl || 'http://localhost:5000/api';
+
+  // 3. Local Development default
+  return envUrl ? normalizeApiUrl(envUrl) : LOCAL_DEV_API_URL;
 };
 
-const API_BASE_URL = getApiBaseUrl();
+export const API_BASE_URL = getApiBaseUrl();
+
+if (typeof window !== 'undefined') {
+  console.log(`[SmartCity Urban Analytics] API Base URL: ${API_BASE_URL} (PROD: ${Boolean(import.meta.env.PROD)})`);
+}
 
 function getAuthHeader() {
   const token = localStorage.getItem('smart_city_token');

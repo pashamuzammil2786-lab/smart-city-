@@ -123,7 +123,12 @@ export default function AuthPage({ defaultTab = 'login', onLoginSuccess }) {
       }
     } catch (err) {
       if (err.message === 'Failed to fetch' || err.name === 'TypeError') {
-        setError('Cannot connect to backend server. Please verify that the backend is running on http://localhost:5000 (run "npm start" in the backend directory).');
+        const isProduction = import.meta.env.PROD || (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1');
+        if (isProduction) {
+          setError('Cannot connect to Smart City cloud backend service (https://smart-city-4-4jzm.onrender.com). If the server was idle, Render takes ~30-50s to wake up on the first request. Please wait a moment and try again.');
+        } else {
+          setError('Cannot connect to local backend server. Please verify that the backend is running on http://localhost:5000 (run "npm start" in the backend directory).');
+        }
       } else {
         setError(err.message || 'Authentication failed. Please verify your credentials.');
       }
